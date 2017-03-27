@@ -59,7 +59,7 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
         $article = $article->orderBy($order['name'], $order['dir']);
 
         $articles = $article->with('category')->offset($start)->limit($length)->get();
-
+/*
         if ($articles) {
             $articles = $articles->each(function ($item,$index)
             {
@@ -67,7 +67,7 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
                 return $item;
             });
         }
-
+*/
         return compact('count','articles');
     }
     /**
