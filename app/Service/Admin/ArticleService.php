@@ -109,7 +109,7 @@ class ArticleService{
 				if (isset($attributes['new_tags']) && $attributes['new_tags']) {
 					$tags = explode(',', $attributes['new_tags']);
 					foreach ($tags as $v) {
-						$tag = $this->tag->firstOrCreate(['name' => $v]);
+						$tag = $this->tag->tagFirstOrCreate(['name' => $v]);
 						$tagIds[] = $tag['id'];
 					}
 				}
@@ -136,7 +136,7 @@ class ArticleService{
 		$categories = $this->category->getArticleCategories();
 		$tags = $this->tag->allTags();
 		$article = $this->article->findArticleById($id);
-		$article['id'] = $this->article->encodeId($article['id']);
+		//$article['id'] = $this->article->encodeId($article['id']);
 		return compact('categories','tags','article');
 	}
 
@@ -167,7 +167,7 @@ class ArticleService{
 
 			$attributes['content_html'] = $attributes['editor-html-code'];
 
-			$attributes['id'] = $id = $this->article->decodeId($attributes['id']);
+			//$attributes['id'] = $id = $this->article->decodeId($attributes['id']);
 
 			$result = $this->article->skipPresenter()->update($attributes,$id);
 			if ($result) {
@@ -176,7 +176,7 @@ class ArticleService{
 				if (isset($attributes['new_tags']) && $attributes['new_tags']) {
 					$tags = explode(',', $attributes['new_tags']);
 					foreach ($tags as $v) {
-						$tag = $this->tag->firstOrCreate(['name' => $v]);
+						$tag = $this->tag->tagFirstOrCreate(['name' => $v]);
 						$tagIds[] = $tag['id'];
 					}
 				}
@@ -202,10 +202,10 @@ class ArticleService{
 	public function destroyArticle($id)
 	{
 		try {
-			$id = $this->article->decodeId($id);
+			//$id = $this->article->decodeId($id);
 			// 删除文章在redis中的信息
 			$this->zrem($this->article->skipPresenter()->find($id,['id', 'title', 'created_at']));
-			$this->delKey(config('admin.global.redis.hashi').$d);
+			$this->delKey(config('admin.global.redis.hashi').$id);
 			$result = $this->article->delete($id);
 			flash_info($result,trans('admin/alert.article.destroy_success'),trans('admin/alert.article.destroy_error'));
 			return $result;
@@ -228,7 +228,7 @@ class ArticleService{
 	public function mark($id,$status)
 	{
 		try {
-			$result = $this->article->update(['status' => $status],$this->article->decodeId($id));
+			$result = $this->article->update(['status' => $status],$id);
 			flash_info($result,trans('admin/alert.article.edit_success'),trans('admin/alert.article.edit_error'));
 			return $result;
 		} catch (Exception $e) {

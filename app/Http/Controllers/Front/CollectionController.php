@@ -16,7 +16,7 @@ class CollectionController extends Controller
   	}
 
     //已收藏的专题列表
-    public function specialLndex($Request){
+    public function specialLndex(Request $Request){
        $anchor = $Request->input('anchor');
        $result = $this->service->getSpecialLikeList($anchor);
        return view('front.special.list')->with($result);
@@ -35,7 +35,7 @@ class CollectionController extends Controller
     }
 
     //已收藏的商品列表
-    public function goodsLikeList($Request){
+    public function goodsLikeList(Request $Request){
        $anchor = $Request->input('anchor');
        $result = $this->service->getGoodsLikeList($anchor);
        return view('front.goodsLike.list')->with($result);

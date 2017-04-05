@@ -77,7 +77,7 @@ class TagRepositoryEloquent extends BaseRepository implements TagRepository
      * @param  [type]                   $attributes [description]
      * @return [type]                               [description]
      */
-    public function firstOrCreate($attributes)
+    public function tagFirstOrCreate($attributes)
     {
         return $this->model->firstOrCreate($attributes);
     }

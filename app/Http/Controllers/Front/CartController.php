@@ -21,7 +21,7 @@ class CartController extends Controller
         return view('front.cart.list')->with($result);
     }
 
-    public function ajaxCartUpdateNum($request,$id)
+    public function ajaxCartUpdateNum(Request $request,$id)
     {
         $num = $request->input('num');
         $responseData = $this->service->getCartUpdateNum($id,$num);

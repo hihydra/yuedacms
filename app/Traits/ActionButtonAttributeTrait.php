@@ -135,8 +135,7 @@ trait ActionButtonAttributeTrait
 	 */
 	public function getArticleActionButton()
 	{
-		return $this->getArticleShowButton().
-				$this->getAuditActionButton().
+		return  $this->getAuditActionButton().
 				$this->getPushActionButton().
 				$this->getEditActionButton().
 				$this->getDestroyActionButton();

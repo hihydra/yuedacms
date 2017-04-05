@@ -15,16 +15,15 @@ class UserController extends Controller
 
     public function index(){
         $resultData = $this->service->getInfo();
-        dd($resultData);
         return view('front.user.index')->with($resultData);
     }
 
-    public function update($request,$id){
-        $resultData = $this->service->getInfo($request->all());
+    public function update(Request $request,$id){
+        $resultData = $this->service->getSaveInfo($request->all(),$id);
         return redirect('front.user.index');
     }
 
-    public function ajaxSetPic($request){
+    public function ajaxSetPic(Request $request){
         $responseData = $this->service->getSetPic($request->all());
         return response()->json($responseData);
     }
@@ -33,7 +32,7 @@ class UserController extends Controller
         return view('front.user.suggest');
     }
 
-    public function ajaxSuggestSave($request){
+    public function ajaxSuggestSave(Request $request){
         $mobile = $request->input('mobile');
         $content = $request->input('content');
         $responseData = $this->service->getSuggestSave($mobile,$content);

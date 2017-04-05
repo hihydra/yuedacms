@@ -15,19 +15,12 @@ class CategoryController extends Controller
     }
 
 
-    /**
-     * 分类列表
-
-     * @date   2017-02-27T16:19:38+0800
-     * @param  [type]                   $id [description]
-     * @return [type]                       [description]
-     */
+    //分类列表
     public function show($storeId)
     {
         $catList = $this->service->getCatList();
         $goodsList = $this->service->getGoodsList();
-        dd(compact('catList','goodsList'));
-        return view('front.category.list')->with($result);
+        return view('front.category.list')->with(compact('catList','goodsList'));
     }
 
 }

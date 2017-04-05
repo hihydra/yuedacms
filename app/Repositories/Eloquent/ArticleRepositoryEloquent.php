@@ -80,6 +80,6 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
     public function findArticleById($id)
     {
         $this->pushCriteria(FilterArticleCriteriaCriteria::class);
-        return $this->skipPresenter()->find($this->decodeId($id))->toArray();
+        return $this->skipPresenter()->find($id)->toArray();
     }
 }
