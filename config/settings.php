@@ -112,7 +112,9 @@ return [
     */
 
     'override' => [
-    
+
     ],
+
+    'defaultImg' => asset('front/img/default/default.jpg'),
 
 ];

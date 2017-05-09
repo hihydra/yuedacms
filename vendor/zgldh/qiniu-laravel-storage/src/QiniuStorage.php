@@ -4,15 +4,15 @@
 class QiniuStorage
 {
     private $storage = null;
-    private static $instance = null;
+    private static $instance = [];
 
     public static function disk($name)
     {
-        if (self::$instance == null) {
-            self::$instance = new self($name);
+        if (!isset(self::$instance[$name])) {
+            self::$instance[$name] = new self($name);
         }
 
-        return self::$instance;
+        return self::$instance[$name];
     }
 
     private function __construct($name)
@@ -155,9 +155,9 @@ class QiniuStorage
      * @param $key
      * @return bool
      */
-    public function uploadToken($key)
+    public function uploadToken($key = null, $expires = 3600, $policy = null, $strictPolicy = true)
     {
-        return $this->storage->getDriver()->uploadToken($key);
+        return $this->storage->getDriver()->uploadToken($key, $expires, $policy, $strictPolicy);
     }
 
     /**
@@ -178,6 +178,16 @@ class QiniuStorage
     public function privateDownloadUrl($key, $domainType = 'default')
     {
         return $this->storage->getDriver()->privateDownloadUrl($key, $domainType);
+    }
+
+    /**
+     * 获取多媒体文件信息
+     * @param $key
+     * @return mixed
+     */
+    public function avInfo($key)
+    {
+        return $this->storage->getDriver()->avInfo($key);
     }
 
     /**

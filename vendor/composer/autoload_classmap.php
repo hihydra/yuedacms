@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ArticleCategoryTable' => $baseDir . '/database/migrations/2016_12_09_153644_article_category_table.php',
     'ArticleTagTable' => $baseDir . '/database/migrations/2016_12_09_135006_article_tag_table.php',
     'BlogPermissionsTableSeeder' => $baseDir . '/database/seeds/BlogPermissionsTableSeeder.php',
     'CreateArticlesTable' => $baseDir . '/database/migrations/2016_12_09_114002_create_articles_table.php',
@@ -159,7 +158,7 @@ return array(
     'PHPUnit_Framework_Constraint_TraversableContains' => $vendorDir . '/phpunit/phpunit/src/Framework/Constraint/TraversableContains.php',
     'PHPUnit_Framework_Constraint_TraversableContainsOnly' => $vendorDir . '/phpunit/phpunit/src/Framework/Constraint/TraversableContainsOnly.php',
     'PHPUnit_Framework_Constraint_Xor' => $vendorDir . '/phpunit/phpunit/src/Framework/Constraint/Xor.php',
-    'PHPUnit_Framework_CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/phpunit/src/Framework/PHPUnit_Framework_CoveredCodeNotExecutedException.php',
+    'PHPUnit_Framework_CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/phpunit/src/Framework/CoveredCodeNotExecutedException.php',
     'PHPUnit_Framework_Error' => $vendorDir . '/phpunit/phpunit/src/Framework/Error.php',
     'PHPUnit_Framework_Error_Deprecated' => $vendorDir . '/phpunit/phpunit/src/Framework/Error/Deprecated.php',
     'PHPUnit_Framework_Error_Notice' => $vendorDir . '/phpunit/phpunit/src/Framework/Error/Notice.php',
@@ -171,7 +170,7 @@ return array(
     'PHPUnit_Framework_IncompleteTestCase' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestCase.php',
     'PHPUnit_Framework_IncompleteTestError' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestError.php',
     'PHPUnit_Framework_InvalidCoversTargetException' => $vendorDir . '/phpunit/phpunit/src/Framework/InvalidCoversTargetException.php',
-    'PHPUnit_Framework_MissingCoversAnnotationException' => $vendorDir . '/phpunit/phpunit/src/Framework/PHPUnit_Framework_MissingCoversAnnotationException.php',
+    'PHPUnit_Framework_MissingCoversAnnotationException' => $vendorDir . '/phpunit/phpunit/src/Framework/MissingCoversAnnotationException.php',
     'PHPUnit_Framework_MockObject_BadMethodCallException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/BadMethodCallException.php',
     'PHPUnit_Framework_MockObject_Builder_Identity' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Identity.php',
     'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/InvocationMocker.php',
@@ -405,6 +404,7 @@ return array(
     'PHP_Token_NEW' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_NS_C' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_NS_SEPARATOR' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PHP_Token_NULLSAFE_OBJECT_OPERATOR' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_NUM_STRING' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_OBJECT_CAST' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_OBJECT_OPERATOR' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',

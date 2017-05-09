@@ -9,32 +9,33 @@ class BaseService
 {
 	public function __construct(){
         $this->url = env('API_URL');
-		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL')]);  //api接口地址
+		$this->client = new \GuzzleHttp\Client(['base_uri' => env('API_URL'),'verify' => base_path('cacert.pem')]);  //api接口地址
+        $this->api_sessionid = env('API_SESSIONID');
 	}
 
 	public function http_curl($path,$query,$mothod="GET",$cookie=false){
         $querys['query'] = $query;
-        if (cookie::get('API_SESSIONID')&&!$cookie) {
-            $querys['headers'] = array('cookie'=>cookie::get('API_SESSIONID'));
+        if (cookie::get($this->api_sessionid)&&!$cookie) {
+            $querys['headers'] = array('cookie'=>cookie::get($this->api_sessionid));
         }
     	$response = $this->client->request($mothod,$path,$querys);
     	if ($response->getStatusCode() == 200) {
-    		$body = json_decode($response->getbody());
-            switch ($body->result) {
+    		$body = json_decode($response->getbody(),true);
+            switch ($body['result']) {
                 case '1':
                     if($cookie){
                         $cookie_data = $response->getHeader('Set-Cookie');
                         $body->API_SESSIONID = $cookie_data[0];
                         return $body;
                     }
-                    dd($body);
-                    return $body->data;
+                    //dd($body);
+                    return $body['data'];
                     break;
                 case '2':
                     header('Location: '.url('/login'));
                     break;
                 default:
-                    flash_info(false,$body->message,$body->message);
+                    flash_info(false,$body['message'],$body['message']);
                     break;
             }
 		}else{

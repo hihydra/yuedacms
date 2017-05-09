@@ -1,4 +1,8 @@
 <?php
+
+use App\Service\Api\UserService;
+
+
 if(!function_exists('flash_info')){
 	function flash_info($result,$successMsg = 'success !',$errorMsg = 'something error !')
 	{
@@ -32,5 +36,24 @@ if(!function_exists('getSettings')){
 			cache()->forever($key,$settings);
 			return $settings;
 		}
+	}
+}
+
+if(!function_exists('isLogin')){
+	function isLogin()
+	{
+		if(!empty(cookie::get($this->api_sessionid))){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+}
+
+if(!function_exists('getUserInfo')){
+	function getUserInfo()
+	{
+		return UserService::getInfo();
 	}
 }
