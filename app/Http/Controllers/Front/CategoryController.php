@@ -19,7 +19,7 @@ class CategoryController extends Controller
     //分类列表
     public function show(Request $request)
     {
-        $storeId = $request->input('storeId',47);
+        $storeId = $request->input('storeId',getStoreId());
         $catId = $request->input('catId');
         $keyword = $request->input('keyword');
         $anchor = $request->input('anchor');

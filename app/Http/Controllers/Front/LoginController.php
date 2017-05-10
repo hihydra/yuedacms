@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Api\UserService;
+use Cookie;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,9 @@ class LoginController extends Controller
         $mobile = $request->input('mobile','18627880278');
         $password = $request->input('password','123456');
         $resultData = $this->service->getLogin($mobile,$password);
-        return redirect('/')->withCookie('API_SESSIONID',$resultData->API_SESSIONID);
+        $info = $this->service->getInfo();
+        $storeIdCookie = Cookie::forever('storeId',$info['storeId']);
+        return redirect('/')->withCookie('API_SESSIONID',$resultData['API_SESSIONID'])->withCookie($storeIdCookie);
     }
 
     //重置密码

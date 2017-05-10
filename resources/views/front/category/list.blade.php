@@ -1,23 +1,18 @@
 @extends('layouts.front')
-@section('meta')
-<title>{{$name}}-{{$settings['title']}}</title>
-<meta name="keywords" content="{{$settings['keywords']}}" />
-<meta name="description" content="{{$settings['description']}},{{$name}}">
-<meta name="author" content="{{$settings['author']}}">
-@endsection
+@section('title'){{$name}}-@endsection
 @section('content')
 <div class="bk-left">
   <div class="area">
     <div class="category">
       <ul class="category-list">
-        <li class="hover">
+        <li>
           <div class="category-info list-nz">
             <h2><a href="{{url('category')}}" class="ml-22">全部</a></h2>
             <em>></em>
           </div>
         </li>
         @foreach($catList as $cat)
-        <li>
+        <li class="cat_{{$cat['id']}}">
           <div class="category-info list-nz">
             <h2><a href="{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$cat['id']])}}" class="ml-22">{{$cat['name']}}</a></h2>
             <em>></em>
@@ -53,7 +48,7 @@
        @foreach($goodsList['datas'] as $good)
        <li>
         <div class="book">
-          <a href="#"><img src="{{{$good['thumbUrl'] or config('settings.defaultImg')}}}" /></a>
+          <a href="#"><img src="{{{$good['thumbUrl'] or defaultImg()}}}" /></a>
           <a href="#" class="tittle">{{str_limit($good['name'], $limit = 25, $end = '...')}}</a>
         </div>
         <div class="info">
@@ -80,29 +75,41 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-  var isAsc = {{{$urlPath['isAsc'] or 'false'}}};
-  switch('{{$urlPath['sort']}}'){
-    case 'SORT_TIME':
-    if(isAsc){
-      $('.sort-time em').attr('class','curr2');
-    }else{
-      $('.sort-time em').attr('class','curr1');
-    }
-    break;
-    case 'SORT_PRICE':
-    if(isAsc){
-      $('.sort-price em').attr('class','curr2');
-    }else{
-      $('.sort-price em').attr('class','curr1');
-    }
-    break;
-    case 'SORT_SALES':
-    if(isAsc){
-      $('.sort-sales em').attr('class','curr2');
-    }else{
-      $('.sort-sales em').attr('class','curr1');
-    }
-    break;
-  }
+  $(document).ready(function(){
+        @php
+          $catId = app('request')->input('catId');
+        @endphp
+        var catId = '{{$catId}}';
+        if(catId){
+           $('.cat_'+catId).addClass('hover');
+        }else{
+            $('.category-list li').first().addClass('hover');
+        }
+
+        var isAsc = {{{$urlPath['isAsc'] or 'false'}}};
+        switch('{{$urlPath['sort']}}'){
+          case 'SORT_TIME':
+          if(isAsc){
+            $('.sort-time em').attr('class','curr2');
+          }else{
+            $('.sort-time em').attr('class','curr1');
+          }
+          break;
+          case 'SORT_PRICE':
+          if(isAsc){
+            $('.sort-price em').attr('class','curr2');
+          }else{
+            $('.sort-price em').attr('class','curr1');
+          }
+          break;
+          case 'SORT_SALES':
+          if(isAsc){
+            $('.sort-sales em').attr('class','curr2');
+          }else{
+            $('.sort-sales em').attr('class','curr1');
+          }
+          break;
+        }
+  });
 </script>
 @endsection

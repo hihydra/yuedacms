@@ -25,10 +25,9 @@ class BaseService
                 case '1':
                     if($cookie){
                         $cookie_data = $response->getHeader('Set-Cookie');
-                        $body->API_SESSIONID = $cookie_data[0];
+                        $body['API_SESSIONID'] = array_first($cookie_data);
                         return $body;
                     }
-                    //dd($body);
                     return $body['data'];
                     break;
                 case '2':

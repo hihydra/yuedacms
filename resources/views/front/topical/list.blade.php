@@ -1,17 +1,12 @@
 @extends('layouts.front')
-@section('meta')
-<title>{{$name}}-{{$settings['title']}}</title>
-<meta name="keywords" content="{{$settings['keywords']}}" />
-<meta name="description" content="{{$settings['description']}},{{$name}}">
-<meta name="author" content="{{$settings['author']}}">
-@endsection
+@section('title'){{$name}}-@endsection
 @section('content')
 <div class="bk-left">
   <div class="area">
     <div class="category">
       <ul class="category-list">
         @foreach($topicalList as $topical)
-        <li>
+        <li class="topical_{{$topical['id']}}">
           <div class="category-info list-nz">
             <h2><a href="{{URL::route('topical',['topicalId'=>$topical['id']])}}" class="ml-22">{{$topical['name']}}</a></h2>
             <em>></em>
@@ -29,7 +24,7 @@
       <span class="sep">></span>
       <a href="{{url('topical')}}">{{$name}}</a>
       <span class="sep">></span>
-      {{$topicalList[$urlPath['topicalId']]['name']}}
+      {{{$topicalList[$urlPath['topicalId']]['name'] or defaultImg()}}}
     </p>
   </div>
   <div class="fl-main">
@@ -38,7 +33,7 @@
         @foreach($topicalGoods['datas'] as $good)
           <li>
             <div class="book">
-              <a href="#"><img src="{{$good['thumbUrl']}}" /></a>
+              <a href="#"><img src="{{{$good['thumbUrl'] or defaultImg()}}}" /></a>
               <a href="#" class="tittle">{{str_limit($good['name'], $limit = 25, $end = '...')}}</a>
             </div>
             <div class="info">
@@ -64,4 +59,17 @@
 <div class="clear"></div>
 @endsection
 @section('js')
+<script type="text/javascript">
+    $(document).ready(function(){
+        @php
+          $topicalId = app('request')->input('topicalId');
+        @endphp
+        var topicalId = '{{$topicalId}}';
+        if(topicalId){
+           $('.topical_'+topicalId).addClass('hover');
+        }else{
+            $('.category-list li').first().addClass('hover');
+        }
+   });
+</script>
 @endsection

@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
             'layouts.partials.sidebar', 'App\Http\ViewComposers\MenuComposer'
         );
         view()->composer(
-            ['layouts.front', 'front.index.index', 'front.category.list' , 'front.topical.list'], 'App\Http\ViewComposers\SettingsComposer'
+            ['layouts.front'], 'App\Http\ViewComposers\SettingsComposer'
         );
         view()->composer(
             'layouts.partials.category', 'App\Http\ViewComposers\CategoryComposer'

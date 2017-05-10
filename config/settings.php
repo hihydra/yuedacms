@@ -117,4 +117,5 @@ return [
 
     'defaultImg' => asset('front/img/default/default.jpg'),
 
+    'storeId' => '47',
 ];

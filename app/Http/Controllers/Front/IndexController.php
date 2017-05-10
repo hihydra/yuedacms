@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service\Api\IndexService;
+use url;
+
 class IndexController extends Controller
 {
 	protected $service;
@@ -12,10 +14,11 @@ class IndexController extends Controller
 		$this->service = $service;
 	}
 
-    public function index()
+    public function index(Request $request)
     {
-    	$resultData = $this->service->getIndex();
-        //dd($resultData);
+        $storeId = $request->input('storeId',getStoreId());
+    	$resultData = $this->service->getIndex($storeId);
+        $resultData['storeId'] = $storeId;
     	return view('front.index.index')->with($resultData);
     }
 

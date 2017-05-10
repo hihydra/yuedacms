@@ -17,7 +17,7 @@ class TopicalController extends Controller
 
     public function show(Request $request)
     {
-    	$storeId = $request->input('storeId',47);
+    	$storeId = $request->input('storeId',getStoreId());
     	$anchor = $request->input('anchor');
     	$topicalList = $this->service->getTopicalList($storeId);
         $topicalList = ArrayToolkit::index($topicalList,'id');

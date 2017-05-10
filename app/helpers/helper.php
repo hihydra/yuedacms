@@ -39,10 +39,17 @@ if(!function_exists('getSettings')){
 	}
 }
 
+if(!function_exists('defaultImg')){
+	function defaultImg()
+	{
+		return config('settings.defaultImg');
+	}
+}
+
 if(!function_exists('isLogin')){
 	function isLogin()
 	{
-		if(!empty(cookie::get($this->api_sessionid))){
+		if(!empty(cookie::get(env('api_sessionid')))){
 			return true;
 		}else{
 			return false;
@@ -51,9 +58,14 @@ if(!function_exists('isLogin')){
 	}
 }
 
-if(!function_exists('getUserInfo')){
-	function getUserInfo()
+
+if(!function_exists('getStoreId')){
+	function getStoreId()
 	{
-		return UserService::getInfo();
+		if(!empty(Cookie::get('storeId'))){
+			return Cookie::get('storeId');
+		}else{
+			return config('settings.storeId');
+		}
 	}
 }

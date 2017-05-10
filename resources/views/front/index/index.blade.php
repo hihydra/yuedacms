@@ -1,10 +1,4 @@
 @extends('layouts.front')
-@section('meta')
-<title>{{$settings['title']}}</title>
-<meta name="keywords" content="{{$settings['keywords']}}" />
-<meta name="description" content="{{$settings['description']}}">
-<meta name="author" content="{{$settings['author']}}">
-@endsection
 @section('content')
 <!--bannar-->
 <div class="bannar">
@@ -16,8 +10,8 @@
 		<div class="special-book M1">
 			<div class="hot-h2">
 				<h2>
-					<p>专题</p>
-					<div class="more"><a href="#">更多</a></div>
+					<p>{{trans('front/system.special')}}</p>
+					<div class="more"><a href="{{URL::route('showcase',['type'=>'special','storeId'=>$storeId])}}">更多</a></div>
 				</h2>
 			</div>
 			<div class="special-list">
@@ -26,7 +20,7 @@
 					@php if($key>2){break;} @endphp
 					<li>
 						<div class="book">
-							<a href="#"><img src="{{$spe['thumbUrl']}}" /></a>
+							<a href="{{URL::route('showcase',['type'=>'special','storeId'=>$storeId,'specialId'=>$spe['id']])}}"><img src="{{$spe['thumbUrl']}}" /></a>
 						</div>
 						<div class="info">
 							<div class="wrap">
@@ -45,10 +39,10 @@
 			<div class="hot-h2">
 				<h2>
 					<p>优惠券</p>
-					<div class="more"><a href="#">更多</a></div>
+					<div class="more"><a href="{{url('coupon')}}">更多</a></div>
 				</h2>
 			</div>
-			<div class="Coupon"><a href="#"><img src="{{asset('front/img/4.png')}}" /></a></div>
+			<div class="Coupon"><a href="{{url('coupon')}}"><img src="{{asset('front/img/4.png')}}" /></a></div>
 		</div>
 	</div>
 	<div class="left">
@@ -56,8 +50,8 @@
 		<div class="hot-book M1">
 			<div class="hot-h2">
 				<h2>
-					<p>书店推荐</p>
-					<div class="more"><a href="#">更多</a></div>
+					<p>{{trans('front/system.recommend')}}</p>
+					<div class="more"><a href="{{URL::route('showcase',['type'=>'recommend','storeId'=>$storeId])}}">更多</a></div>
 				</h2>
 			</div>
 			<div class="hot-list">
@@ -86,8 +80,8 @@
 		<div class="discount-book M1">
 			<div class="hot-h2">
 				<h2>
-					<p>折扣专区</p>
-					<div class="more"><a href="#">更多</a></div>
+					<p>{{trans('front/system.sales')}}</p>
+					<div class="more"><a href="{{URL::route('showcase',['type'=>'sales','storeId'=>$storeId])}}">更多</a></div>
 				</h2>
 			</div>
 			<div class="discount-list sliderT">
