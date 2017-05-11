@@ -8,8 +8,5 @@ $router->group(['prefix' => 'login'],function ($router)
 	$router->get('resetPassword','LoginController@resetPassword')->name('login.resetPassword');
 	$router->post('resetPassword_check','LoginController@resetPassword_check')->name('login.resetPassword_check');
 	$router->get('ajaxValidcodeByMobile','LoginController@ajaxValidcodeByMobile')->name('login.ajaxValidcodeByMobile');
-	$router->get('changeMobile','LoginController@changeMobile')->name('login.changeMobile');
-	$router->get('ajaxValidcode','LoginController@ajaxValidcode')->name('login.ajaxValidcode');
-	$router->post('changeMobile_check','LoginController@changeMobile_check')->name('login.changeMobile_check');
 	$router->get('login_out','LoginController@login_out')->name('login.login_out');
 });

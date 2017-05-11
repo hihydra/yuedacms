@@ -17,20 +17,25 @@ class CartController extends Controller
 
     public function index()
     {
-        $result = $this->service->getCartList();
-        return view('front.cart.list')->with($result);
+        $carts = $this->service->getCartList();
+        $recommendList = $this->service->getCartRecommendList();
+        $name = trans('front/system.cart');
+        //dd($carts);
+        return view('front.cart.list')->with(compact('carts','name','recommendList'));
     }
 
-    public function ajaxCartUpdateNum(Request $request,$id)
+    public function ajaxCartUpdateNum(Request $request)
     {
+        $cartId = $request->input('cartId');
         $num = $request->input('num');
-        $responseData = $this->service->getCartUpdateNum($id,$num);
+        $responseData = $this->service->getCartUpdateNum($cartId,$num);
         return response()->json($responseData);
     }
 
-    public function ajaxCartDelete($id)
+    public function ajaxCartDelete(Request $request)
     {
-        $responseData = $this->service->getCartDelete($id);
+        $cartId = $request->input('cartId');
+        $responseData = $this->service->getCartDelete($cartId);
         return response()->json($responseData);
     }
 }

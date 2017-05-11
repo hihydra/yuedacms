@@ -13,6 +13,9 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'admin/article/upload',
-        'alipay/return'
+        'alipay/return',
+        'coupon/ajaxObtain',
+        'cart/ajaxCartUpdateNum',
+        'cart/ajaxCartDelete'
     ];
 }

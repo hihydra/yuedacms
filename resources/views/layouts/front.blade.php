@@ -9,9 +9,6 @@
   <link href="{{asset('front/css/css.css') }}" rel="stylesheet" type="text/css"/>
   @yield('css')
 </head>
-@inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
-@php $cartCount = $ApiPresenter->getCartCount(); @endphp
-@php $info = $ApiPresenter->getInfo(); @endphp
 <body>
   <!--   top开始   -->
   <div class="top">
@@ -42,25 +39,27 @@
       </div>
       <!--登录注册、门店、下载-->
       <div class="use">
-        @if(isLogin())
         <div class="s-a s-store">
           <span>&nbsp;</span>
-          <a href="#">{{$info['storeName']}}</a>
+          @if($userInfo)
+          <a href="#">{{$userInfo['storeName']}}</a>
+          @else
+          <a href="#">切换门店</a>
+          @endif
         </div>
-        @endif
         <div class="s-a s-dwon">
           <span>&nbsp;</span>
           <a href="#">下载APP</a>
         </div>
-        @if(isLogin())
+        @if($userInfo)
         <div class="inlogin">
           <div class="top-menu">
             <a href="#">
-              <p>{{$info['nickname']}}</p>
+              <p>{{$userInfo['nickname']}}</p>
               <b class="t"></b>
             </a>
           </div>
-          <div class="cnt" style="">
+          <div class="cnt" style="display: none;">
             <ul class="cnt-ul">
               <li>
                 <a href="#">我的书店</a>
@@ -72,7 +71,7 @@
               <li><a href="#">分享应用</a></li>
               <li><a href="#">意见反馈</a></li>
               <li><a href="#">关于</a></li>
-              <li><a href="#">退出</a></li>
+              <li><a href="{{url('login_out')}}">退出</a></li>
             </ul>
           </div>
         </div>
@@ -83,7 +82,7 @@
         @endif
         <div class="s-a s-buy">
           <span>&nbsp;</span>
-          <a href="#">购物车<lable>{{$cartCount['count']}}</label></a>
+          <a href="{{url('cart')}}">购物车<lable>{{$userInfo['cartCount']}}</label></a>
         </div>
       </div>
     </div>
@@ -116,7 +115,8 @@
     </div>
   </div>
   <!--   main结束   -->
-  <script type="text/javascript" src="http://edu.fezo.com.cn:8105/front/default/js/jquery.js"></script>
+  <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
+  <script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
   <script type="text/javascript">
     @php
     $cate = app('request')->segment(1);
@@ -130,6 +130,13 @@
         }
       })
       if (!urlstatus) {$(".nav a").eq(0).parent().addClass('hover'); }
+
+      $(".inlogin").mouseover(function () {
+          $(".cnt").show("fast");
+      });
+      $(".inlogin").mouseleave(function () {
+          $(".cnt").hide("fast");
+      });
     });
   </script>
   @yield('js')

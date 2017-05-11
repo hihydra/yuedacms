@@ -23,7 +23,7 @@ class LoginController extends Controller
 
     //提交登陆
     public function login_check(Request $request){
-        $mobile = $request->input('mobile','18627880278');
+        $mobile = $request->input('mobile','13986287787');
         $password = $request->input('password','123456');
         $resultData = $this->service->getLogin($mobile,$password);
         $info = $this->service->getInfo();
@@ -65,24 +65,6 @@ class LoginController extends Controller
         return response()->json($responseData);
     }
 
-    //修改手机号
-    public function changeMobile(){
-        return view('front.login.changeMobile');
-    }
-
-    //修改手机号验证码
-    public function ajaxValidcode(){
-        $responseData = $this->service->getValidcode();
-        return response()->json($responseData);
-    }
-
-    //修改手机号提交
-    public function changeMobile_check(Request $request){
-       $mobile = $request->input('mobile');
-       $validcode = $request->input('validcode');
-       $resultData = $this->service->getChangeMobile($mobile,$validcode);
-       return redirect('login');
-    }
 
     //退出登陆
     public function login_out(){

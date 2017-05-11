@@ -21,6 +21,13 @@ class CartService extends BaseService
         return $data;
     }
 
+    //购物车为您推荐接口
+    public function getCartRecommendList(){
+        $path  = '/api/shop/cart!recommendList.do';
+        $query = array();
+        $data = $this->http_curl($path,$query);
+        return $data;
+    }
     //添加商品到购物车
     public function getCartAdd($id,$num,$storeId,$specialId){
         $path  = '/api/shop/cart!add.do';
@@ -33,7 +40,7 @@ class CartService extends BaseService
     public function getCartUpdateNum($id,$num){
         $path  = '/api/shop/cart!updateNum.do';
         $query = array('id'=>$id,'num'=>$num);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post');
         return $data;
     }
 

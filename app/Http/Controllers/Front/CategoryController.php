@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $goodsList = $this->service->getGoodsList($storeId,$catId,$anchor,$keyword,$sort,$isAsc);
         //dd($goodsList);
         $urlPath = compact('storeId','catId','keyword','anchor','sort','isAsc');
-        $name = '分类';
+        $name = trans('front/system.category');
         return view('front.category.list')->with(compact('catList','goodsList','urlPath','name'));
     }
 

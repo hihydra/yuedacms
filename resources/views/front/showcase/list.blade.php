@@ -12,7 +12,7 @@
   </div>
   <div class="wrapper">
 
-    @if($type == 'special')
+    @if($type == 'specials')
       <img src="img/bannar2.jpg" />
       <div class="topic-info">
         <h1 class="topic-title">适合女性的书单推荐</h1>
@@ -20,6 +20,17 @@
       </div>
     @endif
     <div class="product-list">
+    @if($type == 'special')
+      @foreach($goods['datas'] as $good)
+      <div class="product-item">
+        <p class="p-title">{{$good['name']}}</p>
+        <div class="left">
+          <img src="{{{$good['thumbUrl'] or defaultImg()}}}" width="1070px;" height="532px;" />
+        </div>
+        <div class="clear"></div>
+      </div>
+      @endforeach
+    @else
       @foreach($goods['datas'] as $good)
       <div class="product-item">
         <p class="p-title">{{$good['name']}}</p>
@@ -37,7 +48,7 @@
         <div class="clear"></div>
       </div>
       @endforeach
-
+    @endif
     </div>
   </div>
 

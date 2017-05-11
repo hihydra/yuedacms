@@ -38,4 +38,23 @@ class UserController extends Controller
         $responseData = $this->service->getSuggestSave($mobile,$content);
         return response()->json($responseData);
     }
+
+    //修改手机号
+    public function changeMobile(){
+        return view('front.login.changeMobile');
+    }
+
+    //修改手机号验证码
+    public function ajaxValidcode(){
+        $responseData = $this->service->getValidcode();
+        return response()->json($responseData);
+    }
+
+    //修改手机号提交
+    public function changeMobile_check(Request $request){
+       $mobile = $request->input('mobile');
+       $validcode = $request->input('validcode');
+       $resultData = $this->service->getChangeMobile($mobile,$validcode);
+       return redirect('login');
+    }
 }

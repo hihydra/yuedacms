@@ -31,7 +31,7 @@ em{ font-style:normal;}
 .inlogin a{ margin:0 5px; font-size:12px;}
 .top-menu{ position:relative; margin-right:6px; height:25px; line-height:25px;}
 .top-menu a{ padding:0; font-size:12px; height:25px; line-height:25px;}
-.top-menu p{ width:70px; overflow:hidden; display:inline-block; height:25px; line-height:25px;}
+.top-menu p{ padding-right: 2px; overflow:hidden; display:inline-block; height:25px; line-height:25px;}
 .top-menu .t{ width:0; height:0; position:absolute; top:10px; right:-2px; border-left:4px solid #fff; border-right:4px solid #fff; border-top:4px solid #bcaea3;}
 .inlogin{ position:relative;}
 .inlogin .cnt{ position:absolute; top:25px; left:0; background:#fff; width:120px; border:1px solid #eee;}
@@ -145,7 +145,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .pay-ul li a img{ border:1px solid #eee;}
 .Pay .btnb{ padding-bottom:10px;}
 .btn_red_l{ float:right; background:#b81b22; color:#fff; font-size:18px; height:44px; line-height:44px; text-align:center; display:block; width:134px; border-radius: 5px;}
-
+.btn_red_n{ float:right; background:#aaaaaa; color:#fff; font-size:18px; height:44px; line-height:44px; text-align:center; display:block; width:134px; border-radius: 5px;}
 /*购物车*/
 .M1 h1{ height:50px; line-height:50px; font-size:22px; font-weight:600;}
 .gwc_box{ padding:0 0 80px 0;}

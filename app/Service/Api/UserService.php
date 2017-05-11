@@ -98,7 +98,7 @@ class UserService extends BaseService
     public function getInfo(){
         $path  = '/api/shop/personInfo!getInfo.do';
         $query = array();
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,"GET",false,false);
         return $data;
     }
 

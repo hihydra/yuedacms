@@ -24,7 +24,7 @@
       <span class="sep">></span>
       <a href="{{url('topical')}}">{{$name}}</a>
       <span class="sep">></span>
-      {{{$topicalList[$urlPath['topicalId']]['name'] or defaultImg()}}}
+      {{{$topicalList[$urlPath['topicalId']]['name'] or  ''}}}
     </p>
   </div>
   <div class="fl-main">

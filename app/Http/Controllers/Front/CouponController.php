@@ -19,7 +19,11 @@ class CouponController extends Controller
         $anchor = $request->input('anchor');
         $coupons = $this->service->getCouponList($storeId,$anchor);
         $name = trans('front/system.coupon');
-        //dd($coupons);
     	return view('front.coupon.list')->with(compact('coupons','name'));
+    }
+
+    public function ajaxObtain(Request $request){
+        $responseData = $this->service->getCouponObtain($request->input('id'));
+        return response()->json($responseData);
     }
 }

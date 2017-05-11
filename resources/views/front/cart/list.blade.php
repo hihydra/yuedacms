@@ -1,0 +1,203 @@
+@extends('layouts.front')
+@section('title'){{$name}}-@endsection
+@section('content')
+<div class="M1" style="margin-top:10px;">
+	<div class="titleNav">
+		<p>当前所在位置：
+			<a href="{{url('/')}}">首页</a>
+			<span class="sep">></span>
+			{{$name}}
+		</p>
+	</div>
+	<h1>我的购物车</h1>
+	<div id="div_display" class="gwc_box gb_tal">
+		<table class="g_table" cellspacing="0" cellpadding="0" border="0" >
+			<tbody><tr class="tbg">
+				<td class="cl01"><div class="g_chkbx">
+					<input class="all" onclick="javascript:checkAll(this,'div_display','cartId');" type="checkbox">
+					<label>全选</label>
+				</div></td>
+				<td>购买信息</td>
+				<td class="cl03">单价</td>
+				<td class="cl03">折扣价</td>
+				<td class="cl04">数量</td>
+				<td class="cl03">小计</td>
+				<td class="cl05">操作</td>
+			</tr>
+		</tbody>
+		@foreach($carts as $cart)
+		<tbody id="div_store_{{$cart['id']}}">
+			<tr><td class="cl01">
+				<div class="g_chkbx">
+					<input id="div_input_{{$cart['id']}}" name="checkAll" class="getItemId" value="{{$cart['id']}}" type="checkbox" onclick="javascript:checkAll(this,'div_store_{{$cart['id']}}');">
+				</div>
+			</td>
+			<td colspan=6><i><img src="{{asset('front/img/dianpu.png')}}" width="15px;"></i>  {{$cart['name']}}</td>
+		</tr>
+		@foreach($cart['items'] as $item)
+		<tr id="div_store_{{$cart['id']}}_{{$item['id']}}">
+			<td class="cl01">
+				<div class="g_chkbx">
+					<input name="cartId" class="getItemId" value="{{$item['id']}}" onclick="javascript:clickCheckItem(this,'div_input_{{$cart['id']}}','div_store_{{$cart['id']}}');" type="checkbox">
+				</div>
+			</td>
+			<td>
+				<div class="bif">
+					<a href="#" class="img"><img src="{{$item['image']}}" width="48px" height="68px"></a>
+					<div class="info">
+						<h4><a href="#">{{$item['name']}}</a></h4>
+						<p class="author"><span>{{$item['name']}}</span></p>
+					</div>
+				</div>
+			</td>
+			<td class="cl03">￥{{$item['mktprice']}}</td>
+			<td class="cl03">￥{{$item['price']}}</td>
+			<input id="ipt_price_{{$item['id']}}" type="hidden" value="{{$item['price']}}" />
+			<td class="cl04" style="">
+				<div id="num" class="quantity_form Numinput">
+					<a href="javascript:updateCartNum('{{$item['id']}}',-1,{{$item['price']}});" class="numadjust decrement decrease">-</a>
+					<input id="ipt_num_{{$item['id']}}" class="quantity_text" size="5" name="num" autocomplete="off" readonly="readonly" value="{{$item['num']}}" type="text">
+					<a href="javascript:updateCartNum('{{$item['id']}}',1,{{$item['price']}});" class="numadjust increment increase">+</a>
+				</div>
+			</td>
+			<td class="itemTotal cl03" id="itemTotal_price_{{$item['id']}}">￥{{$item['price']*$item['num'] }}</td>
+			<td class="cl05" data_type="cartDel"><a href="javascript:delCart({{$cart['id']}},{{$item['id']}});" class="delete del">删除</a></td>
+		</tr>
+		@endforeach
+		<tr>
+			<td></td>
+			<td colspan=6><i><img src="{{asset('front/img/yunfeitishi.png')}}" width="15px;"/></i>  {{trans('front/system.freeShipping')}}</td>
+		</tr>
+	</tbody>
+	@endforeach
+</table>
+<div class="g_tbox">
+	<div class="g_chkbx left" style="margin:0;">
+		<input  class="all" onclick="javascript:checkAll(this,'div_display','cartId');" type="checkbox">
+		<label>全选</label>
+		<a href="#">删除选中图书</a> </div>
+		<div class="right total">
+			共<label id="total_num">0</label>本，总计
+			<i class="price"><label id="total_price">￥0.00</label></i>
+			&nbsp;&nbsp;&nbsp;不含运费
+		</div>
+	</div>
+	<div class="nextStep">
+		<div class="js right"><a href="#" class="btn_red_n right" id="total_pay">去结算</a></div>
+	</div>
+</div>
+
+</div>
+<div class="clear"></div>
+
+
+<div class="Recommend-book M1">
+	<div class="hot-h2">
+		<h2>
+			<p>推荐商品</p>
+		</h2>
+	</div>
+	<div class="Recommend-list">
+		<ul>
+			@foreach($recommendList['datas'] as $key=>$recommend)
+			@php if($key>5){break;} @endphp
+			<li>
+				<div class="book">
+					<a href="#"><img src="{{{$recommend['thumbUrl'] or defaultImg()}}}" /></a>
+					<a href="#" class="tittle">{{str_limit($recommend['name'], $limit = 25, $end = '...')}}</a>
+				</div>
+				<div class="info">
+					<p class="price">￥{{$recommend['price']}}</p>
+				</div>
+			</li>
+			@endforeach
+			<div class="clear"></div>
+		</ul>
+
+	</div>
+</div>
+@endsection
+@section('js')
+<script src="{{asset('vendors/layer/layer.js')}}"></script>
+<script type="text/javascript">
+	function updateCartNum(cartId,num,price){
+		num = $("#ipt_num_"+cartId).val()-1+1+num;
+		if(num<=0){
+			return ;
+		}
+		$.post("{{url('cart/ajaxCartUpdateNum')}}",{'cartId':cartId,'num':num},function(result){
+			if(result.result == 1){
+				$("#ipt_num_"+cartId).val(num);
+				$('#itemTotal_price_'+cartId).html("￥"+convertMoney(price*num));
+				refreshTotalPrice();
+			}else{
+				layer.msg(result.message);
+			}
+		});
+	}
+	function checkAll(obj,formId){
+		$("#"+formId).find("input[name='cartId']").attr("checked",obj.checked);
+		$("#"+formId).find("input[name='checkAll']").attr("checked",obj.checked);
+		refreshGlobalChecked();
+	}
+	function clickCheckItem(obj,checkAllId,formId){
+		var total = $("#"+formId).find("input[name='cartId']").length;
+		var count = $("#"+formId).find("input[name='cartId']:checked").length;
+		$("#"+checkAllId).attr("checked",count==total);
+		refreshGlobalChecked();
+	}
+	function refreshGlobalChecked(){
+		var total = $("#div_display").find("input[name='cartId']").length;
+		var count = $("#div_display").find("input[name='cartId']:checked").length;
+		$(".all").attr("checked",count==total);
+		refreshTotalPrice();
+	}
+	function refreshTotalPrice(){
+		$("#total_pay").unbind("click");
+		var cartIds = $("#div_display").find("input[name='cartId']:checked");
+		var num = 0;
+		var price = 0;
+		for(var i=0;i<cartIds.length;i++){
+			num = $("#ipt_num_"+cartIds[i].value).val()-1+1+num;
+			price = price+$("#ipt_price_"+cartIds[i].value).val()*$("#ipt_num_"+cartIds[i].value).val();
+		}
+		$("#total_num").html(num);
+		$("#total_price").html("￥"+convertMoney(price));
+		if(num>0){
+			$("#total_pay").attr("class","right btn_red_l");
+			$("#total_pay").unbind("click");
+			$("#total_num").bind("click",createOrder);
+		}else{
+			$("#total_pay").attr("class","right btn_red_n");
+		}
+	}
+	function createOrder(){
+		var cartIds = $("#div_display").find("input[name='cartId']:checked");
+		if(cartIds.length==0){
+			return ;
+		}
+		var cartIdStr = "";
+		for(var i=0;i<cartIds.length;i++){
+			if(i==0){
+				cartIdStr += "?cartIds="+cartIds[i].value;
+			}else{
+				cartIdStr += "&cartIds="+cartIds[i].value;
+			}
+		}
+		location.href = cart_buyConfirmUrl+cartIdStr;
+	}
+	function delCart(storeId,cartId){
+		$.post("{{url('cart/ajaxCartDelete')}}",{'cartId':cartId},function(result){
+			if(result.result == 1){
+				$("#div_store_"+storeId+"_"+cartId).remove();
+				if($("#div_store_"+storeId).find("[data_type='cartDel']").length<1){
+					$("#div_store_"+storeId).remove();
+				}
+				refreshGlobalChecked();
+			}else{
+				layer.msg(result.message);
+			}
+		});
+	}
+</script>
+@endsection

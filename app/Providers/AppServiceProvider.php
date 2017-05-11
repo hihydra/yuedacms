@@ -31,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(
             'layouts.partials.hot', 'App\Http\ViewComposers\RecommendedArticlesComposer'
         );
+        view()->composer(
+            'layouts.front', 'App\Http\ViewComposers\UserInfoComposer'
+        );
     }
 
     /**
