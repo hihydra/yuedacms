@@ -69,3 +69,47 @@ if(!function_exists('getStoreId')){
 		}
 	}
 }
+
+if(!function_exists('orderStatus')){
+	function orderStatus($status)
+	{
+		switch ($status) {
+			case 'STATUS_UNKNOWN':
+				return '未知';
+				break;
+			case 'STATUS_NOT_CONFIRM':
+				return '待确认';
+				break;
+			case 'STATUS_NOT_PAY':
+				return '待付款';
+				break;
+			case 'STATUS_WAIT_SHIP':
+				return '待发货';
+				break;
+			case 'STATUS_SHIPPING':
+				return '待收货';
+				break;
+			case 'STATUS_COMPLETE':
+				return '已完成';
+				break;
+			case 'STATUS_CANCEL':
+				return '已取消';
+				break;
+		}
+	}
+}
+
+
+if(!function_exists('paymentType')){
+	function paymentType($type)
+	{
+		switch ($type) {
+			case 'online':
+				return '在线支付';
+				break;
+			case 'cod':
+				return '货到付款';
+				break;
+		}
+	}
+}

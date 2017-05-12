@@ -77,10 +77,9 @@
 		{!!$ApiPresenter->getShowcaseList()!!}
 		@endsection
 		@section('js')
-		<script src="{{asset('vendors/layer/layer.js')}}"></script>
 		<script type="text/javascript">
 			function obtain(id){
-				$.post("{{url('coupon/ajaxObtain')}}",{'id':id},function(result){
+				$.post("{{url('coupon/ajaxObtain')}}/"+id,function(result){
 					layer.msg(result.message);
 					if(result.result == 1){
 						$('.coupon_'+id+' span').text('已领取');

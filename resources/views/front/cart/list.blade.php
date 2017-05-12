@@ -1,5 +1,6 @@
 @extends('layouts.front')
 @section('title'){{$name}}-@endsection
+@inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
 @section('content')
 <div class="M1" style="margin-top:10px;">
 	<div class="titleNav">
@@ -43,10 +44,9 @@
 			</td>
 			<td>
 				<div class="bif">
-					<a href="#" class="img"><img src="{{$item['image']}}" width="48px" height="68px"></a>
+					<a href="#" class="img"><img src="{{$item['image']}}"></a>
 					<div class="info">
 						<h4><a href="#">{{$item['name']}}</a></h4>
-						<p class="author"><span>{{$item['name']}}</span></p>
 					</div>
 				</div>
 			</td>
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<div class="nextStep">
-		<div class="js right"><a href="#" class="btn_red_n right" id="total_pay">去结算</a></div>
+		<div class="js right"><a href="javascript:void(0);" class="btn_red_n right" id="total_pay">去结算</a></div>
 	</div>
 </div>
 
@@ -91,41 +91,16 @@
 <div class="clear"></div>
 
 
-<div class="Recommend-book M1">
-	<div class="hot-h2">
-		<h2>
-			<p>推荐商品</p>
-		</h2>
-	</div>
-	<div class="Recommend-list">
-		<ul>
-			@foreach($recommendList['datas'] as $key=>$recommend)
-			@php if($key>5){break;} @endphp
-			<li>
-				<div class="book">
-					<a href="#"><img src="{{{$recommend['thumbUrl'] or defaultImg()}}}" /></a>
-					<a href="#" class="tittle">{{str_limit($recommend['name'], $limit = 25, $end = '...')}}</a>
-				</div>
-				<div class="info">
-					<p class="price">￥{{$recommend['price']}}</p>
-				</div>
-			</li>
-			@endforeach
-			<div class="clear"></div>
-		</ul>
-
-	</div>
-</div>
+{!!$ApiPresenter->getShowcaseList('cart')!!}
 @endsection
 @section('js')
-<script src="{{asset('vendors/layer/layer.js')}}"></script>
 <script type="text/javascript">
 	function updateCartNum(cartId,num,price){
 		num = $("#ipt_num_"+cartId).val()-1+1+num;
 		if(num<=0){
 			return ;
 		}
-		$.post("{{url('cart/ajaxCartUpdateNum')}}",{'cartId':cartId,'num':num},function(result){
+		$.post("{{url('cart/ajaxCartUpdateNum')}}/"+cartId,{'num':num},function(result){
 			if(result.result == 1){
 				$("#ipt_num_"+cartId).val(num);
 				$('#itemTotal_price_'+cartId).html("￥"+convertMoney(price*num));
@@ -166,28 +141,13 @@
 		if(num>0){
 			$("#total_pay").attr("class","right btn_red_l");
 			$("#total_pay").unbind("click");
-			$("#total_num").bind("click",createOrder);
+			//$("#total_num").bind("click",createOrder);
 		}else{
 			$("#total_pay").attr("class","right btn_red_n");
 		}
 	}
-	function createOrder(){
-		var cartIds = $("#div_display").find("input[name='cartId']:checked");
-		if(cartIds.length==0){
-			return ;
-		}
-		var cartIdStr = "";
-		for(var i=0;i<cartIds.length;i++){
-			if(i==0){
-				cartIdStr += "?cartIds="+cartIds[i].value;
-			}else{
-				cartIdStr += "&cartIds="+cartIds[i].value;
-			}
-		}
-		location.href = cart_buyConfirmUrl+cartIdStr;
-	}
 	function delCart(storeId,cartId){
-		$.post("{{url('cart/ajaxCartDelete')}}",{'cartId':cartId},function(result){
+		$.post("{{url('cart/ajaxCartDelete')}}/"+cartId,function(result){
 			if(result.result == 1){
 				$("#div_store_"+storeId+"_"+cartId).remove();
 				if($("#div_store_"+storeId).find("[data_type='cartDel']").length<1){

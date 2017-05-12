@@ -1,24 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\Front;
-use App\Service\Order\UserService;
+use App\Service\Api\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use URL;
 
 class OrderController extends Controller
 {
     protected $service;
 
-    public function __construct(UserService $service)
+    public function __construct(OrderService $service)
     {
         $this->service = $service;
     }
 
-    public function index($request){
+    public function index(Request $request){
         $anchor = $request->input('anchor','');
         $status = $request->input('status','');
-        $resultData = $this->service->getOrderList($anchor,$status);
-        return view('front.order.list')->with($resultData);
+        $orders = $this->service->getOrderList($anchor,$status);
+        $name = trans('front/system.cart');
+        return view('front.order.list')->with(compact('orders','name'));
     }
 
     public function show($sn){
@@ -41,15 +43,14 @@ class OrderController extends Controller
         return redirect('front.order.index');
     }
 
-    public function cancel($sn,$request){
-        $reason = $request->input('reason');
-        $resultData = $this->service->getOrderCreate($sn,$request);
-        return redirect('front.order.index');
+    public function ajaxCancel($sn){
+        $responseData = $this->service->getOrderCancel($sn);
+        return response()->json($responseData);
     }
 
-    public function destroy($sn){
-        $this->service->getOrderDelete($sn);
-        return redirect('front.address.index');
+    public function ajaxDelete($sn){
+        $responseData = $this->service->getOrderDelete($sn);
+        return response()->json($responseData);
     }
 
     public function rogConfirm($sn){

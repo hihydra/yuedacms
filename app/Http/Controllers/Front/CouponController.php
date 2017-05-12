@@ -13,7 +13,7 @@ class CouponController extends Controller
 		$this->service = $service;
 	}
 
-    public function show(Request $request)
+    public function index(Request $request)
     {
         $storeId = $request->input('storeId',getStoreId());
         $anchor = $request->input('anchor');
@@ -22,8 +22,8 @@ class CouponController extends Controller
     	return view('front.coupon.list')->with(compact('coupons','name'));
     }
 
-    public function ajaxObtain(Request $request){
-        $responseData = $this->service->getCouponObtain($request->input('id'));
+    public function ajaxObtain($id){
+        $responseData = $this->service->getCouponObtain($id);
         return response()->json($responseData);
     }
 }

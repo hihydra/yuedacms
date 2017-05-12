@@ -24,17 +24,15 @@ class CartController extends Controller
         return view('front.cart.list')->with(compact('carts','name','recommendList'));
     }
 
-    public function ajaxCartUpdateNum(Request $request)
+    public function ajaxCartUpdateNum(Request $request,$cartId)
     {
-        $cartId = $request->input('cartId');
         $num = $request->input('num');
         $responseData = $this->service->getCartUpdateNum($cartId,$num);
         return response()->json($responseData);
     }
 
-    public function ajaxCartDelete(Request $request)
+    public function ajaxCartDelete($cartId)
     {
-        $cartId = $request->input('cartId');
         $responseData = $this->service->getCartDelete($cartId);
         return response()->json($responseData);
     }

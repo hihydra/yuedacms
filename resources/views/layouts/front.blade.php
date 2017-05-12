@@ -62,7 +62,7 @@
           <div class="cnt" style="display: none;">
             <ul class="cnt-ul">
               <li>
-                <a href="#">我的书店</a>
+                <a href="{{url('order')}}">我的书店</a>
                 <em>0</em>
               </li>
               <li><a href="#">我的收藏</a></li>
@@ -116,6 +116,7 @@
   </div>
   <!--   main结束   -->
   <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
+  <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
   <script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
   <script type="text/javascript">
     @php

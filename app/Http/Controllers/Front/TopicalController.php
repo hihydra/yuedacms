@@ -15,7 +15,7 @@ class TopicalController extends Controller
 		$this->service = $service;
 	}
 
-    public function show(Request $request)
+    public function index(Request $request)
     {
     	$storeId = $request->input('storeId',getStoreId());
     	$anchor = $request->input('anchor');

@@ -68,10 +68,10 @@ em{ font-style:normal;}
 .hot-list ul li .info .desc{ line-height:18px; padding:3px 0; height:36px; overflow:hidden;}
 .hot-list ul li .info .li-btn{ margin-top:3px; color:#fff;border:1px solid #e34f51; background: #ef6668; display:block; line-height:30px; width:60px; border-radius: 3px; cursor:pointer; height:30px; text-align:center; padding:0 15px; font-size:14px;}
 .discount-list{ margin-top:20px; position:relative;}
-.discount-list ul li{ width:155px; float:left; margin:0 10px 20px 30px;}
+.discount-list ul li{ width:138px; float:left; margin:0 10px 20px 30px;}
 .discount-list ul li .book{padding-bottom:8px; text-align:center; position:relative;}
-.discount-list ul li .book i img{ position:absolute; left:24px; top:0; width:40px;}
-.discount-list ul li .book a img{box-shadow: 0 1px 10px #b0b0b0; width:105px; height:146px;}
+.discount-list ul li .book i img{ position:absolute; /*left:24px; */top:0; width:40px;}
+.discount-list ul li .book a img{box-shadow: 0 1px 10px #b0b0b0; width:125px; height:146px;}
 .discount-list ul li .book a.tittle{ font-size:14px; line-height:20px; display:inline-block; margin-top:10px; word-break:break-all; word-wrap:break-word; height:20px; overflow:hidden;}
 .discount-list ul li .info{ position:relative;}
 .discount-list ul li .info .price{ color:#ed595d; font-size:14px; text-align:center;}
@@ -156,7 +156,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .cl01{ width:100px;}
 .g_chkbx{ margin:0 0 0 20px;}
 .bif a.img{ float:left; line-height:0;}
-.bif a.img img{ width:48px; height:68px;}
+.bif a.img img{ width:68px; height:68px;}
 .bif .info{ margin-left:13px; float:left; padding:4px 0;}
 .bif .info h4{ margin:0; padding:0 0 4px 0;}
 .bif .info h4 a{ color:#666; font-weight:normal; display:block;}

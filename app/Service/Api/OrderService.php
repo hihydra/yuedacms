@@ -12,6 +12,14 @@ class OrderService extends BaseService
         return $data;
     }
 
+    //获取订单数量
+    public function getOrderCounts(){
+        $path  = '/api/shop/order!counts.do';
+        $query = array();
+        $data = $this->http_curl($path,$query);
+        return $data;
+    }
+
     //获取订单详情
     public function getOrderDetail($sn){
         $path  = '/api/shop/order!detail.do';
@@ -45,7 +53,7 @@ class OrderService extends BaseService
     }
 
     //取消订单（只能取消未付款的订单）
-    public function getOrderCancel($sn,$reason){
+    public function getOrderCancel($sn,$reason=null){
         $path  = '/api/shop/order!cancel.do';
         $query = array('sn'=>$sn,'reason'=>$reason);
         $data = $this->http_curl($path,$query);

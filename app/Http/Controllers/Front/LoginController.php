@@ -23,7 +23,7 @@ class LoginController extends Controller
 
     //提交登陆
     public function login_check(Request $request){
-        $mobile = $request->input('mobile','13986287787');
+        $mobile = $request->input('mobile','15900000001');
         $password = $request->input('password','123456');
         $resultData = $this->service->getLogin($mobile,$password);
         $info = $this->service->getInfo();

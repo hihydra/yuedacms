@@ -12,7 +12,7 @@ class ShowcaseController extends Controller
 		$this->service = $service;
 	}
 
-    public function show(Request $request,$type)
+    public function index(Request $request,$type)
     {
         $storeId = $request->input('storeId',getStoreId());
         $anchor = $request->input('anchor');

@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
 
     //分类列表
-    public function show(Request $request)
+    public function index(Request $request)
     {
         $storeId = $request->input('storeId',getStoreId());
         $catId = $request->input('catId');
