@@ -26,9 +26,7 @@ class LoginController extends Controller
         $mobile = $request->input('mobile','15900000001');
         $password = $request->input('password','123456');
         $resultData = $this->service->getLogin($mobile,$password);
-        $info = $this->service->getInfo();
-        $storeIdCookie = Cookie::forever('storeId',$info['storeId']);
-        return redirect('/')->withCookie('API_SESSIONID',$resultData['API_SESSIONID'])->withCookie($storeIdCookie);
+        return redirect('/')->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
     }
 
     //重置密码

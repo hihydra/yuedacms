@@ -21,7 +21,6 @@ class BaseService
     	$response = $this->client->request($mothod,$path,$querys);
     	if ($response->getStatusCode() == 200) {
     		$body = json_decode($response->getbody(),true);
-
             switch ($body['result']) {
                 case '1':
                     if($cookie){
@@ -43,7 +42,7 @@ class BaseService
                     }
                     break;
                 default:
-                    flash_info(false,$body['message'],$body['message']);
+                    return $body;
                     break;
             }
 		}else{

@@ -3,13 +3,7 @@
 @inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
 @section('content')
 <div class="M1" style="margin-top:10px;">
-	<div class="titleNav">
-		<p>当前所在位置：
-			<a href="{{url('/')}}">首页</a>
-			<span class="sep">></span>
-			我的订单
-		</p>
-	</div>
+	@include('front.share.crumb',['name'=>$name])
 	<div class="second-menu">
 		<ul>
 			<li><a href="{{url('order')}}">所有订单</a></li>

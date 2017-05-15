@@ -19,7 +19,7 @@ class OrderController extends Controller
         $anchor = $request->input('anchor','');
         $status = $request->input('status','');
         $orders = $this->service->getOrderList($anchor,$status);
-        $name = trans('front/system.cart');
+        $name = trans('front/system.order');
         return view('front.order.list')->with(compact('orders','name'));
     }
 

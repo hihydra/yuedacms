@@ -7,6 +7,7 @@
   <meta name="description" content="{{$settings['description']}}">
   <meta name="author" content="{{$settings['author']}}">
   <link href="{{asset('front/css/css.css') }}" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
   @yield('css')
 </head>
 <body>
@@ -65,11 +66,11 @@
                 <a href="{{url('order')}}">我的书店</a>
                 <em>0</em>
               </li>
-              <li><a href="#">我的收藏</a></li>
+              <li><a href="{{url('user/collection')}}">我的收藏</a></li>
               <li><a href="#">我的礼券</a></li>
-              <li><a href="#">个人设置</a></li>
-              <li><a href="#">分享应用</a></li>
-              <li><a href="#">意见反馈</a></li>
+              <li><a href="{{url('user')}}">个人设置</a></li>
+              <li><a href="{{url('user/share')}}">分享应用</a></li>
+              <li><a href="{{url('user/suggest')}}">意见反馈</a></li>
               <li><a href="#">关于</a></li>
               <li><a href="{{url('login_out')}}">退出</a></li>
             </ul>
@@ -115,7 +116,6 @@
     </div>
   </div>
   <!--   main结束   -->
-  <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
   <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
   <script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
   <script type="text/javascript">

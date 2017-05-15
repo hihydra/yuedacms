@@ -3,13 +3,7 @@
 @inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
 @section('content')
 <div class="M1" style="margin-top:10px;">
-	<div class="titleNav">
-		<p>当前所在位置：
-			<a href="{{url('/')}}">首页</a>
-			<span class="sep">></span>
-			{{$name}}
-		</p>
-	</div>
+	@include('front.share.crumb',['name'=>$name])
 	<div class="quan-list">
 		@foreach($coupons['datas'] as $coupon)
 		<div class="quan-item

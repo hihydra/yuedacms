@@ -15,30 +15,12 @@ class CollectionController extends Controller
   		 $this->service = $service;
   	}
 
-    //已收藏的专题列表
-    public function specialLndex(Request $Request){
-       $anchor = $Request->input('anchor');
-       $result = $this->service->getSpecialLikeList($anchor);
-       return view('front.special.list')->with($result);
-    }
-
-    //收藏专题
-    public function ajaxSpecialLike($specialId){
-      $responseData = $this->service->getSpecialLike($specialId);
-      return response()->json($responseData);
-    }
-
-    //取消收藏专题
-    public function ajaxSpecialUnlike($specialId){
-      $responseData = $this->service->getSpecialUnlike($specialId);
-      return response()->json($responseData);
-    }
-
     //已收藏的商品列表
-    public function goodsLikeList(Request $Request){
+    public function goodsLike(Request $Request){
        $anchor = $Request->input('anchor');
        $result = $this->service->getGoodsLikeList($anchor);
-       return view('front.goodsLike.list')->with($result);
+       $result['name'] = trans('front/system.collection');
+       return view('front.collection.goods')->with($result);
     }
 
     //收藏商品
@@ -53,4 +35,24 @@ class CollectionController extends Controller
       return response()->json($responseData);
     }
 
+    //已收藏的专题列表
+    public function specialLike(Request $Request){
+       $anchor = $Request->input('anchor');
+       $result = $this->service->getSpecialLikeList($anchor);
+       $result['name'] = trans('front/system.collection');
+       //dd($result);
+       return view('front.collection.special')->with($result);
+    }
+
+    //收藏专题
+    public function ajaxSpecialLike($specialId){
+      $responseData = $this->service->getSpecialLike($specialId);
+      return response()->json($responseData);
+    }
+
+    //取消收藏专题
+    public function ajaxSpecialUnlike($specialId){
+      $responseData = $this->service->getSpecialUnlike($specialId);
+      return response()->json($responseData);
+    }
 }

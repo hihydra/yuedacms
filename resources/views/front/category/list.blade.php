@@ -24,13 +24,7 @@
   </div>
 </div>
 <div class="M2" style="margin-top:10px;">
-  <div class="titleNav">
-    <p>当前所在位置：
-      <a href="{{url('/')}}">首页</a>
-      <span class="sep">></span>
-      <a href="{{url('category')}}">{{$name}}</a>
-    </p>
-  </div>
+  @include('front.share.crumb',['name'=>$name])
   <div class="fl-main">
     <div class="show-switch">
       <a href="{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_TIME'])}}" class="sort-item sort-hover sort-time">

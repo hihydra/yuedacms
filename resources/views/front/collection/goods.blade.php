@@ -10,11 +10,11 @@
 		<div class="book-select" style="margin-top:0;">
 			<div class="bs-info">
 				<ul class="bs-ul" style="margin-top:0;">
-					<li>
+					<li class="on">
 					<a href="{{url('user/collection')}}" class="smooth">{{trans('front/system.goodsLike')}}</a>
 						<b></b>
 					</li>
-					<li class="on">
+					<li>
 						<a href="{{url('user/collection/specialLike')}}" class="smooth">{{trans('front/system.specialLike')}}</a>
 						<b></b>
 					</li>
@@ -25,14 +25,18 @@
 		<div class="Recommend-list Recommend-list-2">
 			<ul>
 				@foreach($datas as $data)
-				<li class="div_{{$data['id']}}" style="width: 47%;">
+				<li class="div_{{$data['id']}}">
 					<div class="book">
-						<a href="#"><img src="{{$data['thumbUrl']}}" style="width:440px;height:234px;" /></a>
+						<a href="#"><img src="{{$data['thumbUrl']}}" /></a>
 					</div>
 					<div class="info">
-						<a href="#" class="tittle">{{str_limit($data['name'], $limit = 40, $end = '...')}}</a>
+						<a href="#" class="tittle">{{str_limit($data['name'], $limit = 25, $end = '...')}}</a>
 						<p class="author">{{date('Y-m-d h:i',round($data['likeTime']/1000))}} 喜欢</p>
-						<p class="author"><img src="{{asset('front/img/u78.png')}}" width="14px;"> {{$data['likecount']}}&nbsp;&nbsp;<a href="javascript:unlike({{$data['id']}})">取消收藏</a></p>
+						<p class="price">￥{{$data['price']}}</p>
+						<div class="info-c">
+							<a class="btn_red" href="#">加入购物车</a>
+							<a class="qx" href="javascript:unlike({{$data['id']}})">取消收藏</a>
+						</div>
 					</div>
 				</li>
 				@endforeach
@@ -54,7 +58,7 @@
 @section('js')
 <script type="text/javascript">
 	function unlike(id){
-		$.post("{{url('user/ajaxSpecialUnlike')}}/"+id,function(result){
+		$.post("{{url('user/ajaxGoodsUnlike')}}/"+id,function(result){
 			layer.msg(result.message);
 			if(result.result == 1){
 				$('.div_'+id).remove();

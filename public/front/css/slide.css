@@ -1,0 +1,15 @@
+.bannar-img{position:relative;overflow:auto}
+.bannar-img li{list-style:none}
+.bannar-img ul li{float:left;width:825pt;height:285px}
+.bannar-img{width:40pc}
+.bannar-img .dots{position:absolute;right:0;bottom:20px;left:0;text-align:center}
+.bannar-img .dots li{z-index:999px;display:inline-block;margin:0 4px;width:10px;height:10px;border:2px solid #fff;border-radius:6px;text-indent:-999em;opacity:.4;cursor:pointer;-webkit-transition:background .5s,opacity .5s;transition:background .5s,opacity .5s}
+.bannar-img .dots li.active{background:#fff;opacity:1}
+.productshow{position:relative;margin:10px auto;padding:4px 0;text-align:center;font-family:Î¢ÈíÑÅºÚ,ºÚÌå}
+.productshow .discount-list{position:relative;overflow:hidden;margin:0 auto;width:710px;height:217px}
+.productshow .discount-list ul{position:absolute;top:0;left:0;width:1250pc}
+.productshow .discount-list li{float:left;text-align:center}
+.productshow .discount-list li.last{background:0 0}
+.productshow .discount-list li div{overflow:hidden;text-align:center}
+.productshow .discount-list a:hover img{opacity:.86;filter:alpha(opacity=86);-moz-opacity:.86}
+.productshow .discount-list li p{margin:0;line-height:2pc}

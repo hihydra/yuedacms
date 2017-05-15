@@ -1,46 +1,6 @@
 @extends('layouts.front')
 @section('css')
-<style type="text/css" src="{{asset('vendors/flexslider/flexslider.css')}}"></style>
-<style type="text/css">
-	.productshow{
-		padding:4px 0;
-		margin:10px auto;
-		position:relative;
-		text-align:center;
-		font-family:微软雅黑, 黑体;
-	}
-	.productshow .discount-list{
-		width:710px;
-		height:217px;
-		overflow:hidden;
-		position:relative;
-		margin:0 auto;
-	}
-	.productshow .discount-list ul{
-		width:20000px;
-		position:absolute;
-		left:0px;
-		top:0px;
-	}
-	.productshow .discount-list li{
-		float:left;
-		text-align:center;
-	}
-	.productshow .discount-list li.last{
-		background:none;
-	}
-	.productshow .discount-list li div{
-		overflow:hidden;
-		text-align:center;
-	}
-	.productshow .discount-list a:hover img{
-		filter:alpha(opacity=86);-moz-opacity:0.86;opacity:0.86;
-	}
-	.productshow .discount-list li p{
-		margin:0;
-		line-height:32px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="{{asset('front/css/slide.css')}}">
 @endsection
 @section('content')
 <!--bannar-->
@@ -48,7 +8,7 @@
 	<div class="bannar-img flexslider">
 		<ul class="slides">
 			<li><img src="{{asset('front/img/bannar.jpg')}}" /></li>
-			<li><img src="{{asset('front/img/bannar.jpg')}}" /></li>
+			<li><img src="{{asset('front/img/6.jpg')}}" /></li>
 			<li><img src="{{asset('front/img/bannar.jpg')}}" /></li>
 		</ul>
 	</div>
@@ -135,7 +95,7 @@
 			</div>
 			<div class="productshow">
 				<a class="dis-l abtn aleft" href="#left"><img src="{{asset('front/img/l_btn.png')}}" /></a>
-          		<a class="dis-r abtn aright" href="#right"><img src="{{asset('front/img/r_btn.png')}}" /></a>
+				<a class="dis-r abtn aright" href="#right"><img src="{{asset('front/img/r_btn.png')}}" /></a>
 				<div class="discount-list scrollcontainer">
 					<ul>
 						@foreach($sales as $sale)
@@ -161,11 +121,12 @@
 <div class="clear"></div>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{asset('vendors/flexslider/jquery.flexslider-min.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/unslider/unslider.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/Xslider/Xslider.js')}}"></script>
 <script type="text/javascript">
-	$(function(){
-		$(".flexslider").flexslider({
+	//$(function(){
+		$('.bannar-img').unslider({
+			dots: true,
 		});
 		$(".productshow").Xslider({
 			unitdisplayed:3,
@@ -173,6 +134,6 @@
 			autoscroll:2000,
 			unitlen:180,
 		});
-	});
+	//});
 </script>
 @endsection

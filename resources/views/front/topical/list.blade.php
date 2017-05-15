@@ -18,15 +18,7 @@
   </div>
 </div>
 <div class="M2" style="margin-top:10px;">
-  <div class="titleNav">
-    <p>当前所在位置：
-      <a href="{{url('/')}}">首页</a>
-      <span class="sep">></span>
-      <a href="{{url('topical')}}">{{$name}}</a>
-      <span class="sep">></span>
-      {{{$topicalList[$urlPath['topicalId']]['name'] or  ''}}}
-    </p>
-  </div>
+  @include('front.share.crumb',['name'=>$name])
   <div class="fl-main">
     <div class="Recommend-list Recommend-list-1">
       <ul>

@@ -14,24 +14,46 @@ class UserController extends Controller
     }
 
     public function index(){
-        $resultData = $this->service->getInfo();
-        return view('front.user.index')->with($resultData);
+        $result = $this->service->getInfo();
+        $result['name'] = trans('front/system.setting');
+        return view('front.user.index')->with($result);
     }
 
-    public function update(Request $request,$id){
-        $resultData = $this->service->getSaveInfo($request->all(),$id);
-        return redirect('front.user.index');
+    public function saveInfo(Request $request){
+        $superiorCode = $request->input('superiorCode');
+        if(!empty($superiorCode)){
+            $responseData = $this->service->bindSuperior($superiorCode);
+            if($responseData['result'] != 1){
+                return response()->json($responseData);
+            }
+        }
+        $responseData = $this->service->getSaveInfo($request->all());
+        return response()->json($responseData);
+    }
+
+    public function safe(){
+        $result = $this->service->getInfo();
+        $result['name'] = trans('front/system.setting');
+        return view('front.user.safe')->with($result);
     }
 
     public function ajaxSetPic(Request $request){
         $responseData = $this->service->getSetPic($request->all());
         return response()->json($responseData);
     }
-
-    public function suggest(){
-        return view('front.user.suggest');
+    //分享
+    public function share()
+    {
+        $name = trans('front/system.share');
+        return view('front.user.share')->with(compact('name'));
     }
 
+    //意见反馈
+    public function suggest(){
+        $name = trans('front/system.suggest');
+        return view('front.user.suggest')->with(compact('name'));
+    }
+    //意见反馈提交
     public function ajaxSuggestSave(Request $request){
         $mobile = $request->input('mobile');
         $content = $request->input('content');
@@ -56,5 +78,12 @@ class UserController extends Controller
        $validcode = $request->input('validcode');
        $resultData = $this->service->getChangeMobile($mobile,$validcode);
        return redirect('login');
+    }
+    //修改密码
+    public function ajaxChangePassword(Request $request){
+        $oldpassword = $request->input('oldpassword');
+        $newpassword = $request->input('newpassword');
+        $responseData = $this->service->getChangePassword($oldpassword,$newpassword);
+        return response()->json($responseData);
     }
 }

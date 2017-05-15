@@ -95,18 +95,26 @@ class UserService extends BaseService
     }
 
     //获取用户信息
-    public function getInfo(){
+    public function getInfo($isJump=true){
         $path  = '/api/shop/personInfo!getInfo.do';
         $query = array();
-        $data = $this->http_curl($path,$query,"GET",false,false);
+        $data = $this->http_curl($path,$query,"GET",false,$isJump);
         return $data;
     }
 
     //修改用户信息
-    public function getSaveInfo($nickname,$sex,$storeId,$birthday){
+    public function getSaveInfo($from){
         $path  = '/api/shop/personInfo!saveInfo.do';
-        $query = array('nickname'=>$nickname,'sex'=>$sex,'storeId'=>$storeId,'birthday'=>$birthday);
-        $data = $this->http_curl($path,$query);
+        $query = $from;
+        $data = $this->http_curl($path,$query,"post");
+        return $data;
+    }
+
+    //设置邀请人
+    public function bindSuperior($superiorCode){
+        $path  = '/api/shop/personInfo!bindSuperior.do';
+        $query = array('superiorCode'=>$superiorCode);
+        $data = $this->http_curl($path,$query,"post");
         return $data;
     }
 

@@ -3,6 +3,8 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use App\Service\Api\UserService;
 use App\Service\Api\CartService;
+use Cookie;
+
 class UserInfoComposer
 {
 	protected $user;
@@ -15,11 +17,12 @@ class UserInfoComposer
 
     public function compose(View $view)
     {
-    	$userInfo = $this->user->getInfo();
+    	$userInfo = $this->user->getInfo(false);
     	if($userInfo){
+            $storeIdCookie = Cookie::forever('storeId',$userInfo['storeId']);
     		$cartCount = $this->cart->getCartCount();
     		$userInfo['cartCount'] = $cartCount['count'];
     	}
-		$view->with('userInfo',$userInfo);
+		$view->with('userInfo',$userInfo)->withCookie($storeIdCookie);
     }
 }

@@ -128,7 +128,7 @@ em{ font-style:normal;}
 .Recommend-list ul li .book a.tittle{ width:110px; font-size:14px; line-height:20px; display:inline-block; margin-top:10px; word-break:break-all; word-wrap:break-word; height:40px; text-align:left;}
 .Recommend-list ul li .info{ position:relative;}
 .Recommend-list ul li .info .price{ color:#ed595d; font-size:14px; text-align:left; width:110px; margin:auto;}
-.Recommend-list ul li .info .author{ display:block; width:110px; color:#999; font-size:12px; height:24px; overflow:hidden; margin:auto;}
+.Recommend-list ul li .info .author{ display:block; /*width:110px;*/ color:#999; font-size:12px; height:24px; overflow:hidden; margin:auto;}
 
 /*付款*/
 .Pay{ border:1px solid #eee; margin:0 0 20px 0; padding:38px 48px; background:#fff; overflow:auto;}
@@ -145,7 +145,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .pay-ul li a img{ border:1px solid #eee;}
 .Pay .btnb{ padding-bottom:10px;}
 .btn_red_l{ float:right; background:#b81b22; color:#fff; font-size:18px; height:44px; line-height:44px; text-align:center; display:block; width:134px; border-radius: 5px;}
-.btn_red_n{ float:right; background:#aaaaaa; color:#fff; font-size:18px; height:44px; line-height:44px; text-align:center; display:block; width:134px; border-radius: 5px;}
+
 /*购物车*/
 .M1 h1{ height:50px; line-height:50px; font-size:22px; font-weight:600;}
 .gwc_box{ padding:0 0 80px 0;}
@@ -175,7 +175,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 
 /*分类*/
 .bk-left{ float:left; width:239px; margin:10px 10px 10px 0;}
-.M2{ padding:10px 15px; background:#fff; margin-bottom:10px; float:left; width:821px;}
+.M2{ padding:10px 15px; background:#fff; margin-bottom:10px; float:left; width:821px; min-height:510px;}
 .category-content{ position:relative; width:239px; float:left; z-index:113;}
 .category-content span{ display:block; height:42px; padding:0; text-align:center; font-size:16px; color:#b81b22; border:1px solid #b81b22;}
 .category{z-index:113; width:237px; border:1px solid #eee; background:#f8f8f8;}
@@ -300,3 +300,35 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .pc-info-b .pc-like-area .ico-like{ font-size:18px; position:relative; top:2px; padding-right:5px; background:url(../img/sc-1.png) no-repeat; display:inline-block; height:12px; width:12px;}
 .pc-info-b .no-border{ border-right:none;}
 .pc-price{ color:#b81b22; font-size:18px;}
+
+/*收藏*/
+.titList{ border:1px solid #eee; width:100%;}
+.titList .pname{ width:100%; height:52px; line-height:52px; font-size:18px; color:#999; border-bottom:1px solid #eee; text-align:center; background:#fff;}
+.titList_ul{ position:relative; top:-1px; background:#fff;}
+.titList_ul li a{ height:42px; line-height:42px; border-top:1px dotted #eee; color:#666; font-size:15px; text-align:center; display:block;}
+.titList_ul li.selected a{ background:#f8f8f8; color:#b81b22; border-left:4px solid #b81b22; margin-left:-1px;}
+.Recommend-list-2 ul li{ width:30%;}
+.Recommend-list-2 .book{ float:left; padding-right:15px;}
+.Recommend-list-2 .info{ float:left}
+.Recommend-list-2 ul li .info .author{ margin:0;}
+.Recommend-list-2 ul li .info .price{ margin:0;}
+.Recommend-list-2 .info a.tittle{ font-size:14px; height:40px; line-height:20px; display:block;}
+.info-c{ padding-top:20px;}
+.info-c .btn_red{ float:left; width:90px; height:29px; line-height:29px; display:inline-block; text-align:center; border-radius:5px; color:#fff; background: #ef6668; margin: 0 auto;}
+.info-c .qx{ color:#999; font-size:12px; line-height:28px; margin-left:15px;}
+.photo-input{ position:absolute; cursor:pointer; opacity:0;}
+.btn_blue{ width:175px;  height:45px;  display:block; margin-bottom:10px; background:url(../img/sc-btn.jpg) no-repeat;}
+.item{ margin-bottom:10px;}
+.item span.label{ float:left; height:18px; line-height:18px; padding:6px 0; width:120px; text-align:right;}
+.item em{ color:#e4593c;}
+.itxt{ height:18px; width:127px; padding:5px 23px 5px 5px;}
+.item .area, .item .itxt, .item .sele, .item .selt{ line-height:18px; border:1px solid #ccc; float:none; font-size:12px;}
+.ftx{ color:#999;}
+.jdradio{ float:none; vertical-align:-2px; margin:0 3px 0 0; padding:0;}
+.m_p p{ line-height:30px; padding:0 5px;}
+.pay-ul-1 li{ float:left; width:25%; margin-bottom:20px;}
+.pay-ul-1 .info-c{ padding-top:0;}
+.pay-ul-1 .left{ margin-right:10px;}
+.pay-ul-1 .info-c .btn_red{ width:70px; height:25px; line-height:25px;}
+
+
