@@ -23,23 +23,22 @@ class LoginController extends Controller
 
     //提交登陆
     public function login_check(Request $request){
-        $mobile = $request->input('mobile','15900000001');
+        $mobile = $request->input('mobile','13986287787');
         $password = $request->input('password','123456');
         $resultData = $this->service->getLogin($mobile,$password);
-        return redirect('/')->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
+        if($resultData['result'] == 1){
+          Cookie::forever('API_SESSIONID',$resultData['API_SESSIONID']);
+          $this->setStoreId();
+        }
+        return response()->json($resultData);
     }
 
-    //重置密码
-    public function changePassword(){
-        return view('front.login.changePassword');
-    }
-
-    //提交重置密码
-    public function changePassword_check(Request $request){
-       $oldpassword = $request->input('oldpassword');
-       $newpassword = $request->input('newpassword');
-       $resultData = $this->service->getChangePassword($oldpassword,$newpassword);
-       return redirect('login');
+    public function setStoreId(){
+        $userInfo = $this->service->getInfo(false);
+        if(empty($userInfo['storeId'])){
+            $userInfo['storeId'] = config('settings.storeId');
+        }
+        return  Cookie::forever('storeId',$userInfo['storeId']);
     }
 
     //忘记密码
@@ -52,20 +51,19 @@ class LoginController extends Controller
        $mobile = $request->input('mobile');
        $password = $request->input('password');
        $validcode = $request->input('validcode');
-       $resultData = $this->service->getResetPassword($mobile,$password,$validcode);
-       return redirect('login');
+       $responseData = $this->service->getResetPassword($mobile,$password,$validcode);
+       return response()->json($responseData);
     }
 
     //忘记密码验证码
     public function ajaxValidcodeByMobile(Request $request){
-        $region = $request->get('mobile');
+        $mobile = $request->get('mobile');
         $responseData = $this->service->getValidcodeByMobile($mobile);
         return response()->json($responseData);
     }
 
-
     //退出登陆
     public function login_out(){
-       return redirect('/')->withCookie(cookie()->forget('API_SESSIONID'));
+       return redirect('login')->withCookie(cookie()->forget('API_SESSIONID'));
     }
 }

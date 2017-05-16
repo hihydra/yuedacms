@@ -9,7 +9,7 @@ $router->group(['prefix' => 'user','middleware' => ['isLogin']],function ($route
 	$router->get('suggest','UserController@suggest')->name('user.suggest');
 	$router->post('ajaxSuggestSave','UserController@ajaxSuggestSave')->name('user.ajaxSuggestSave');
 	$router->get('changeMobile','UserController@changeMobile')->name('user.changeMobile');
-	$router->get('ajaxValidcode','UserController@ajaxValidcode')->name('user.ajaxValidcode');
+	$router->post('ajaxValidcode','UserController@ajaxValidcode')->name('user.ajaxValidcode');
 	$router->post('changeMobile_check','UserController@changeMobile_check')->name('user.changeMobile_check');
 	$router->post('ajaxChangePassword','UserController@ajaxChangePassword')->name('user.ajaxChangePassword');
 	//收货地址

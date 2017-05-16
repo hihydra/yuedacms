@@ -1,0 +1,83 @@
+﻿@charset "utf-8";
+body{ background:#fff;}
+.login{ height:523px; width:100%; background:url(../img/login-bg.jpg) no-repeat center -10px;}
+/* CSS Document */
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container{ width:1002px;}
+.carousel-inner .item{ margin-top:2px; padding:0; width:100%;}
+.carousel{ margin-bottom:5px;}
+.dev-header { background-color: #fff; border-bottom: 1px solid #dddddd; box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); color: #333333; font-family: microsoft yahei; font-size: 12px; height: 74px;}
+.dev-header .wrapper { position: relative; z-index: 6; margin: auto; width: 1002px;}
+.dev-logo { border: 0 none; display: inline; float: left; margin:5px 0 0; padding: 0;}
+.dev-logo a { background-position: 0 -150px; display: block; height:60px; width:360px; margin-left:0;}
+.hidspan span { display: none;}
+
+.dh-nav { display: inline; float: left; margin-left: 15px; margin-top: 20px; width:620px; text-align:right;}
+.dh-nav ul { list-style: none outside none; margin: 0;}
+.dh-nav .dhnl { display: inline; float: left; margin: 0; padding: 0; position:relative;}
+/* ʾ */
+.cue-hd,.cue-mid,.cue-ft,.cue-arrow,.cue-tt p{background-image:url(../img/error_bg.png); _background-image:url(../img/error_bg_ie6.png);}
+#errorAlert{position: absolute; width: 347px; top: 0; left: 50%; margin-left: -215px; text-align: left; z-index: 1000; display: none;}
+#errorAlert.cue_Alert-show{display: block; -webkit-animation: shake 0.6s ease-in-out 0.3s; -moz-animation: shake 0.6s ease-in-out 0.3s; -o-animation: shake 0.6s ease-in-out 0.3s; animation: shake 0.6s ease-in-out 0.3s;}
+#errorAlert .cue-hd,
+#errorAlert .cue-ft{overflow: hidden; font-size: 0; line-height: 0;}
+#errorAlert .cue-hd{height: 8px; background-position: -10px 0; background-repeat: no-repeat;}
+#errorAlert .cue-ft{height: 10px; background-position: -10px -8px; background-repeat: no-repeat;}
+#errorAlert .cue-mid{padding: 5px 20px 7px; background-position: -357px 0; background-repeat: repeat-y;}
+#errorAlert .cue-arrow{position: absolute; top: 35px; right: -6px; width: 10px; height: 19px; background-position: 0 0; background-repeat: no-repeat;}
+#errorAlert .cue-tt p{padding: 10px 20px 8px 60px; color: #434343; line-height: 22px; font-weight: bold; font-size: 14px; background-position: -704px center; background-repeat: no-repeat;}
+#errorAlert .cue-detail{margin-top:2px; padding: 8px 18px 5px 18px; color: #7d7d7d; line-height: 18px; border-top: 1px solid #e1e1e1;}
+#errorAlert .cue-detail a{color: #4e90e2; text-decoration: underline;}
+#errorMask{position:absolute; top:0; left: 0;width: 100%; height: 600px; background: #000; opacity: 0.2; filter:alpha(opacity=20); z-index: 1;}
+
+/* עɹʾ */
+.Successful-hd,.Successful-mid,.Successful-ft,.Successful-arrow,.Successful-tt p{background-image:url(../img/error_bg.png); _background-image:url(../img/error_bg_ie6.png);}
+#Successful-Alert{position: absolute; width: 347px; top: 0; left: 50%; margin-left: -215px; text-align: left; z-index: 1000; display: none;}
+#Successful-Alert.Successful_Alert-show{display: block; -webkit-animation: shake 0.6s ease-in-out 0.3s; -moz-animation: shake 0.6s ease-in-out 0.3s; -o-animation: shake 0.6s ease-in-out 0.3s; animation: shake 0.6s ease-in-out 0.3s;}
+#Successful-Alert .Successful-hd,#Successful-Alert .Successful-ft{overflow: hidden; font-size: 0; line-height: 0;}
+#Successful-Alert .Successful-hd{height: 8px; background-position: -10px 0; background-repeat: no-repeat;}
+#Successful-Alert .Successful-ft{height: 10px; background-position: -10px -8px; background-repeat: no-repeat;}
+#Successful-Alert .Successful-mid{padding: 5px 20px 7px; background-position: -357px 0; background-repeat: repeat-y;}
+#Successful-Alert .Successful-arrow{position: absolute; top: 35px; right: -6px; width: 10px; height: 19px; background-position: 0 0; background-repeat: no-repeat;}
+#Successful-Alert .Successful-tt p{padding: 10px 20px 8px 60px; color: #434343; line-height: 22px; font-weight: bold; font-size: 16px; background:url(../img/OK.png) 20px 9px; background-repeat: no-repeat;}
+
+#Successful-Mask{position:absolute; top:0; left: 0;width: 100%; height: 600px; background: #000; opacity: 0.2; filter:alpha(opacity=20); z-index: 1;}
+
+/*登录*/
+.login1{ background:#fff; border:1px solid #e3e4e8; border-radius:3px; height:310px; left:50%; margin-left:141px; padding:14px 16px 15px; position:absolute; text-align:left; top:135px; width:295px; z-index:2;}
+.tab-2{ background:url(../img/login-bg.png) no-repeat -323px 0; height:320px; left:50%; margin-left:141px; padding:14px 16px 15px; position:absolute; text-align:left; top:135px; width:295px; z-index:2;}
+.loginFunc{ clear:both; height:37px; line-height:37px; overflow:hidden; margin:0 25px; border-bottom:1px solid #e4e4e4;}
+.loginFunc span{ border-bottom:2px solid #b81b22; color:#b81b22; display:block; width:80px;  text-align:center; height:35px; line-height:35px; font-size:20px;}
+.loginFuncNormal, .loginFuncMobile{ color:#333; font-weight:bold; cursor:pointer; float:left; font-size:14px; height:100%; line-height:46px; overflow:hidden; position:relative; text-align:center; width:148px;}
+.loginFuncMobile{ border-right:medium none; width:147px;}
+.loginForm{ padding-top:20px; position:relative;}
+.loginFormIpt{ background:url(../img/bg_v2.png) 0 -142px; border-radius:4px; clear:both; height:42px; line-height:42px; margin:0 0 18px 25px; padding-right:5px; position:relative; width:240px; z-index:2; }
+.verification-code{ background:url(../img/bg_v2.png) 0 -248px; border-radius:4px; clear:both; height:42px; line-height:42px; margin:0 0 10px 25px; padding-right:5px; position:relative; width:123px; z-index:2; }
+.verification-code .loginFormTdIpt{ width:77px; margin-top:2px; height:20px; border:none;}
+.verification-code .ico{ left:9px; position:absolute; top:13px; z-index:1;}
+.loginFormIpt .ico{ left:9px; position:absolute; top:13px; z-index:1;}
+.ico-uid{ background:url(../img/bg_v2.png) -154px -64px; height:16px; width:14px;}
+.loginFormTdIpt{ background:none; border:medium none; color:#666; font-size:14px; font-weight:700; height:21px; line-height:21px; padding:9px 0 10px; left:28px; top:1px; width:205px; ime-mode:disabled; position:absolute;}
+.placeholder{ background:none; color:#666; font-size:14px; left:30px; line-height:24px; position:absolute; top:8px;cursor: text; visibility: visible;}
+.ico-pwd{background:url(../img/bg_v2.png) -178px -64px; height:16px; width:14px;}
+.ico-phone{background:url(../img/bg_v2.png) -200px -64px; height:18px; width:14px;}
+.loginFormCheck{ clear:both; color:#555; height:13px; line-height:13px; margin-left:25px; position:relative; width:245px; z-index:1;}
+.loginFormCheckInner{ float:left; height:14px; position:relative; width:150px;}
+.forgetPwdLine{ text-align:right;}
+.loginFormBtn{ height:43px; margin:10px 0 0 25px; position:relative; width:245px;}
+.btn{border-radius:3px; cursor:pointer; display:inline-block; outline:0 none; text-align:center; vertical-align:baseline;}
+.btn-login{  color:#fff;background:url(../img/bg_v2.png) 0 -96px; }
+.btn-reg{ color:#fff;background:url(../img/bg_v2.png) -117px -96px; float:right; border:none;}
+.btn-submit{display:block;margin-top:3px;padding:0 15px;height:38px;border:1px solid #b81b22;border-radius:3px;background:#b81b22;color:#fff;text-align:center;font-size:14px;line-height:34px;cursor:pointer}
+
+
+.loginFormIpt input{ border:none; margin-top:0;box-shadow:none; width:200px; height:20px;}
+.pic-QR{ position:absolute; left:127px; top:0; width:120px; height:43px;}
+.pic-QR a{ padding-left:7px;}
+.pic-QR img{ width:80px; height:32px;}
+.manual{ border-top:1px solid #dbdbdb; margin:15px 0; height:77px;}
+.manual a{ background:url(../img/bg_v2.png) no-repeat 0 -300px; display:block; width:270px; height:38px; margin:20px auto;}
+.manual a:hover{ text-decoration:none;}
+.btn1{border-radius:3px; cursor:pointer; display:inline-block; height:38px; outline:0 none; padding:0; text-align:center; vertical-align:baseline; width:110px;}
+.foot-1{ background:#fff; padding-top:30px; border-top:2px solid #CCC;}
+.foot-1 .foot-ul{ color:#3c3c3c;}
+.foot-1 .foot-ul a{ color:#3c3c3c;}

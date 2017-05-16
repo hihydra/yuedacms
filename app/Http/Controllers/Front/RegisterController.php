@@ -16,8 +16,7 @@ class RegisterController extends Controller
 
     //注册首页
     public function index(){
-        $resultData = $this->service->getRegionList();
-        return view('front.register.index')->with($resultData);
+        return view('front.register.index');
     }
 
     //注册提交
@@ -31,13 +30,6 @@ class RegisterController extends Controller
     	$region = $request->get('mobile');
     	$random = md5($region.env('SECRETKRY'));
     	$responseData = $this->service->getRegisterValidcode($mobile,$random);
-    	return response()->json($responseData);
-    }
-
-    //获取门店列表
-    public function ajaxStorefront(Request $request){
-    	$region = $request->get('region','');
-    	$responseData = $this->service->getStorefrontList($region);
     	return response()->json($responseData);
     }
 

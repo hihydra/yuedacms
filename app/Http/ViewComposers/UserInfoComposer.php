@@ -18,11 +18,10 @@ class UserInfoComposer
     public function compose(View $view)
     {
     	$userInfo = $this->user->getInfo(false);
-    	if($userInfo){
-            $storeIdCookie = Cookie::forever('storeId',$userInfo['storeId']);
-    		$cartCount = $this->cart->getCartCount();
-    		$userInfo['cartCount'] = $cartCount['count'];
-    	}
-		$view->with('userInfo',$userInfo)->withCookie($storeIdCookie);
+        if($userInfo){
+            $cartCount = $this->cart->getCartCount();
+            $userInfo['cartCount'] = $cartCount['count'];
+        }
+		$view->with('userInfo',$userInfo);
     }
 }

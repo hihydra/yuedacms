@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 body { line-height: 1.5em; -webkit-text-size-adjust: none; background:#fafafa;}
 body, textarea, select, input { color: #444; font-family: microsoft yahei,arial,helvetica,sans-serif; font-size: 14px;}
@@ -332,3 +332,29 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .pay-ul-1 .info-c .btn_red{ width:70px; height:25px; line-height:25px;}
 
 
+
+/*注册*/
+.reg-detail{ padding:52px 97px 38px 97px; background-color:#fff;}
+.reg-title{ font-size:28px; color:#000;}
+.box-shadow-in{ padding-bottom:30px; border-bottom:1px solid #e0e0e0; text-align:center;}
+.node{ margin-top:42px;}
+.node-title{ font-size:14px; font-weight:bold;}
+.node-intro{ color:#999; line-height:16px; margin-top:19px;}
+.node-des{ margin:30px 53px 0 0;}
+.node-input{ width:334px; margin-right:270px;}
+.short{ width:163px;}
+.short .dinput{ margin-top:0; border-radius:0; color:#333; font-size:12px; border:1px solid #c5c5c5; background-color:#fff; padding:0 15px; height:35px;}
+.short .dinput input{ line-height:32px; height:32px; width:100%; border:none;}
+.ddrop{ color:#333; margin-top:0; border-radius:0; padding:10px 14px; font-size:12px; position:relative; height:14px; border:1px solid #c5c5c5; background-color:#fff;}
+.input-intro{ font-size:12px; color:#999; padding:10px 0; text-align:left; width:110px;}
+.node .item{ margin-top:20px;}
+.node .item span.label{ width:100px;}
+.register{ margin-top:20px; text-align:center;}
+.btn-register{ width:300px; height:50px; line-height:50px; color:#fff; text-align:center; border:none; cursor: pointer; background:#b81b22;}
+.node .item a.hq{ height:30px; line-height:30px; display:inline-block; padding:0 10px; background:#ebebeb; vertical-align:-1px;}
+
+.s-store{ position:relative;}
+.dwon-ul{ position:absolute; top:28px; left:0; width:280px; border:1px solid #eee; background:#fff; padding:10px;}
+.dwon-ul ul li{ float:left; padding:0 5px;}
+.dwon-ul ul li a{ padding:0 5px;}
+.dwon-ul ul li a.hover,.dwon-ul ul li a:hover{ background:#444; color:#fff; height:25px; line-height:25px; display:inline-block;}

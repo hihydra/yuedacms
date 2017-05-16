@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Front'],function ($router){
 	require(__DIR__ . '/front/collection.php');
 	require(__DIR__ . '/front/showcase.php');
 	require(__DIR__ . '/front/coupon.php');
+	require(__DIR__ . '/front/store.php');
 });
 
 Route::group(['prefix' => 'admin'],function ($router)

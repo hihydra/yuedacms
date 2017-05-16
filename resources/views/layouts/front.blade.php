@@ -43,7 +43,7 @@
         <div class="s-a s-store">
           <span>&nbsp;</span>
           @if($userInfo)
-          <a href="#">{{$userInfo['storeName']}}</a>
+          <a href="#">{{{$userInfo['storeName'] or ''}}}</a>
           @else
           <a href="#">切换门店</a>
           @endif
@@ -56,7 +56,7 @@
         <div class="inlogin">
           <div class="top-menu">
             <a href="#">
-              <p>{{$userInfo['nickname']}}</p>
+              <p>{{{$userInfo['nickname'] or ''}}}</p>
               <b class="t"></b>
             </a>
           </div>
@@ -78,7 +78,7 @@
         </div>
         @else
         <div class="unlogin">
-          <a href="#">登录</a>|<a href="#">注册</a>
+          <a href="{{url('login')}}">登录</a>|<a href="{{url('register')}}">注册</a>
         </div>
         @endif
         <div class="s-a s-buy">

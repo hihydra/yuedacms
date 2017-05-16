@@ -79,6 +79,7 @@ class UserController extends Controller
        $resultData = $this->service->getChangeMobile($mobile,$validcode);
        return redirect('login');
     }
+
     //修改密码
     public function ajaxChangePassword(Request $request){
         $oldpassword = $request->input('oldpassword');

@@ -26,4 +26,8 @@ return [
 	'safe'   =>  '账户与安全',
 	'password_error' => '密码长度不能小于6位',
 	'repassword_error' => '2次密码不一致',
+	'address'   =>  '收货地址',
+	'login_error'  => '用户名或密码不能为空',
+	'phone_error'  => '请输入有效的手机号码',
+	'validcode_error' => '验证码不能为空',
 ];

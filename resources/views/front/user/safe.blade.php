@@ -2,7 +2,7 @@
 @section('title'){{$name}}-@endsection
 @section('css')
 <style type="text/css">
-	    .person-code-btn{
+	.person-code-btn{
         margin: 0 0 0 15px;
         padding: 7px 10px;
         background: #fff;
@@ -36,7 +36,7 @@
 				<span class="label"><em>*</em> 更换手机号码：</span>
 				<div class="fl">
 					<input class="itxt" maxlength="20" type="text" id="tel"/>
-					<input type="button" class="person-code-btn" onclick="getCode('{{url('tool/smsMessage')}}',$('#tel'),this);" value="获取验证码"/>
+					<input type="button" class="person-code-btn" onclick="getCode('{{url('user/ajaxValidcode')}}',$('#tel'),this);" value="获取验证码"/>
 				</div>
 			</div>
 			<div class="clear"></div>
@@ -101,7 +101,7 @@
 	}
 	function getCode(url,mobile,obj){
 		if(tel()){
-			$.post(url,{'mobile':mobile.val()},function(result){
+			$.post(url,function(result){
 				layer.msg(result.message);
 				if(result.result == 1){
 					settime(obj);

@@ -18,5 +18,7 @@ class VerifyCsrfToken extends BaseVerifier
         'cart/*',
         'order/*',
         'user/*',
+        'login/*',
+        'register/*',
     ];
 }

@@ -26,7 +26,7 @@
 			<div class="item">
 				<span class="label"><em>*</em> 昵称：</span>
 				<div class="fl">
-					<input class="itxt" name="nickname" maxlength="20" value="{{$nickname}}" type="text" />
+					<input class="itxt" name="nickname" maxlength="20" value="{{{$nickname or ''}}}" type="text" />
 				</div>
 			</div>
 			<div class="clear"></div>

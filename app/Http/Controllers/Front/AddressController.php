@@ -15,8 +15,10 @@ class AddressController extends Controller
     }
 
     public function index(){
-        $resultData = $this->service->getAddressList();
-        return view('front.address.list')->with($resultData);
+        $addresslist = $this->service->getAddressList();
+        $name = trans('front/system.address');
+
+        return view('front.address.list')->with(compact('addresslist','name'));
     }
 
     public function create()
