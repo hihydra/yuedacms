@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Front;
 use App\Service\Api\UserService;
+use App\Service\Api\CouponService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use url;
 
 class UserController extends Controller
 {
     protected $service;
+    protected $coupon;
 
-    public function __construct(UserService $service){
+    public function __construct(UserService $service,CouponService $coupon){
         $this->service = $service;
+        $this->coupon = $coupon;
     }
 
     public function index(){
@@ -53,12 +57,23 @@ class UserController extends Controller
         $name = trans('front/system.suggest');
         return view('front.user.suggest')->with(compact('name'));
     }
+
     //意见反馈提交
     public function ajaxSuggestSave(Request $request){
         $mobile = $request->input('mobile');
         $content = $request->input('content');
         $responseData = $this->service->getSuggestSave($mobile,$content);
         return response()->json($responseData);
+    }
+
+    //我的礼券
+    public function myCoupons(Request $request){
+        $status = $request->input('status','STATUS_UNUSED');
+        $anchor = $request->input('anchor','');
+        $coupons = $this->coupon->getMyCoupons($status,$anchor);
+        $name = trans('front/system.myCoupons');
+        //dd($coupons);
+        return view('front.user.myCoupons')->with(compact('name','coupons','status'));
     }
 
     //修改手机号

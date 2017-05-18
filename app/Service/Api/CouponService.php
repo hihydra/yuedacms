@@ -32,6 +32,7 @@ class CouponService extends BaseService
         STATUS_USED,//已使用
     int anchor:由上一次请求返回
     */
+    //我的优惠券
     public function getMyCoupons($status,$anchor=null){
         $path  = '/api/shop/coupon!myCoupons.do';
         $query = array('status'=>$status,'anchor'=>$anchor);

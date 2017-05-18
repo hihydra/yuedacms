@@ -16,19 +16,20 @@ class RegisterController extends Controller
 
     //注册首页
     public function index(){
-        return view('front.register.index');
+        $regionList = $this->service->getRegionList();
+        return view('front.register.index')->with(compact('regionList'));
     }
 
     //注册提交
     public function register_check(Request $request){
-    	$resultData = $this->service->getRegister($request->all());
-    	return redirect('front.index');
+    	$responseData = $this->service->getRegister($request->all());
+    	return response()->json($responseData);
     }
 
     //获取验证码
     public function ajaxValidcode(Request $request){
-    	$region = $request->get('mobile');
-    	$random = md5($region.env('SECRETKRY'));
+    	$mobile = $request->get('mobile');
+    	$random = md5($mobile.env('SECRETKRY'));
     	$responseData = $this->service->getRegisterValidcode($mobile,$random);
     	return response()->json($responseData);
     }

@@ -1,15 +1,15 @@
 @extends('layouts.front')
 @section('title')注册-@endsection
 @section('css')
-<script type="text/javascript" src="{{asset('vendors/jquery.inputbox/jquery.inputbox.css')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('vendors/jquery.inputbox/jquery.inputbox.css')}}">
 <style type="text/css">
 	.person-code-btn{
-        margin: 0 0 0 15px;
-        padding: 7px 10px;
-        background: #fff;
-        border: 1px solid #b81b22;
-        color: #b81b22;
-    }
+		margin: 0 0 0 15px;
+		padding: 7px 10px;
+		background: #fff;
+		border: 1px solid #b81b22;
+		color: #b81b22;
+	}
 </style>
 @endsection
 @section('content')
@@ -29,14 +29,19 @@
 		<div class="item">
 			<span class="label"><em>*</em> 所属门店：</span>
 			<div class="fl">
-			<div id="test1">
-				<input type="hidden" class="province" value=""/>
-				<input type="hidden" class="city" value=""/>
-				<input type="hidden" class="area" value=""/>
-				<div name="province" type="selectbox" style="z-index:2;"><div class="opts"></div></div>
-				<div name="city" type="selectbox" style="z-index:2;"><div class="opts"></div></div>
-				<div name="area" type="selectbox" style="z-index:2;"><div class="opts"></div></div>
-			</div>
+				<div name="city" type="selectbox">
+					<div class="opts">
+						<a class="selected">请选择城市</a>
+						@foreach($regionList as $region)
+						<a href="javascript:getStore({{$region['id']}});" val="{{$region['id']}}">{{$region['name']}}</a>
+						@endforeach
+					</div>
+				</div>
+				<div name="store" type="selectbox">
+					<div class="opts">
+						<a class="selected">请选择门店</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -50,7 +55,7 @@
 		<div class="item">
 			<span class="label"><em>*</em> 手机验证码：</span>
 			<div class="fl">
-				<input class="itxt" maxlength="20" placeholder="请输入手机验证码" type="text" name="validcode"/> <input type="button" class="person-code-btn" onclick="getCode('{{url('login/ajaxValidcodeByMobile')}}',$('#tel').val(),this);" value="获取验证码"/>
+				<input class="itxt" maxlength="20" placeholder="请输入手机验证码" type="text" name="validcode"/> <input type="button" class="person-code-btn" onclick="getCode('{{url('register/ajaxValidcode')}}',$('#tel').val(),this);" value="获取验证码"/>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -77,23 +82,37 @@
 	</div>
 	<div class="box-shadow-in"></div>
 	<div class="register">
-		<button type="submit" class="btn-register">立即注册</button>
+		<button type="button" class="btn-register" onclick="register();">立即注册</button>
 	</div>
 </div>
 <div class="clear"></div>
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/jquery.inputbox/jquery.inputbox.js')}}"></script>
-<script type="text/javascript" src="{{asset('vendors/jquery.ganged/jquery.ganged.js')}}"></script>
 <script type="text/javascript">
-	$(function(){
-		$.get("{{url('store/ajaxRegionList')}}",function(result){
-			var data = result;
-			$('#test1').ganged({'data': data, 'width': 100, 'height': 30});
-			$('#test2').ganged({'data': data});
+	$('div[name="city"]').inputbox({
+		height:30,
+		width:156
+	});
+	$('div[name="store"]').inputbox({
+		height:30,
+		width:156
+	});
+	function getStore(regionId){
+		$.get("{{url('store/ajaxStorefront')}}/"+regionId,function(result){
+			if(result.datas){
+				$('div[name="store"] .selected').html('请选择门店');
+				$('input[name="store"]').val('');
+				var html ="<a class='selected'>请选择门店</a>";
+				$.each(result.datas,function(i,data){
+					html+="<a val="+data.id+">"+ data.name +"</a>";
+				});
+				$('div[name="store"] .opts').html(html);
+			}else{
+				layer.msg('{{trans("front/system.getStore")}}');
+			}
 		});
-	})
-
+	}
 	function tel(){
 		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
 		if(!myreg.test($('#tel').val()))
@@ -133,16 +152,24 @@
 			,1000)
 	}
 	function register() {
+		var nickname = $("input[name='nickname']").val();
 		var mobile = $("input[name='mobile']").val();
 		var password = $("input[name='password']").val();
+		var rePassword = $("input[name='rePassword']").val();
 		var validcode = $("input[name='validcode']").val();
-		if(mobile.length ==0 || password.length ==0){
-			layer.msg("{{trans('front/system.login_error')}}");return;
+		if(nickname.length ==0){
+			layer.msg("{{trans('front/system.nickname_error')}}");return;
 		}
-		if(validcode.length ==0){
-			layer.msg("{{trans('front/system.validcode_error')}}");return;
+		if(mobile.length ==0 || validcode.length ==0){
+			layer.msg("{{trans('front/system.mobile_validcode_error')}}");return;
 		}
-		$.post("{{url('login/resetPassword_check')}}",{'mobile':mobile,'password':password,'validcode':validcode},function(result){
+		if(!$('input[name="store"]').val()){
+			layer.msg("{{trans('front/system.store_error')}}");return;
+		}
+		if(password != rePassword){
+			layer.msg("{{trans('front/system.repassword_error')}}");return;
+		}
+		$.post("{{url('register/register_check')}}",{'nickname':nickname,'mobile':mobile,'password':password,'validcode':validcode,'storeId':$('input[name="store"]').val()},function(result){
 			layer.msg(result.message);
 			if(result.result == 1){
 				location.href = "{{url('login')}}";

@@ -133,7 +133,7 @@
 		if(oldpassword.length<5 || newpassword.length<5 || reNewpassword.length<5){
 				layer.msg("{{trans('front/system.password_error')}}");return;
 		}
-		if(newpassword.length != reNewpassword.length){
+		if(newpassword != reNewpassword){
 				layer.msg("{{trans('front/system.repassword_error')}}");return;
 		}
 		$.post("{{url('user/ajaxChangePassword')}}",{'oldpassword':oldpassword,'newpassword':newpassword},function(result){

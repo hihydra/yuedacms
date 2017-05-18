@@ -145,6 +145,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .pay-ul li a img{ border:1px solid #eee;}
 .Pay .btnb{ padding-bottom:10px;}
 .btn_red_l{ float:right; background:#b81b22; color:#fff; font-size:18px; height:44px; line-height:44px; text-align:center; display:block; width:134px; border-radius: 5px;}
+.btn_red_n{ float:right; background:#aaaaaa; color:#fff; font-size:18px; height:44px; line-height:44px; text-align:center; display:block; width:134px; border-radius: 5px;}
 
 /*购物车*/
 .M1 h1{ height:50px; line-height:50px; font-size:22px; font-weight:600;}
@@ -285,6 +286,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .quan-gray-item .q-opbtns{ background:url(../img/semi-circle.png) repeat-y #c3c3c3;}
 .quan-gray-item .q-price{ color:#c3c3c3;}
 .quan-item .btn-getend{ right:90px;width:69px; height:69px; line-height:69em; overflow:hidden; bottom:5px; position:absolute; background:url(../img/quan-state.png) no-repeat; background-position:0 -79px; }
+.quan-item .btn-finish{right:90px;width:69px;height:69px;line-height:69em;overflow:hidden;bottom:5px;position:absolute;background:url(../img/quan-state.png) no-repeat;background-position: 0 -237px;}
 
 /*专题*/
 .wrapper .topic-title{ font-size:18px; font-weight:700; color:#666; height:30px; line-height:30px;}

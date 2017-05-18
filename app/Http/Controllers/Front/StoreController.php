@@ -13,19 +13,14 @@ class StoreController extends Controller
 	}
 
     //获取区域列表
-    public function ajaxRegionList(Request $request){
-        $pid = $request->get('pid','');
-        $region = $this->service->getRegionList($pid);
-        foreach ($region as $key => $value) {
-            $responseData[$value['id']] = $value['name'];
-        }
+    public function ajaxRegionList(){;
+        $responseData = $this->service->getRegionList();
         return response()->json($responseData);
     }
 
     //获取门店列表
-    public function ajaxStorefront(Request $request){
-        $region = $request->get('region','');
-        $responseData = $this->service->getStorefrontList($region);
+    public function ajaxStorefront($regionId){
+        $responseData = $this->service->getStorefrontList($regionId);
         return response()->json($responseData);
     }
 

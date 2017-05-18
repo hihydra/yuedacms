@@ -23,17 +23,17 @@ class UserService extends BaseService
     }
 
     //获取区域列表
-    public function getRegionList($pid=null){
-        $path  = '/api/shop/region!list.do';
-        $query = array('pid'=>$pid);
+    public function getRegionList(){
+        $path  = '/api/shop/region!cityList.do';
+        $query = array();
         $data = $this->http_curl($path,$query);
         return $data;
     }
 
     //获取门店列表
-    public function getStorefrontList($region){
-        $path  = '/api/shop/storefront!list.do';
-        $query = array('region'=>$region);
+    public function getStorefrontList($regionId,$anchor = null){
+        $path  = '/api/shop/storefront!openListByCity.do';
+        $query = array('regionId'=>$regionId,'anchor'=>$anchor,'limit'=>200);
         $data = $this->http_curl($path,$query);
         return $data;
     }
@@ -41,7 +41,7 @@ class UserService extends BaseService
     //提交注册
     public function getRegister($form){
         $path  = '/api/shop/account!register.do';
-        $query = array($form);
+        $query = $form;
         $data = $this->http_curl($path,$query);
         return $data;
     }

@@ -81,12 +81,15 @@
         }
 
         var isAsc = {{{$urlPath['isAsc'] or 'false'}}};
+        console.log(isAsc);
         switch('{{$urlPath['sort']}}'){
           case 'SORT_TIME':
           if(isAsc){
             $('.sort-time em').attr('class','curr2');
+            $('.sort-time').attr('href',"{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_TIME','isAsc'=>'false'])}}");
           }else{
             $('.sort-time em').attr('class','curr1');
+            $('.sort-time').attr('href',"{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_TIME','isAsc'=>'true'])}}");
           }
           break;
           case 'SORT_PRICE':

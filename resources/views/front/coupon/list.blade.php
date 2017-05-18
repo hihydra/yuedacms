@@ -29,7 +29,7 @@
 			</div>
 			<div class="q-range">
 				@if($coupon['isSingleStore'])
-				<div class="range-item"><p>{{$coupon['storeName']}}</p></div>
+				<div class="range-item"><p>限{{$coupon['storeName']}}</p></div>
 				@else
 				<div class="range-item"><p>全场通用</p></div>
 				@endif
@@ -42,6 +42,7 @@
 			<a class="get-coupon coupon_{{$coupon['id']}}" href="javascript:void(0);">
 				<b class="semi-circle"></b>
 				<span>已领取</span></a>
+				<div class="q-state"><div class="btn-state btn-finish">已领取</div></div>
 				@else
 				@if($coupon['amount']>$coupon['getCount'])
 				<a class="get-coupon coupon_{{$coupon['id']}}" href="javascript:obtain({{$coupon['id']}});">
@@ -51,6 +52,7 @@
 					<a class="get-coupon coupon_{{$coupon['id']}}" href="javascript:void(0);">
 						<b class="semi-circle"></b>
 						<span>卷领光了</span></a>
+						<div class="q-state"><div class="btn-state btn-getend">已抢完</div></div>
 						@endif
 						@endif
 					</div>
@@ -78,6 +80,7 @@
 					if(result.result == 1){
 						$('.coupon_'+id+' span').text('已领取');
 						$('.coupon_'+id).attr('href','javascript:void(0);');
+						$('.coupon_'+id).append('<div class="q-state"><div class="btn-state btn-finish">已领取</div></div>');
 					}
 				});
 			}

@@ -27,10 +27,9 @@ class LoginController extends Controller
         $password = $request->input('password','123456');
         $resultData = $this->service->getLogin($mobile,$password);
         if($resultData['result'] == 1){
-          Cookie::forever('API_SESSIONID',$resultData['API_SESSIONID']);
           $this->setStoreId();
         }
-        return response()->json($resultData);
+        return response()->json($resultData)->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
     }
 
     public function setStoreId(){
@@ -38,7 +37,7 @@ class LoginController extends Controller
         if(empty($userInfo['storeId'])){
             $userInfo['storeId'] = config('settings.storeId');
         }
-        return  Cookie::forever('storeId',$userInfo['storeId']);
+        return Cookie::forever('storeId',$userInfo['storeId']);
     }
 
     //忘记密码

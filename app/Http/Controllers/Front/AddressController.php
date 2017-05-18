@@ -17,34 +17,30 @@ class AddressController extends Controller
     public function index(){
         $addresslist = $this->service->getAddressList();
         $name = trans('front/system.address');
-
         return view('front.address.list')->with(compact('addresslist','name'));
     }
 
-    public function create()
-    {
-        return view('front.address.create')->with($resultData);
+    public function store(Request $request){
+        $responseData = $this->service->getAddressStore($request->all());
+        return response()->json($responseData);
     }
 
-    public function store(){
-        $resultData = $this->service->getAddressStore($request->all());
-        return redirect('front.address.index');
-    }
-
-    public function update($request,$id){
-        $resultData = $this->service->getAddressEdit($request->all());
-        return redirect('front.address.index');
+    public function update(Request $request,$id){
+        $from = $request->all();
+        $from['id'] = $id;
+        $responseData = $this->service->getAddressEdit($from);
+        return response()->json($responseData);
     }
 
     public function destroy($id)
     {
-        $this->service->getAddressDelete($id);
-        return redirect('front.address.index');
+        $responseData = $this->service->getAddressDelete($id);
+        return response()->json($responseData);
     }
 
     public function defaddr($id)
     {
-        $this->service->getAddressDefaddr($id);
-        return redirect('front.address.index');
+        $responseData = $this->service->getAddressDefaddr($id);
+        return response()->json($responseData);
     }
 }

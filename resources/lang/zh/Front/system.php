@@ -30,4 +30,9 @@ return [
 	'login_error'  => '用户名或密码不能为空',
 	'phone_error'  => '请输入有效的手机号码',
 	'validcode_error' => '验证码不能为空',
+	'store_error'  => '请选择门店',
+	'getStore'  => '获取门店失败',
+	'mobile_validcode_error' => '手机号和验证码不能为空',
+	'myCoupons'  => '我的礼券',
+	'expireCoupons'  => '过期礼券',
 ];

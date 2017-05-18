@@ -7,6 +7,7 @@
   <meta name="description" content="{{$settings['description']}}">
   <meta name="author" content="{{$settings['author']}}">
   <link href="{{asset('front/css/css.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{asset('front/css/style.css') }}" rel="stylesheet" type="text/css"/>
   <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
   @yield('css')
 </head>
@@ -67,8 +68,9 @@
                 <em>0</em>
               </li>
               <li><a href="{{url('user/collection')}}">我的收藏</a></li>
-              <li><a href="#">我的礼券</a></li>
+              <li><a href="{{url('user/myCoupons')}}">我的礼券</a></li>
               <li><a href="{{url('user')}}">个人设置</a></li>
+              <li><a href="{{url('user/address')}}">收货地址</a></li>
               <li><a href="{{url('user/share')}}">分享应用</a></li>
               <li><a href="{{url('user/suggest')}}">意见反馈</a></li>
               <li><a href="#">关于</a></li>
