@@ -20,7 +20,7 @@
 			<div class="hot-h2">
 				<h2>
 					<p>{{trans('front/system.special')}}</p>
-					<div class="more"><a href="{{URL::route('showcase',['type'=>'special','storeId'=>$storeId])}}">更多</a></div>
+					<div class="more"><a href="{{URL::route('showcase',['type'=>'special'])}}">更多</a></div>
 				</h2>
 			</div>
 			<div class="special-list">
@@ -29,7 +29,7 @@
 					@php if($key>2){break;} @endphp
 					<li>
 						<div class="book">
-							<a href="{{URL::route('showcase',['type'=>'special','storeId'=>$storeId,'specialId'=>$spe['id']])}}"><img src="{{$spe['thumbUrl']}}" /></a>
+							<a href="{{URL::route('showcase',['type'=>'special','specialId'=>$spe['id']])}}"><img src="{{$spe['thumbUrl']}}" /></a>
 						</div>
 						<div class="info">
 							<div class="wrap">
@@ -60,7 +60,7 @@
 			<div class="hot-h2">
 				<h2>
 					<p>{{trans('front/system.recommend')}}</p>
-					<div class="more"><a href="{{URL::route('showcase',['type'=>'recommend','storeId'=>$storeId])}}">更多</a></div>
+					<div class="more"><a href="{{URL::route('showcase',['type'=>'recommend'])}}">更多</a></div>
 				</h2>
 			</div>
 			<div class="hot-list">
@@ -90,7 +90,7 @@
 			<div class="hot-h2">
 				<h2>
 					<p>{{trans('front/system.sales')}}</p>
-					<div class="more"><a href="{{URL::route('showcase',['type'=>'sales','storeId'=>$storeId])}}">更多</a></div>
+					<div class="more"><a href="{{URL::route('showcase',['type'=>'sales'])}}">更多</a></div>
 				</h2>
 			</div>
 			<div class="productshow">
@@ -124,7 +124,7 @@
 <script type="text/javascript" src="{{asset('vendors/unslider/unslider.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/Xslider/Xslider.js')}}"></script>
 <script type="text/javascript">
-	//$(function(){
+	$(function(){
 		$('.bannar-img').unslider({
 			dots: true,
 		});
@@ -134,6 +134,6 @@
 			autoscroll:2000,
 			unitlen:180,
 		});
-	//});
+	});
 </script>
 @endsection

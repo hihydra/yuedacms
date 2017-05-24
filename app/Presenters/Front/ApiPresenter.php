@@ -23,4 +23,8 @@ class ApiPresenter
 		$html = view('front.share.recommend',$data);
 		return $html;
 	}
+
+	public function getStore($storeId){
+		$store = $this->index->getOpenList('','',200);
+	}
 }

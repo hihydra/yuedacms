@@ -14,7 +14,7 @@ class ShowcaseController extends Controller
 
     public function index(Request $request,$type)
     {
-        $storeId = $request->input('storeId',getStoreId());
+        $storeId = getStoreId();
         $anchor = $request->input('anchor');
         switch ($type) {
             case 'recommend':

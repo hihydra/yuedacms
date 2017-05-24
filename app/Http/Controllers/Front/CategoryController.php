@@ -19,7 +19,7 @@ class CategoryController extends Controller
     //分类列表
     public function index(Request $request)
     {
-        $storeId = $request->input('storeId',getStoreId());
+        $storeId = getStoreId();
         $catId = $request->input('catId');
         $keyword = $request->input('keyword');
         $anchor = $request->input('anchor');
@@ -27,10 +27,15 @@ class CategoryController extends Controller
         $isAsc = $request->input('isAsc');
         $catList = $this->service->getCatList();
         $goodsList = $this->service->getGoodsList($storeId,$catId,$anchor,$keyword,$sort,$isAsc);
-        //dd($goodsList);
+
         $urlPath = compact('storeId','catId','keyword','anchor','sort','isAsc');
-        $name = trans('front/system.category');
-        return view('front.category.list')->with(compact('catList','goodsList','urlPath','name'));
+        if ($keyword) {
+            $name = trans('front/system.search');
+            return view('front.search.index')->with(compact('catList','goodsList','urlPath','name'));
+        }else{
+            $name = trans('front/system.category');
+            return view('front.category.list')->with(compact('catList','goodsList','urlPath','name'));
+        }
     }
 
 }

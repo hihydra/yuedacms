@@ -27,7 +27,7 @@
 		</div>
 		<div class="clear"></div>
 		<div class="item">
-			<span class="label"><em>*</em> 所属门店：</span>
+			<span class="label"><em>*</em> 常去门店：</span>
 			<div class="fl">
 				<div name="city" type="selectbox">
 					<div class="opts">

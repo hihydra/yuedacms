@@ -1,5 +1,6 @@
 <?php
 return [
+	'search'  => '搜索',
 	'recommend' => '店长推荐',
 	'sales' 	=> '折扣专区',
 	'special' 	=> '专题',
@@ -9,7 +10,10 @@ return [
 	'topical'   => '主题广场',
 	'category'  => '分类',
 	'cart'      => '购物车',
-	'order'      => '我的书店',
+	'order'     => '我的书店',
+	'store'     => '切换门店',
+	'orderDetail'  =>  '订单详情',
+	'goods'     => '确认订单',
 	'freeShipping' => '本店购物满59元包邮，不满59元收取运费10元',
 	'personal' => '个人中心',
 	'share' => '分享',
@@ -35,4 +39,5 @@ return [
 	'mobile_validcode_error' => '手机号和验证码不能为空',
 	'myCoupons'  => '我的礼券',
 	'expireCoupons'  => '过期礼券',
+
 ];

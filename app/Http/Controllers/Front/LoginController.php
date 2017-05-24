@@ -23,13 +23,16 @@ class LoginController extends Controller
 
     //提交登陆
     public function login_check(Request $request){
-        $mobile = $request->input('mobile','13986287787');
-        $password = $request->input('password','123456');
+        $mobile = $request->input('mobile');
+        $password = $request->input('password');
         $resultData = $this->service->getLogin($mobile,$password);
         if($resultData['result'] == 1){
           $this->setStoreId();
+          return response()->json($resultData)->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
+        }else{
+          return response()->json($resultData);
         }
-        return response()->json($resultData)->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
+
     }
 
     public function setStoreId(){

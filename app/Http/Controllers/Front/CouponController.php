@@ -15,7 +15,7 @@ class CouponController extends Controller
 
     public function index(Request $request)
     {
-        $storeId = $request->input('storeId',getStoreId());
+        $storeId = getStoreId();
         $anchor = $request->input('anchor');
         $coupons = $this->service->getCouponList($storeId,$anchor);
         $name = trans('front/system.coupon');

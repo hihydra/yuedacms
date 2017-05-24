@@ -35,22 +35,22 @@
 			<div class="item">
 				<span class="label"><em>*</em> 更换手机号码：</span>
 				<div class="fl">
-					<input class="itxt" maxlength="20" type="text" id="tel"/>
-					<input type="button" class="person-code-btn" onclick="getCode('{{url('user/ajaxValidcode')}}',$('#tel'),this);" value="获取验证码"/>
+					<input class="itxt" maxlength="20" type="text" id="tel" name="mobile" />
+					<input type="button" class="person-code-btn" onclick="getCode('{{url('register/ajaxValidcode')}}',$('#tel').val(),this);" value="获取验证码"/>
 				</div>
 			</div>
 			<div class="clear"></div>
 			<div class="item">
 				<span class="label"><em>*</em> 手机验证码：</span>
 				<div class="fl">
-					<input class="itxt" maxlength="20" value="" type="text" />
+					<input class="itxt" name="validcode" maxlength="20" value="" type="text" />
 				</div>
 			</div>
 			<div class="clear"></div>
 			<div class="item">
 				<span class="label">&nbsp;</span>
 				<div class="info-c">
-					<a class="btn_red" href="#">保存</a>
+					<a class="btn_red" href="javascript:changeMobile();">保存</a>
 				</div>
 			</div>
 			<br><br>
@@ -88,20 +88,9 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-	function tel(){
-		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-		if(!myreg.test($('#tel').val()))
-		{
-			alert('请输入有效的手机号码！');
-			$('#tel').focus();
-			return false;
-		}else{
-			return true;
-		}
-	}
 	function getCode(url,mobile,obj){
 		if(tel()){
-			$.post(url,function(result){
+			$.post(url,{'mobile':mobile},function(result){
 				layer.msg(result.message);
 				if(result.result == 1){
 					settime(obj);
@@ -125,6 +114,19 @@
 		setTimeout(function() {
 			settime(obj) }
 			,1000)
+	}
+	function changeMobile(){
+		var mobile = $("input[name='mobile']").val();
+		var validcode = $("input[name='validcode']").val();
+		if(mobile.length ==0 || validcode.length ==0){
+			layer.msg("{{trans('front/system.mobile_validcode_error')}}");return;
+		}
+		$.post("{{url('user/changeMobile_check')}}",{'mobile':mobile,'validcode':validcode},function(result){
+			layer.msg(result.message);
+			if(result.result == 1){
+				window.location.reload();
+			}
+		});
 	}
 	function changePassword(){
 		var oldpassword = $("input[name='oldpassword']").val();

@@ -5,6 +5,7 @@ use App\Service\Api\UserService;
 use App\Service\Api\CouponService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Common\ArrayToolkit;
 use url;
 
 class UserController extends Controller
@@ -19,11 +20,26 @@ class UserController extends Controller
 
     public function index(){
         $result = $this->service->getInfo();
+        $result['regionList'] = $this->service->getRegionList();
         $result['name'] = trans('front/system.setting');
         return view('front.user.index')->with($result);
     }
 
     public function saveInfo(Request $request){
+        $file = $request->file('file');
+        dd($file);
+        $data = $request->all();
+        if ($data['file']->isValid()) {
+            $file = $data['file'];
+            $filedir="upload/images/";
+            $imagesName=$file->getClientOriginalName();
+            $fileMove = $file->move($filedir,$imagesName);
+            $filePath = base_path().'\public\\'.str_replace('/','\\',$filedir.$imagesName);
+            //dd($filePath);
+            $responseData = $this->service->getSetPic($filePath);
+            dd($responseData);
+            return response()->json($responseData);
+        }
         $superiorCode = $request->input('superiorCode');
         if(!empty($superiorCode)){
             $responseData = $this->service->bindSuperior($superiorCode);
@@ -72,7 +88,6 @@ class UserController extends Controller
         $anchor = $request->input('anchor','');
         $coupons = $this->coupon->getMyCoupons($status,$anchor);
         $name = trans('front/system.myCoupons');
-        //dd($coupons);
         return view('front.user.myCoupons')->with(compact('name','coupons','status'));
     }
 
@@ -81,18 +96,18 @@ class UserController extends Controller
         return view('front.login.changeMobile');
     }
 
-    //修改手机号验证码
-    public function ajaxValidcode(){
-        $responseData = $this->service->getValidcode();
-        return response()->json($responseData);
-    }
-
     //修改手机号提交
     public function changeMobile_check(Request $request){
        $mobile = $request->input('mobile');
        $validcode = $request->input('validcode');
-       $resultData = $this->service->getChangeMobile($mobile,$validcode);
-       return redirect('login');
+       $responseData = $this->service->getChangeMobile($mobile,$validcode);
+       return response()->json($responseData);
+    }
+
+    //修改密码验证码
+    public function ajaxValidcode(){
+        $responseData = $this->service->getValidcode();
+        return response()->json($responseData);
     }
 
     //修改密码

@@ -58,11 +58,24 @@ if(!function_exists('isLogin')){
 	}
 }
 
+if(!function_exists('getStoreName')){
+	function getStoreName()
+	{
+		if(!empty(Cookie::get('storeName'))){
+			echo Cookie::get('storeName');
+		}else{
+			echo '切换门店';
+		}
+	}
+}
+
 
 if(!function_exists('getStoreId')){
 	function getStoreId()
 	{
-		if(!empty(Cookie::get('storeId'))){
+		if (app('request')->input('storeId')) {
+			return app('request')->input('storeId');
+		}else if(!empty(Cookie::get('storeId'))){
 			return Cookie::get('storeId');
 		}else{
 			return config('settings.storeId');
@@ -109,6 +122,23 @@ if(!function_exists('paymentType')){
 				break;
 			case 'cod':
 				return '货到付款';
+				break;
+		}
+	}
+}
+
+if(!function_exists('shippingMethod')){
+	function shippingMethod($type)
+	{
+		switch ($type) {
+			case 'METHOD_SELF':
+				return '上门自提';
+				break;
+			case 'METHOD_DELIVERY':
+				return '快递配送';
+				break;
+			case 'METHOD_LOCAL':
+				return '同城配送';
 				break;
 		}
 	}

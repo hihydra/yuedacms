@@ -18,6 +18,7 @@ class IndexService extends BaseService
         $path  = '/api/shop/storefront!openList.do';
         $query = array('keyword'=>$keyword,'anchor'=>$anchor,'limit'=>$limit);
         $data = $this->http_curl($path,$query);
+
         return $data;
     }
 

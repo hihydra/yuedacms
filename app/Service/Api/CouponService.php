@@ -51,8 +51,8 @@ class CouponService extends BaseService
     //获取待提交订单可用优惠券列表
     public function getCouponsByOrder($json){
         $path  = '/api/shop/coupon!getCouponsByOrder.do';
-        $query = array();
-        $data = $this->http_curl($path,$query);
+        $query = array('paramData'=>$json);
+        $data = $this->http_curl($path,$query,'post');
         return $data;
     }
 

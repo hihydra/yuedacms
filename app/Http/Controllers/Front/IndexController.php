@@ -16,18 +16,8 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-        $storeId = $request->input('storeId',getStoreId());
+        $storeId = getStoreId();
     	$resultData = $this->service->getIndex($storeId);
-        $resultData['storeId'] = $storeId;
     	return view('front.index.index')->with($resultData);
-    }
-
-    public function search()
-    {
-        $result = $this->service->search(request('q',''));
-        if ($result) {
-            return view('front.index.search')->with($result);
-        }
-        return redirect('/');
     }
 }

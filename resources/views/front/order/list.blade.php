@@ -50,7 +50,7 @@
 						@endif
 						<a class="btn_cancel slink" href="javascript:orderDelete('{{$order['sn']}}');">删除订单</a>
 						@endif
-						<a href="#">查看</a>
+						<a href="{{url('order/'.$order['sn'])}}">查看</a>
 					</td>
 				</tr>
 				@endforeach

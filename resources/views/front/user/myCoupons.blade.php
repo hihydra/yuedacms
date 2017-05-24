@@ -1,5 +1,8 @@
 @extends('layouts.front')
 @section('css')
+<style type="text/css">
+.quan-item{width: 320px;margin: 2px 12px 15px 40px;}
+</style>
 @endsection
 @section('content')
 @include('front.share.leftSidebar')

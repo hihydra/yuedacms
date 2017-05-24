@@ -14,7 +14,7 @@
         @foreach($catList as $cat)
         <li class="cat_{{$cat['id']}}">
           <div class="category-info list-nz">
-            <h2><a href="{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$cat['id']])}}" class="ml-22">{{$cat['name']}}</a></h2>
+            <h2><a href="{{URL::route('category',['catId'=>$cat['id']])}}" class="ml-22">{{$cat['name']}}</a></h2>
             <em>></em>
           </div>
         </li>
@@ -27,13 +27,13 @@
   @include('front.share.crumb',['name'=>$name])
   <div class="fl-main">
     <div class="show-switch">
-      <a href="{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_TIME'])}}" class="sort-item sort-hover sort-time">
+      <a href="{{URL::route('category',['catId'=>$urlPath['catId'],'keyword'=>$urlPath['keyword'],'sort'=>'SORT_TIME'])}}" class="sort-item sort-hover SORT_TIME">
         <em class="curr3"><span>时间</span><b></b></em>
       </a>
-      <a href="{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_PRICE'])}}" class="sort-item sort-hover sort-price">
+      <a href="{{URL::route('category',['catId'=>$urlPath['catId'],'keyword'=>$urlPath['keyword'],'sort'=>'SORT_PRICE'])}}" class="sort-item sort-hover SORT_PRICE">
         <em class="curr3"><span>价格</span><b></b></em>
       </a>
-      <a href="{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_SALES'])}}" class="sort-item sort-hover sort-sales">
+      <a href="{{URL::route('category',['catId'=>$urlPath['catId'],'keyword'=>$urlPath['keyword'],'sort'=>'SORT_SALES'])}}" class="sort-item sort-hover SORT_SALES">
         <em><span>销量</span><b></b></em>
       </a>
     </div>
@@ -80,32 +80,16 @@
             $('.category-list li').first().addClass('hover');
         }
 
-        var isAsc = {{{$urlPath['isAsc'] or 'false'}}};
-        console.log(isAsc);
-        switch('{{$urlPath['sort']}}'){
-          case 'SORT_TIME':
+        var sort = "{{{$urlPath['sort'] or 0}}}";
+        if(sort != 0){
+          var isAsc = {{{$urlPath['isAsc'] or 0}}};
           if(isAsc){
-            $('.sort-time em').attr('class','curr2');
-            $('.sort-time').attr('href',"{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_TIME','isAsc'=>'false'])}}");
+              $('.'+sort+' em').attr('class','curr2');
+              $('.'+sort).attr("href",$('.'+sort).attr("href")+"&isAsc=false");
           }else{
-            $('.sort-time em').attr('class','curr1');
-            $('.sort-time').attr('href',"{{URL::route('category',['storeId'=>$urlPath['storeId'],'catId'=>$urlPath['catId'],'sort'=>'SORT_TIME','isAsc'=>'true'])}}");
+              $('.'+sort+' em').attr('class','curr1');
+              $('.'+sort).attr("href",$('.'+sort).attr("href")+"&isAsc=true");
           }
-          break;
-          case 'SORT_PRICE':
-          if(isAsc){
-            $('.sort-price em').attr('class','curr2');
-          }else{
-            $('.sort-price em').attr('class','curr1');
-          }
-          break;
-          case 'SORT_SALES':
-          if(isAsc){
-            $('.sort-sales em').attr('class','curr2');
-          }else{
-            $('.sort-sales em').attr('class','curr1');
-          }
-          break;
         }
   });
 </script>

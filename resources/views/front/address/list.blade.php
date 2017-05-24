@@ -3,6 +3,11 @@
 @section('css')
 <style type="text/css">
 .perTable td a{color: #36c;}
+.perTable tr:hover{background-color: #eee;}
+.perTable .note-implicit{color:#fff;}
+.perTable tr:hover .note-implicit{padding: 5px 5px; border-color: #f30; border-radius: 3px; background: #f30;color: #fff;}
+.perTable .note{padding: 5px 5px; border-color: #ff3800; border-radius: 3px; background: #ffd6cc; color: #f30;}
+.perTable td a:hover{color: #f30;}
 </style>
 @endsection
 @section('content')

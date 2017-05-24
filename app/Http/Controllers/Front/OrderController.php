@@ -24,8 +24,10 @@ class OrderController extends Controller
     }
 
     public function show($sn){
-        $resultData = $this->service->getOrderDetail($sn);
-        return view('front.order.show')->with($resultData);
+        $result = $this->service->getOrderDetail($sn);
+        $result['expressInfo'] = $this->service->getOrderExpressInfo($sn);
+        $result['name'] = trans('front/system.orderDetail');
+        return view('front.order.show')->with($result);
     }
 
     public function expressInfo($sn){

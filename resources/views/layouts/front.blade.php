@@ -11,6 +11,9 @@
   <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
   @yield('css')
 </head>
+@php
+$storeId = getStoreId();
+@endphp
 <body>
   <!--   top开始   -->
   <div class="top">
@@ -30,24 +33,22 @@
       </div>
       <!--搜索框-->
       <div class="search">
+        <form action="{{url('category')}}" method="get">
         <div class="s-bg">
           <div class="s-btn right">
-            <input class="s-seek" value="" type="button" />
+            <input class="s-seek"  type="button" />
           </div>
           <div class="s-input left">
-            <input type="text" placeholder="请输入搜索内容" />
+            <input type="text" placeholder="请输入搜索内容" name="keyword" value=""/>
           </div>
         </div>
+        </form>
       </div>
       <!--登录注册、门店、下载-->
       <div class="use">
         <div class="s-a s-store">
           <span>&nbsp;</span>
-          @if($userInfo)
-          <a href="#">{{{$userInfo['storeName'] or ''}}}</a>
-          @else
-          <a href="#">切换门店</a>
-          @endif
+          <a href="{{url('store')}}">{{getStoreName()}}</a>
         </div>
         <div class="s-a s-dwon">
           <span>&nbsp;</span>
@@ -65,7 +66,6 @@
             <ul class="cnt-ul">
               <li>
                 <a href="{{url('order')}}">我的书店</a>
-                <em>0</em>
               </li>
               <li><a href="{{url('user/collection')}}">我的收藏</a></li>
               <li><a href="{{url('user/myCoupons')}}">我的礼券</a></li>

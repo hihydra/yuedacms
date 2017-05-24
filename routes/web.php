@@ -13,7 +13,7 @@
 
 
 Route::group(['namespace' => 'Front'],function ($router){
-	$router->get('/','IndexController@index');
+	$router->get('/','IndexController@index')->name('index');
 	$router->post('search','IndexController@search');
 	require(__DIR__ . '/front/category.php');
 	require(__DIR__ . '/front/topical.php');
@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Front'],function ($router){
 	require(__DIR__ . '/front/showcase.php');
 	require(__DIR__ . '/front/coupon.php');
 	require(__DIR__ . '/front/store.php');
+	require(__DIR__ . '/front/goods.php');
 });
 
 Route::group(['prefix' => 'admin'],function ($router)

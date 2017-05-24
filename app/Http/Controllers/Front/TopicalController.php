@@ -17,7 +17,7 @@ class TopicalController extends Controller
 
     public function index(Request $request)
     {
-    	$storeId = $request->input('storeId',getStoreId());
+    	$storeId = getStoreId();
     	$anchor = $request->input('anchor');
     	$topicalList = $this->service->getTopicalList($storeId);
         $topicalList = ArrayToolkit::index($topicalList,'id');
@@ -26,6 +26,6 @@ class TopicalController extends Controller
     	$topicalGoods = $this->service->getTopicalGoods($storeId,$topicalId,$anchor);
         $urlPath = compact('storeId','topicalId','anchor');
     	$name = trans('front/system.topical');
-    	return view('front.topical.list')->with(compact('topicalList','topicalGoods','name','urlPath'));
+    	return view('front.topical.list')->with(compact('topicalList','topicalGoods','name','urlPath','storeId'));
     }
 }
