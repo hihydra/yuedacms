@@ -14,7 +14,7 @@ class GoodsService extends BaseService
         return $data;
     }
 
-    //判断是否在配送fanwei
+    //判断是否在配送范围
     public function checkServiceRadius($storeId,$lng,$lat){
         $path  = '/api/shop/storefront!checkServiceRadius.do';
         $query = array('lng'=>$lng,'lat'=>$lat,'storeId'=>$storeId);

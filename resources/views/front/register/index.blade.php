@@ -109,7 +109,7 @@
 				});
 				$('div[name="store"] .opts').html(html);
 			}else{
-				layer.msg('{{trans("front/system.getStore")}}');
+				layer.msg('{{trans("front/system.getStore_error")}}');
 			}
 		});
 	}

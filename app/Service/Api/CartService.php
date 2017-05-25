@@ -46,9 +46,9 @@ class CartService extends BaseService
 
     //删除购物车商品
     public function getCartDelete($cartIds){
-        $path  = '/api/shop/cart!delete.do';
-        $query = array('cartIds'=>$cartIds);
-        $data = $this->http_curl($path,$query);
+        $path  = '/api/shop/cart!delete.do?cartIds='.implode('&cartIds=',$cartIds);
+        $query = array();
+        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
         return $data;
     }
 

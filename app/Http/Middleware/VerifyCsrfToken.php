@@ -16,9 +16,11 @@ class VerifyCsrfToken extends BaseVerifier
         'alipay/return',
         'coupon/*',
         'cart/*',
+        'order',
         'order/*',
         'user/*',
         'login/*',
         'register/*',
+        'goods/*',
     ];
 }

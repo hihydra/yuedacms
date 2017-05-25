@@ -30,19 +30,24 @@ class OrderController extends Controller
         return view('front.order.show')->with($result);
     }
 
-    public function expressInfo($sn){
-        $resultData = $this->service->getOrderExpressInfo($id);
-        return view('front.order.expressInfo')->with($resultData);
+    public function store(Request $request){
+        $shippingMethod = $request->input('shippingMethod');
+        $storeId = $request->input('storeId');
+        $paymentType = $request->input('paymentType');
+        $addressId = $request->input('addressId');
+        $otherInfo = json_encode($request->input('otherInfo'));
+        $form = compact('shippingMethod','storeId','paymentType','addressId','otherInfo');
+        $cartIds = $request->input('cartIds');
+        $resultData = $this->service->getOrderCreate($cartIds,$form);
+        return redirect('order/pay?snLs[]='.implode('snLs[]=',$cartIds));
     }
 
-    public function shippingType($regionid){
-        $resultData = $this->service->getShippingType($regionid);
-        return view('front.order.shippingType')->with($resultData);
-    }
-
-    public function store($request){
-        $resultData = $this->service->getOrderCreate($request->all());
-        return redirect('front.order.index');
+    public function pay(Request $request){
+        $snLs = $request->input('snLs');
+        $name = trans('front/system.pay');
+        $payInfoData = $this->service->getZhiFuBao($snLs);
+        parse_str(preg_replace('/\"/', '', $payInfoData['payInfo']));
+        return view('front.order.pay')->with(compact('snLs','name','total_fee'));
     }
 
     public function ajaxCancel($sn){

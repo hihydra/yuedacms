@@ -20,7 +20,6 @@ class CartController extends Controller
         $carts = $this->service->getCartList();
         $recommendList = $this->service->getCartRecommendList();
         $name = trans('front/system.cart');
-        //dd($carts);
         return view('front.cart.list')->with(compact('carts','name','recommendList'));
     }
 
@@ -31,9 +30,10 @@ class CartController extends Controller
         return response()->json($responseData);
     }
 
-    public function ajaxCartDelete($cartId)
+    public function ajaxCartDelete(Request $request)
     {
-        $responseData = $this->service->getCartDelete($cartId);
+        $cartIds = $request->input('cartIds');
+        $responseData = $this->service->getCartDelete($cartIds);
         return response()->json($responseData);
     }
 }

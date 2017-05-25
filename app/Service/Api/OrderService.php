@@ -45,10 +45,10 @@ class OrderService extends BaseService
     }
 
     //生成订单
-    public function getOrderCreate($form){
-        $path  = '/api/shop/order!create.do';
+    public function getOrderCreate($cartIds,$form){
+        $path  = '/api/shop/order!create.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = $form;
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
         return $data;
     }
 
@@ -69,18 +69,18 @@ class OrderService extends BaseService
     }
 
     //获取支付宝相关参数
-    public function getZhiFuBao($sn){
-        $path  = '/api/shop/payment!zhiFuBao.do';
-        $query = array('sn'=>$sn);
-        $data = $this->http_curl($path,$query);
+    public function getZhiFuBao($snLs){
+        $path  = '/api/shop/payment!zhiFuBao.do?sn='.implode('&sn=',$snLs);
+        $query = array();
+        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
         return $data;
     }
 
     //获取微信支付相关参数
-    public function getWeiXin($sn){
-        $path  = '/api/shop/payment!weiXin.do';
-        $query = array('sn'=>$sn);
-        $data = $this->http_curl($path,$query);
+    public function getWeiXin($snLs){
+        $path  = '/api/shop/payment!weiXin.do?sn='.implode('&sn=',$snLs);
+        $query = array();
+        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
         return $data;
     }
 

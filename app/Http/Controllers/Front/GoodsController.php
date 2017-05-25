@@ -41,7 +41,6 @@ class GoodsController extends Controller
         $goodList = $this->getCouponsByOrder($cartList);
         $addressList = $this->user->getAddressList();
         $name = trans('front/system.goods');
-        //dd(compact('goodList','name','addressList'));
         return view('front.goods.index')->with(compact('goodList','name','addressList'));
     }
 
