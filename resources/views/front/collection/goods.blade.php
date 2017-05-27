@@ -11,11 +11,11 @@
 			<div class="bs-info">
 				<ul class="bs-ul" style="margin-top:0;">
 					<li class="on">
-					<a href="{{url('user/collection')}}" class="smooth">{{trans('front/system.goodsLike')}}</a>
+					<a href="{{url('user/goods')}}" class="smooth">{{trans('front/system.goodsLike')}}</a>
 						<b></b>
 					</li>
 					<li>
-						<a href="{{url('user/collection/specialLike')}}" class="smooth">{{trans('front/system.specialLike')}}</a>
+						<a href="{{url('user/special')}}" class="smooth">{{trans('front/system.specialLike')}}</a>
 						<b></b>
 					</li>
 					<div class="clear"></div>
@@ -34,7 +34,7 @@
 						<p class="author">{{date('Y-m-d h:i',round($data['likeTime']/1000))}} 喜欢</p>
 						<p class="price">￥{{$data['price']}}</p>
 						<div class="info-c">
-							<a class="btn_red" href="#">加入购物车</a>
+							<a class="btn_red" href="javascript:addCart({{$data['id']}},1,'',{{$data['specialId']}})">加入购物车</a>
 							<a class="qx" href="javascript:unlike({{$data['id']}})">取消收藏</a>
 						</div>
 					</div>
@@ -62,6 +62,14 @@
 			layer.msg(result.message);
 			if(result.result == 1){
 				$('.div_'+id).remove();
+			}
+		});
+	}
+	function addCart(productId,num,storeId){
+		$.post("{{url('cart/ajaxAdd')}}",{'productId':productId,'num':num,'storeId':storeId},function(result){
+			layer.msg(result.message);
+			if(result.result == 1){
+
 			}
 		});
 	}

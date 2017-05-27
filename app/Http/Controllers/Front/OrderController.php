@@ -31,15 +31,11 @@ class OrderController extends Controller
     }
 
     public function store(Request $request){
-        $shippingMethod = $request->input('shippingMethod');
-        $storeId = $request->input('storeId');
-        $paymentType = $request->input('paymentType');
-        $addressId = $request->input('addressId');
-        $otherInfo = json_encode($request->input('otherInfo'));
-        $form = compact('shippingMethod','storeId','paymentType','addressId','otherInfo');
+        $form = array_only($request->all(), ['shippingMethod','storeId','paymentType','addressId','otherInfo']);
+        $form['otherInfo'] = json_encode($request->input('otherInfo'));
         $cartIds = $request->input('cartIds');
-        $resultData = $this->service->getOrderCreate($cartIds,$form);
-        return redirect('order/pay?snLs[]='.implode('snLs[]=',$cartIds));
+        $snLs = $this->service->getOrderCreate($cartIds,$form);
+        return redirect('order/pay?snLs[]='.implode('snLs[]=',$snLs));
     }
 
     public function pay(Request $request){
@@ -47,6 +43,14 @@ class OrderController extends Controller
         $name = trans('front/system.pay');
         $payInfoData = $this->service->getZhiFuBao($snLs);
         parse_str(preg_replace('/\"/', '', $payInfoData['payInfo']));
+        /*
+        $alipay = app('alipay.web');
+        $alipay->setOutTradeNo($out_trade_no);
+        $alipay->setTotalFee($total_fee);
+        $alipay->setSubject($subject);
+        $alipay->setBody($body);
+        $pay['alipay'] = $alipay->getPayLink();
+        */
         return view('front.order.pay')->with(compact('snLs','name','total_fee'));
     }
 

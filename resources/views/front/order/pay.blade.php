@@ -1,5 +1,26 @@
 @extends('layouts.front')
 @section('title'){{$name}}-@endsection
+@section('css')
+<style type="text/css">
+.example {
+    width: 307px;
+    height: 488px;
+    background: url("//c1.mifile.cn/f/i/16/pay/weinxin-pay.png") no-repeat;
+    position: absolute;
+    top: 120px;
+    left: 353px;
+}
+.modal-bd {
+    padding: 0 40px;
+    position: relative;
+    text-align: center;
+}
+.msg span {
+    color: #ff6700;
+    cursor: pointer;
+}
+</style>
+@endsection
 @inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
 @section('content')
 <div class="M1" style="margin-top:10px;">
@@ -17,28 +38,32 @@
 		</div>
 		<div class="pt1">
 			<h4>
-				选择在线支付平台<i>（目前只支持支付宝和微信支付）</i>
+				请选择以下支付方式<i>（目前只支持支付宝和微信支付）</i>
 			</h4>
 			<ul class="pay-ul">
 				<li>
-					<span>
-						<input name="payType" value="1" checked="checked" type="radio" />
-					</span>
 					<a href="#"><img src="{{asset('front/img/zfb.jpg')}}" /></a>
 				</li>
 				<li>
-					<span>
-						<input name="payType" value="2" type="radio" />
-					</span>
-					<a href="#"><img src="{{asset('front/img/wx.jpg')}}" /></a>
+					<a onclick="weixinpay()"><img src="{{asset('front/img/wx.jpg')}}" /></a>
 				</li>
 			</ul>
 		</div>
 	</div>
-	<p class="btnb"><a href="#" class="btn_red_l left">立即付款</a></p>
 	<div class="clear"></div>
 </div>
 {!!$ApiPresenter->getShowcaseList('cart')!!}
 @endsection
 @section('js')
+<script type="text/javascript">
+function weixinpay(){
+	layer.open({
+		type: 1,
+  		skin: 'layui-layer-rim', //加上边框
+  		area: ['420px', '360px'], //宽高
+  		content: '<div class="modal-bd" id="J_showWeixinPayExample"><div class="code" id="J_weixinPayCode"><img src="//i.huodong.mi.com/qrcode/wxget?code=weixin%3A%2F%2Fwxpay%2Fbizpayurl%3Fpr%3DnInIbDQ&amp;key=bd7a08e95394324ba9f0ef7135d3edd8"></div><div class="msg">请使用 <span>微信</span> 扫一扫<br>二维码完成支付</div></div>',
+  		title: '微信支付'
+	});
+}
+</script>
 @endsection

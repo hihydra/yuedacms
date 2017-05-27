@@ -29,9 +29,9 @@ class CartService extends BaseService
         return $data;
     }
     //添加商品到购物车
-    public function getCartAdd($id,$num,$storeId,$specialId){
+    public function getCartAdd($id,$num,$storeId){
         $path  = '/api/shop/cart!add.do';
-        $query = array('id'=>$id,'num'=>$num,'storeId'=>$storeId,'specialId'=>$specialId);
+        $query = array('id'=>$id,'num'=>$num,'storeId'=>$storeId);
         $data = $this->http_curl($path,$query);
         return $data;
     }

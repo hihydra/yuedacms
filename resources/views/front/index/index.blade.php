@@ -7,9 +7,9 @@
 <div class="bannar" >
 	<div class="bannar-img flexslider">
 		<ul class="slides">
-			<li><img src="{{asset('front/img/bannar.jpg')}}" /></li>
-			<li><img src="{{asset('front/img/6.jpg')}}" /></li>
-			<li><img src="{{asset('front/img/bannar.jpg')}}" /></li>
+			@foreach($adv as $ad)
+				<li><a href="{{{$ad['url'] or ''}}}" target="_blade"><img src="{{$ad['thumbUrl']}}"/></a></li>
+			@endforeach
 		</ul>
 	</div>
 </div>

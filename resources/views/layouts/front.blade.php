@@ -5,7 +5,6 @@
   <title>@yield('title'){{$settings['title']}}</title>
   <meta name="keywords" content="{{$settings['keywords']}}" />
   <meta name="description" content="{{$settings['description']}}">
-  <meta name="author" content="{{$settings['author']}}">
   <link href="{{asset('front/css/css.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{asset('front/css/style.css') }}" rel="stylesheet" type="text/css"/>
   <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
@@ -34,14 +33,14 @@ $storeId = getStoreId();
       <!--搜索框-->
       <div class="search">
         <form action="{{url('category')}}" method="get">
-        <div class="s-bg">
-          <div class="s-btn right">
-            <input class="s-seek"  type="button" />
+          <div class="s-bg">
+            <div class="s-btn right">
+              <input class="s-seek"  type="button" />
+            </div>
+            <div class="s-input left">
+              <input type="text" placeholder="请输入搜索内容" name="keyword" value=""/>
+            </div>
           </div>
-          <div class="s-input left">
-            <input type="text" placeholder="请输入搜索内容" name="keyword" value=""/>
-          </div>
-        </div>
         </form>
       </div>
       <!--登录注册、门店、下载-->
@@ -52,12 +51,32 @@ $storeId = getStoreId();
         </div>
         <div class="s-a s-dwon">
           <span>&nbsp;</span>
-          <a href="#">下载APP</a>
+          <a>下载APP</a>
+          <div class="app">
+            <div class="panel_state" style="background-color:#eee;width: 300px;height: 170px;">
+              <div class="panel_state_content">
+                <div class="image">
+                  <img class="img " src="{{$settings['download_app']}}" style="width: 150px;height: 150px;margin: 10px;">
+
+                  <!--
+                  <map name="app_map" id="app_map">
+                    <area target="_blank" shape="rect" coords="140,50,290,100" href="http://edu.fezo.com.cn:8101/?/topic/c3" />
+                    <area target="_blank" shape="rect" coords="140,110,290,160" href="http://edu.fezo.com.cn:8101/?/topic/c4" />
+                  </map>
+                -->
+
+                <div class="title">
+                    <p>扫描下载官方App</p>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         @if($userInfo)
         <div class="inlogin">
           <div class="top-menu">
-            <a href="#">
+            <a>
               <p>{{{$userInfo['nickname'] or ''}}}</p>
               <b class="t"></b>
             </a>
@@ -67,7 +86,7 @@ $storeId = getStoreId();
               <li>
                 <a href="{{url('order')}}">我的书店</a>
               </li>
-              <li><a href="{{url('user/collection')}}">我的收藏</a></li>
+              <li><a href="{{url('user/goods')}}">我的收藏</a></li>
               <li><a href="{{url('user/myCoupons')}}">我的礼券</a></li>
               <li><a href="{{url('user')}}">个人设置</a></li>
               <li><a href="{{url('user/address')}}">收货地址</a></li>
@@ -135,11 +154,21 @@ $storeId = getStoreId();
       if (!urlstatus) {$(".nav a").eq(0).parent().addClass('hover'); }
 
       $(".inlogin").mouseover(function () {
-          $(".cnt").show("fast");
+        $(".cnt").show("fast");
       });
       $(".inlogin").mouseleave(function () {
-          $(".cnt").hide("fast");
+        $(".cnt").hide("fast");
       });
+      $(".s-dwon").click(function(e){
+       $(".app").show();
+       e.stopPropagation();
+     });
+      $(".app").click(function(e){
+       e.stopPropagation();
+     });
+      $(document.body).click(function(){
+       $(".app").hide();
+     });
     });
   </script>
   @yield('js')

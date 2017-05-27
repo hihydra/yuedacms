@@ -23,6 +23,15 @@ class CartController extends Controller
         return view('front.cart.list')->with(compact('carts','name','recommendList'));
     }
 
+    public function ajaxAdd(Request $request)
+    {
+        $num = $request->input('num');
+        $productId = $request->input('productId');
+        $storeId = $request->input('storeId');
+        $responseData = $this->service->getCartAdd($productId,$num,$storeId);
+        return response()->json($responseData);
+    }
+
     public function ajaxCartUpdateNum(Request $request,$cartId)
     {
         $num = $request->input('num');

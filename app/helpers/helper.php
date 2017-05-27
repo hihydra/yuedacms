@@ -42,7 +42,7 @@ if(!function_exists('getSettings')){
 if(!function_exists('defaultImg')){
 	function defaultImg()
 	{
-		return config('settings.defaultImg');
+		return asset(config('settings.defaultImg'));
 	}
 }
 

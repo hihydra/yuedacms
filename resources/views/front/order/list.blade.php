@@ -42,7 +42,7 @@
 					<td>{{orderStatus($order['status'])}}</td>
 					<td class="operation">
 						@if($order['status'] == 'STATUS_NOT_PAY')
-						<a class=" btn_red_01" target="_blank" href="{{URL::route('order.pay',['snLs'=>$order['sn']])}}">付款</a>
+						<a class=" btn_red_01" target="_blank" href="{{URL::route('order.pay',['snLs[]'=>$order['sn']])}}">付款</a>
 						<a class="btn_cancel slink" href="javascript:orderCancel('{{$order['sn']}}');">取消订单</a>
 						@elseif($order['status'] == 'STATUS_COMPLETE' || $order['status'] == 'STATUS_CANCEL')
 						@if($order['commented'] == 0)
@@ -89,7 +89,7 @@
 			$.post("{{url('order/ajaxCancel')}}/"+sn,function(result){
 				layer.msg(result.message);
 				if(result.result == 1){
-					$("#div_order_"+sn).remove();
+					window.location.reload();
 				}
 			});
 		}

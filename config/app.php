@@ -235,7 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
-        'Settings' => Krucas\Settings\Facades\Settings::class,
+        'Settings' => Krucas\Settings\Facades\Settings::class,//setting
     ],
 
 ];

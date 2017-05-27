@@ -1,8 +1,8 @@
 <?php
 $router->group(['prefix' => 'goods','middleware' => ['isLogin']],function ($router)
 {
+	$router->post('/','GoodsController@index')->name('goods');
 	$router->get('/','GoodsController@index')->name('goods');
-	$router->get('cart','GoodsController@cart')->name('goods.cart');
-	$router->post('cart','GoodsController@cart')->name('goods.cart');
+	$router->post('directBuy','GoodsController@directBuy')->name('goods.directBuy');
 	$router->get('checkServiceRadius','GoodsController@checkServiceRadius')->name('goods.checkServiceRadius');
 });

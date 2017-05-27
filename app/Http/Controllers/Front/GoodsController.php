@@ -22,26 +22,35 @@ class GoodsController extends Controller
 
     public function index(Request $request)
     {
-        $storeId = $request->input('storId');
-        $productId = $request->input('productId');
-        $good = $this->service->getGoodsDetail($productId,$storeId);
-        $good['num'] = $request->input('num');
-        $good['goodsId'] = $good['id'];
-        $goodList['items'][] = $good;
-        $goodList['id'] = $storeId;
-        $goodList = $this->getCouponsByOrder(array($goodList));
+        if($request->has('cartIds')){
+            $cartIds = $request->input('cartIds');
+            $goodList = $this->service->getCartListByIds($cartIds);
+            $name = trans('front/system.goods');
+            $type = 'cart';
+        }else if($request->has('storId') && $request->has('productId')){
+            $storeId = $request->input('storId');
+            $productId = $request->input('productId');
+            $good = $this->service->getGoodsDetail($productId,$storeId);
+            $good['num'] = $request->input('num',1);
+            $good['goodsId'] = $good['id'];
+            $good['productId'] = $productId;
+            $items[] = $good;
+            $id = $storeId;
+            $goodList[] = compact('items','id');
+            $name = trans('front/system.goods');
+            $type = 'direct';
+        }
+        $goodList = $this->getCouponsByOrder($goodList);
         $addressList = $this->user->getAddressList();
-        $name = trans('front/system.goods');
-        return view('front.goods.index')->with(compact('goodList','name','addressList'));
+        return view('front.goods.index')->with(compact('goodList','name','type','addressList'));
     }
 
-    public function cart(Request $request){
-        $cartIds = $request->input('cartIds');
-        $cartList = $this->service->getCartListByIds($cartIds);
-        $goodList = $this->getCouponsByOrder($cartList);
-        $addressList = $this->user->getAddressList();
-        $name = trans('front/system.goods');
-        return view('front.goods.index')->with(compact('goodList','name','addressList'));
+    public function directBuy(Request $request)
+    {
+        $form = array_only($request->all(), ['receiver','receiverMobile','receiverAddress','lng','lat','shippingMethod','storeId','paymentType','addressId','num','productId']);
+        $form['otherInfo'] = json_encode($request->input('otherInfo'));
+        $snLs = $this->service->getOrderDirectBuy($form);
+        return redirect('order/pay?snLs[]='.implode('snLs[]=',$snLs));
     }
 
     //获取订单可用优惠券列表

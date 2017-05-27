@@ -115,7 +115,7 @@ return [
 
     ],
 
-    'defaultImg' => asset('front/img/default/default.jpg'),
+    'defaultImg' => 'front/img/default/default.jpg',
 
     'storeId' => '47',
 ];

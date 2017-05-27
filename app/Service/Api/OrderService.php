@@ -72,7 +72,7 @@ class OrderService extends BaseService
     public function getZhiFuBao($snLs){
         $path  = '/api/shop/payment!zhiFuBao.do?sn='.implode('&sn=',$snLs);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
+        $data = $this->http_curl($path,$query,'post',false,false,'form_params');
         return $data;
     }
 
@@ -80,7 +80,7 @@ class OrderService extends BaseService
     public function getWeiXin($snLs){
         $path  = '/api/shop/payment!weiXin.do?sn='.implode('&sn=',$snLs);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
+        $data = $this->http_curl($path,$query,'post',false,false,'form_params');
         return $data;
     }
 

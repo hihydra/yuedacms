@@ -11,11 +11,11 @@
 			<div class="bs-info">
 				<ul class="bs-ul" style="margin-top:0;">
 					<li>
-					<a href="{{url('user/collection')}}" class="smooth">{{trans('front/system.goodsLike')}}</a>
+					<a href="{{url('user/goods')}}" class="smooth">{{trans('front/system.goodsLike')}}</a>
 						<b></b>
 					</li>
 					<li class="on">
-						<a href="{{url('user/collection/specialLike')}}" class="smooth">{{trans('front/system.specialLike')}}</a>
+						<a href="{{url('user/special')}}" class="smooth">{{trans('front/system.specialLike')}}</a>
 						<b></b>
 					</li>
 					<div class="clear"></div>

@@ -37,7 +37,7 @@ class UserController extends Controller
             $filePath = base_path().'\public\\'.str_replace('/','\\',$filedir.$imagesName);
             //dd($filePath);
             $responseData = $this->service->getSetPic($filePath);
-            dd($responseData);
+            //dd($responseData);
             return response()->json($responseData);
         }
         $superiorCode = $request->input('superiorCode');

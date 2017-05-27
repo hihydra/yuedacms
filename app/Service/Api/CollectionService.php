@@ -70,9 +70,9 @@ class CollectionService extends BaseService
     }
 
     //收藏商品
-    public function getGoodsLike($goodsId,$specialId){
+    public function getGoodsLike($goodsId){
         $path  = '/api/shop/goods!like.do';
-        $query = array('goodsId'=>$goodsId,'specialId'=>$specialId);
+        $query = array('goodsId'=>$goodsId);
         $data = $this->http_curl($path,$query);
         return $data;
     }

@@ -23,7 +23,6 @@ Route::group(['namespace' => 'Front'],function ($router){
 	require(__DIR__ . '/front/address.php');
 	require(__DIR__ . '/front/cart.php');
 	require(__DIR__ . '/front/order.php');
-	require(__DIR__ . '/front/collection.php');
 	require(__DIR__ . '/front/showcase.php');
 	require(__DIR__ . '/front/coupon.php');
 	require(__DIR__ . '/front/store.php');

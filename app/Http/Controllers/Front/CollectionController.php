@@ -16,7 +16,7 @@ class CollectionController extends Controller
   	}
 
     //已收藏的商品列表
-    public function goodsLike(Request $Request){
+    public function goods(Request $Request){
        $anchor = $Request->input('anchor');
        $result = $this->service->getGoodsLikeList($anchor);
        $result['name'] = trans('front/system.collection');
@@ -24,8 +24,8 @@ class CollectionController extends Controller
     }
 
     //收藏商品
-    public function ajaxGoodsLike($goodsId,$specialId){
-      $responseData = $this->service->getGoodsLike($goodsId,$specialId);
+    public function ajaxGoodsLike($goodsId){
+      $responseData = $this->service->getGoodsLike($goodsId);
       return response()->json($responseData);
     }
 
@@ -36,11 +36,10 @@ class CollectionController extends Controller
     }
 
     //已收藏的专题列表
-    public function specialLike(Request $Request){
+    public function special(Request $Request){
        $anchor = $Request->input('anchor');
        $result = $this->service->getSpecialLikeList($anchor);
        $result['name'] = trans('front/system.collection');
-       //dd($result);
        return view('front.collection.special')->with($result);
     }
 

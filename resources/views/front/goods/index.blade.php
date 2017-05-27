@@ -6,7 +6,11 @@
   @include('front.share.crumb',['name'=>$name])
   <h1>收货地址</h1>
   <div id="div_orderList">
+    @if($type == 'cart')
     <form action="{{url('order')}}" method="post" id="orderCreate">
+    @else
+    <form action="{{url('goods/directBuy')}}" method="post" id="orderCreate">
+    @endif
       <div class="list">
         @foreach($addressList as $address)
         <div class="addr suggest-address
@@ -56,6 +60,8 @@
         <tr>
           <td class="cl06">
             <input type="hidden" name="cartIds[]" value="{{$item['id']}}">
+            <input type="hidden" name="productId" value="{{$item['productId']}}">
+            <input type="hidden" name="num" value="{{$item['num']}}">
           </td>
           <td>
             <div class="bif">
@@ -126,13 +132,13 @@
         <input id="ipt_goodsPrice_{{$good['id']}}" value="{{$good['goodsPrice']}}" type="hidden" />
         <input id="ipt_freight_{{$good['id']}}" value="{{$good['freight']}}" type="hidden" />
         <input id="ipt_totalPrice_{{$good['id']}}" value="{{$good['goodsPrice'] + $good['freight']}}" type="hidden" />
-        <input type="hidden" name="otherInfo[{{$good['id']}}]['couponId']">
+        <input type="hidden" name="otherInfo[{{$good['id']}}][couponId]">
       </div>
       <div class="left" style="width:70%;">
         <div class="item">
           <span class="label">买家留言：</span>
           <div class="left">
-            <textarea style="width:490px; height:40px; border:1px solid #ccc; padding:5px;" name="otherInfo[{{$good['id']}}]['remark']"></textarea>
+            <textarea style="width:490px; height:40px; border:1px solid #ccc; padding:5px;" name="otherInfo[{{$good['id']}}][remark]"></textarea>
           </div>
           <div class="clear"></div>
         </div>
@@ -159,31 +165,31 @@
         <div class="item">
           <span class="label"><em>*</em> 发票信息：</span>
           <div class="left" style="height:28px; line-height:30px;">
-            <input name="otherInfo[{{$good['id']}}]['receiptType']" class="jdradio receiptType" value="0" type="radio" checked="true">
+            <input name="otherInfo[{{$good['id']}}][receiptType]" class="jdradio receiptType" value="0" type="radio" checked="true">
             <label class="mr">不开发票</label>
-            <input name="otherInfo[{{$good['id']}}]['receiptType']" class="jdradio receiptType" value="1" type="radio">
+            <input name="otherInfo[{{$good['id']}}][receiptType]" class="jdradio receiptType" value="1" type="radio">
             <label class="mr">个人发票</label>
-            <input name="otherInfo[{{$good['id']}}]['receiptType']" class="jdradio receiptType" value="2" type="radio">
+            <input name="otherInfo[{{$good['id']}}][receiptType]" class="jdradio receiptType" value="2" type="radio">
             <label class="mr">单位发票</label>
           </div>
           <div class="clear"></div>
           <div class="item receiptTitle" style="display: none;">
             <span class="label"><em>*</em> 发票抬头：</span>
             <div class="left">
-              <input style="border:1px solid #ccc; padding:5px;" type="type" name="otherInfo[{{$good['id']}}]['receiptTitle']">
+              <input style="border:1px solid #ccc; padding:5px;" type="type" name="otherInfo[{{$good['id']}}][receiptTitle]">
             </div>
             <div class="clear"></div>
           </div>
           <div class="item receiptContent"  style="display: none;">
             <span class="label"><em>*</em> 发票内容：</span>
             <div class="left" style="height:28px; line-height:30px;">
-              <input name="otherInfo[{{$good['id']}}]['receiptContent']" class="jdradio" value="图书" type="radio" checked="true">
+              <input name="otherInfo[{{$good['id']}}][receiptContent]" class="jdradio" value="图书" type="radio" checked="true">
               <label class="mr">图书</label>
-              <input name="otherInfo[{{$good['id']}}]['receiptContent']" class="jdradio" value="音像" type="radio">
+              <input name="otherInfo[{{$good['id']}}][receiptContent]" class="jdradio" value="音像" type="radio">
               <label class="mr">音像</label>
-              <input name="otherInfo[{{$good['id']}}]['receiptContent']" class="jdradio" value="教材" type="radio">
+              <input name="otherInfo[{{$good['id']}}][receiptContent]" class="jdradio" value="教材" type="radio">
               <label class="mr">教材</label>
-              <input name="otherInfo[{{$good['id']}}]['receiptContent']" class="jdradio" value="资料" type="radio">
+              <input name="otherInfo[{{$good['id']}}][receiptContent]" class="jdradio" value="资料" type="radio">
               <label class="mr">资料</label>
             </div>
             <div class="clear"></div>
@@ -252,12 +258,12 @@
         couponHint = "包邮";
         $('#ipt_freightHint_'+storeId).html("￥"+convertMoney(0));
       }
-      $("input[name=\"otherInfo["+storeId+"]['couponId']\"]").val(couponId);
+      $("input[name=\"otherInfo["+storeId+"][couponId]\"]").val(couponId);
     }else{
       discountPrice = 0;
       couponHint = 0;
       $('#ipt_freightHint_'+storeId).html("￥"+convertMoney(freight));
-      $("input[name=\"otherInfo["+storeId+"]['couponId']\"]").val('');
+      $("input[name=\"otherInfo["+storeId+"][couponId]\"]").val('');
     }
     $('.coupon_'+storeId+'_'+couponId+' .c-detail').toggleClass('item-selected');
 
@@ -288,10 +294,10 @@
     }
     for(var i=0;i<storeIds.length;i++){
       var storeId = storeIds[i].value;
-      var receiptType = $.trim($("input[name=\"otherInfo["+storeId+"]['receiptType']\"]:checked").val());
-      var receiptTitle = $.trim($("input[name=\"otherInfo["+storeId+"]['receiptTitle']\"]").val());
+      var receiptType = $.trim($("input[name=\"otherInfo["+storeId+"][receiptType]\"]:checked").val());
+      var receiptTitle = $.trim($("input[name=\"otherInfo["+storeId+"][receiptTitle]\"]").val());
       if(receiptType == 2 && receiptTitle==""){
-        $("input[name=\"otherInfo["+storeId+"]['receiptTitle']\"]").focus();
+        $("input[name=\"otherInfo["+storeId+"][receiptTitle]\"]").focus();
         layer.msg("{{trans('front/system.receipt_error')}}");return;
      }
    }

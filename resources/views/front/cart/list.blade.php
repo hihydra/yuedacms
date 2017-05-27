@@ -5,7 +5,8 @@
 <div class="M1" style="margin-top:10px;">
 	@include('front.share.crumb',['name'=>$name])
 	<h1>我的购物车</h1>
-	<form method="post" action="{{'goods/cart'}}" id="buyCart">
+	@if(!empty($carts))
+	<form method="post" action="{{url('goods')}}" id="buyCart">
 		<div id="div_display" class="gwc_box gb_tal">
 			<table class="g_table" cellspacing="0" cellpadding="0" border="0" >
 				<tbody><tr class="tbg">
@@ -65,6 +66,7 @@
 			</tr>
 		</tbody>
 		@endforeach
+
 	</table>
 	<div class="g_tbox">
 		<div class="g_chkbx left" style="margin:0;">
@@ -78,13 +80,20 @@
 			</div>
 		</div>
 		<div class="nextStep">
-		<div class="js right"><a href="javascript:void(0);" onclick="buyCart_submit()" class="btn_red_n right" id="total_pay">去结算</a></div>
+			<div class="js right"><a href="javascript:void(0);" onclick="buyCart_submit()" class="btn_red_n right" id="total_pay">去结算</a></div>
 		</div>
+
 	</div>
 </form>
+@else
+<div class="g_tbox">
+	<div class="g_chkbx" style="text-align: center;">
+		购物车空空如也,来挑几本好书吧！
+	</div>
+</div>
+@endif
 </div>
 <div class="clear"></div>
-
 
 {!!$ApiPresenter->getShowcaseList('cart')!!}
 @endsection

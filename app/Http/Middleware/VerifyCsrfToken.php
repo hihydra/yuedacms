@@ -22,5 +22,6 @@ class VerifyCsrfToken extends BaseVerifier
         'login/*',
         'register/*',
         'goods/*',
+        'goods',
     ];
 }

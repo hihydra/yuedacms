@@ -18,10 +18,10 @@ $router->group(['prefix' => 'user','middleware' => ['isLogin']],function ($route
 	$router->resource('address','AddressController');
 	$router->post('address/defaddr/{id}','AddressController@defaddr');
 	//收藏
-	$router->get('collection','CollectionController@goodsLike');
-	$router->get('collection/specialLike','CollectionController@specialLike');
-	$router->post('ajaxGoodsLike/{goodsId}/{specialId}','CollectionController@ajaxGoodsLike')->name('user.Collection.ajaxGoodsLike');
-	$router->post('ajaxGoodsUnlike/{goodsId}','CollectionController@ajaxGoodsUnlike')->name('user.Collection.ajaxGoodsUnlike');
-	$router->post('ajaxSpecialLike/{specialId}','CollectionController@ajaxCartUpdateNum')->name('user.Collection.ajaxSpecialLike');
-	$router->post('ajaxSpecialUnlike/{specialId}','CollectionController@ajaxSpecialUnlike')->name('user.Collection.ajaxSpecialUnlike');
+	$router->get('goods','CollectionController@goods');
+	$router->post('ajaxGoodsLike/{goodsId}','CollectionController@ajaxGoodsLike')->name('collection.ajaxGoodsLike');
+	$router->post('ajaxGoodsUnlike/{goodsId}','CollectionController@ajaxGoodsUnlike')->name('collection.ajaxGoodsUnlike');
+	$router->get('special','CollectionController@special');
+	$router->post('ajaxSpecialLike/{specialId}','CollectionController@ajaxSpecialLike')->name('collection.ajaxSpecialLike');
+	$router->post('ajaxSpecialUnlike/{specialId}','CollectionController@ajaxSpecialUnlike')->name('collection.ajaxSpecialUnlike');
 });

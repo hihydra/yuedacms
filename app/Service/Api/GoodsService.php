@@ -22,7 +22,7 @@ class GoodsService extends BaseService
         return $data;
     }
 
-    //立即购买
+    //立即购买商品列表
     public function getCartListByIds($cartIds){
         $path  = '/api/shop/cart!listByIds.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = array();
@@ -31,10 +31,10 @@ class GoodsService extends BaseService
     }
 
     //立即购买
-    public function getOrderDirectBuy($from){
+    public function getOrderDirectBuy($form){
         $path  = '/api/shop/order!directBuy.do';
-        $query = $from;
-        $data = $this->http_curl($path,$query);
+        $query = $form;
+        $data = $this->http_curl($path,$query,'post',false,false);
         return $data;
     }
 

@@ -19,7 +19,7 @@ em{ font-style:normal;}
 .top-center .nav ul li.hover{ background:#b81b22; height:82px; left:0; position:relative; top:2px; margin-top:-2px;}
 .top-center .nav ul li a{ color:#323233; margin:0 4px; padding:0 14px; display:inline-block;}
 .top-center .nav ul li.hover a{ color:#fff;}
-.search{ float:left; margin:20px 0 0 0;}
+.search{ float:left; margin:20px 0 0 35px;}
 .search .s-bg{ background:#e8e8e8; border-radius:20px; width:236px; height:38px; position:relative;}
 .search .s-bg .s-input input{ border:0; height:36px; line-height:36px; background:#e8e8e8; margin:0 0 0 16px; width:168px;}
 .search .s-bg .s-btn{ border-left:2px solid #ccc; margin-top:6px; height:25px; padding-left:12px;}
@@ -31,8 +31,8 @@ em{ font-style:normal;}
 .inlogin a{ margin:0 5px; font-size:12px;}
 .top-menu{ position:relative; margin-right:6px; height:25px; line-height:25px;}
 .top-menu a{ padding:0; font-size:12px; height:25px; line-height:25px;}
-.top-menu p{ padding-right: 2px; overflow:hidden; display:inline-block; height:25px; line-height:25px;}
-.top-menu .t{ width:0; height:0; position:absolute; top:10px; right:-2px; border-left:4px solid #fff; border-right:4px solid #fff; border-top:4px solid #bcaea3;}
+.top-menu p{ padding-right: 2px; overflow:hidden; display:inline-block; height:25px; line-height:29px;}
+.top-menu .t{ width:0; height:0; position:absolute; top:12px; right:-2px; border-left:4px solid #fff; border-right:4px solid #fff; border-top:4px solid #bcaea3;}
 .inlogin{ position:relative;}
 .inlogin .cnt{ position:absolute; top:25px; left:0; background:#fff; width:120px; border:1px solid #eee;}
 .inlogin .cnt ul li{ position:relative; font-size:12px;}
@@ -47,6 +47,7 @@ em{ font-style:normal;}
 .s-dwon span{ background:url(../img/download.png) no-repeat;}
 .s-a a{vertical-align:middle;}
 .s-buy a label{ color:#b81b22;}
+.app{position:absolute;right:312px;top: 79px;display:none;}
 /*main*/
 .Full-screen{ width:100%;}
 .main{ width:1100px; margin:0 auto;}

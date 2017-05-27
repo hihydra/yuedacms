@@ -50,8 +50,8 @@ body{ background:#fff;}
 .loginFuncNormal, .loginFuncMobile{ color:#333; font-weight:bold; cursor:pointer; float:left; font-size:14px; height:100%; line-height:46px; overflow:hidden; position:relative; text-align:center; width:148px;}
 .loginFuncMobile{ border-right:medium none; width:147px;}
 .loginForm{ padding-top:20px; position:relative;}
-.loginFormIpt{ background:url(../img/bg_v2.png) 0 -142px; border-radius:4px; clear:both; height:42px; line-height:42px; margin:0 0 18px 25px; padding-right:5px; position:relative; width:240px; z-index:2; }
-.verification-code{ background:url(../img/bg_v2.png) 0 -248px; border-radius:4px; clear:both; height:42px; line-height:42px; margin:0 0 10px 25px; padding-right:5px; position:relative; width:123px; z-index:2; }
+.loginFormIpt{ background:url(../img/bg_v2.png) 0 -142px; border-radius:4px; clear:both; height:42px; line-height:42px; margin:0 0 18px 25px; padding-right:6px; position:relative; width:240px; z-index:2; }
+.verification-code{ background:url(../img/bg_v2.png) 0 -248px; border-radius:4px; clear:both; height:43px; line-height:42px; margin:0 0 10px 25px; padding-right:5px; position:relative; width:123px; z-index:2; }
 .verification-code .loginFormTdIpt{ width:77px; margin-top:2px; height:20px; border:none;}
 .verification-code .ico{ left:9px; position:absolute; top:13px; z-index:1;}
 .loginFormIpt .ico{ left:9px; position:absolute; top:13px; z-index:1;}

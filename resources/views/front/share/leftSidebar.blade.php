@@ -2,7 +2,7 @@
 	<div class="titList">
 		<div class="pname">个人中心</div>
 		<ul class="titList_ul">
-			<li><a href="{{url('user/collection')}}">我的收藏</a></li>
+			<li><a href="{{url('user/goods')}}">我的收藏</a></li>
       <li><a href="{{url('user/myCoupons')}}">我的礼券</a></li>
 			<li><a href="{{url('user')}}">个人设置</a></li>
       <li><a href="{{url('user/address')}}">收货地址</a></li>
