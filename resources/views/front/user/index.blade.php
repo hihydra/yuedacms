@@ -103,7 +103,6 @@
 					<div class="item">
 						<span class="label">&nbsp;</span>
 						<div class="info-c">
-							<!--<button type="submit">保存</button>-->
 							<a class="btn_red" href="javascript:saveInfo();">保存</a>
 						</div>
 					</div>
@@ -184,7 +183,6 @@
 		$('#w').val(c.w);
 		$('#h').val(c.h);
 	}
-
 	function checkCoords(){
 		if (parseInt($('#w').val())) {
 			return true;
@@ -206,6 +204,8 @@
 			var date = new Date(year+'/'+month+'/'+day);
 			var birthday = date.getTime()/1000;
 		}
+		$('#saveInfo').submit();
+		/*
 		if(superiorCode == {{$invitationCode}}){
 			superiorCode = '';
 		}
@@ -223,6 +223,7 @@
 				}
 			},
 		});
+		*/
 	}
 </script>
 @endsection

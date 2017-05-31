@@ -33,6 +33,7 @@ class CartService extends BaseService
         $path  = '/api/shop/cart!add.do';
         $query = array('id'=>$id,'num'=>$num,'storeId'=>$storeId);
         $data = $this->http_curl($path,$query);
+        //dd($data);
         return $data;
     }
 

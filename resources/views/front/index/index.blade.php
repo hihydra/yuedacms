@@ -8,7 +8,11 @@
 	<div class="bannar-img flexslider">
 		<ul class="slides">
 			@foreach($adv as $ad)
+				@if(!empty($ad['url']))
 				<li><a href="{{{$ad['url'] or ''}}}" target="_blade"><img src="{{$ad['thumbUrl']}}"/></a></li>
+				@else
+				<li><a href="{{url('goods/'.$ad['id'])}}" target="_blade"><img src="{{$ad['thumbUrl']}}"/></a></li>
+				@endif
 			@endforeach
 		</ul>
 	</div>
@@ -73,11 +77,11 @@
 						</div>
 						<div class="info">
 							<div class="wrap">
-								<a class="tittle" href="#">{{$recommend['name']}}</a>
+								<a class="tittle" href="{{url('goods/'.$recommend['id'])}}">{{$recommend['name']}}</a>
 								<p class="author">{{$recommend['author']}}</p>
 								<p class="desc">{{$recommend['desc']}}</p>
 							</div>
-							<a class="li-btn" href="#">立即阅读</a>
+							<a class="li-btn" href="{{url('goods/'.$recommend['id'])}}">立即阅读</a>
 						</div>
 					</li>
 					@endforeach
@@ -102,8 +106,8 @@
 						<li>
 							<div class="book">
 								<i><img src="{{asset('front/img/sale.png')}}" /></i>
-								<a href="#"><img src="{{$sale['thumbUrl']}}" /></a>
-								<a href="#" class="tittle">{{$sale['name']}}</a>
+								<a href="{{url('goods/'.$sale['id'])}}"><img src="{{$sale['thumbUrl']}}" /></a>
+								<a href="{{url('goods/'.$sale['id'])}}" class="tittle">{{$sale['name']}}</a>
 							</div>
 							<div class="info">
 								<p class="price">￥{{$sale['price']}}<span>￥{{$sale['marketPrice']}}</span></p>

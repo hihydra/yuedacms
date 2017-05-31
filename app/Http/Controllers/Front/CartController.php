@@ -27,7 +27,7 @@ class CartController extends Controller
     {
         $num = $request->input('num');
         $productId = $request->input('productId');
-        $storeId = $request->input('storeId');
+        $storeId = getStoreId();
         $responseData = $this->service->getCartAdd($productId,$num,$storeId);
         return response()->json($responseData);
     }

@@ -49,128 +49,124 @@ $storeId = getStoreId();
           <span>&nbsp;</span>
           <a href="{{url('store')}}">{{getStoreName()}}</a>
         </div>
-        <div class="s-a s-dwon">
+        <div class="s-a s-dwon" style="position:relative;">
           <span>&nbsp;</span>
           <a>下载APP</a>
-          <div class="app">
-            <div class="panel_state" style="background-color:#eee;width: 300px;height: 170px;">
-              <div class="panel_state_content">
-                <div class="image">
-                  <img class="img " src="{{$settings['download_app']}}" style="width: 150px;height: 150px;margin: 10px;">
-
-                  <!--
-                  <map name="app_map" id="app_map">
-                    <area target="_blank" shape="rect" coords="140,50,290,100" href="http://edu.fezo.com.cn:8101/?/topic/c3" />
-                    <area target="_blank" shape="rect" coords="140,110,290,160" href="http://edu.fezo.com.cn:8101/?/topic/c4" />
-                  </map>
-                -->
-
-                <div class="title">
-                    <p>扫描下载官方App</p>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div id="QR-code" class="QR_Alert-show app">
+            <div class="QR-mid">
+              <div class="QR-tt">
+                <div class="fl"><img src="{{$settings['download_app']}}" /></div>
+                <div class="fr">
+                 <ul>
+                   <li>扫描下载官方App</li>
+                   <li class="apple"><a target="_blank" href="{{$settings['download_android']}}">&nbsp;</a></li>
+                   <li class="Android"><a target="_blank" href="{{$settings['download_ios']}}">&nbsp;</a></li>
+                 </ul>
+               </div>
+               <div class="clear"></div>
+             </div>
+           </div>
+           <div class="QR-arrow" id="QR-Arr"></div>
+         </div>
+       </div>
+       @if($userInfo)
+       <div class="inlogin">
+        <div class="top-menu">
+          <a>
+            <p>{{{$userInfo['nickname'] or ''}}}</p>
+            <b class="t"></b>
+          </a>
         </div>
-        @if($userInfo)
-        <div class="inlogin">
-          <div class="top-menu">
-            <a>
-              <p>{{{$userInfo['nickname'] or ''}}}</p>
-              <b class="t"></b>
-            </a>
-          </div>
-          <div class="cnt" style="display: none;">
-            <ul class="cnt-ul">
-              <li>
-                <a href="{{url('order')}}">我的书店</a>
-              </li>
-              <li><a href="{{url('user/goods')}}">我的收藏</a></li>
-              <li><a href="{{url('user/myCoupons')}}">我的礼券</a></li>
-              <li><a href="{{url('user')}}">个人设置</a></li>
-              <li><a href="{{url('user/address')}}">收货地址</a></li>
-              <li><a href="{{url('user/share')}}">分享应用</a></li>
-              <li><a href="{{url('user/suggest')}}">意见反馈</a></li>
-              <li><a href="#">关于</a></li>
-              <li><a href="{{url('login_out')}}">退出</a></li>
-            </ul>
-          </div>
+        <div class="cnt" style="display: none;">
+          <ul class="cnt-ul">
+            <li>
+              <a href="{{url('order')}}">我的书店</a>
+            </li>
+            <li><a href="{{url('user/goods')}}">我的收藏</a></li>
+            <li><a href="{{url('user/myCoupons')}}">我的礼券</a></li>
+            <li><a href="{{url('user')}}">个人设置</a></li>
+            <li><a href="{{url('user/address')}}">收货地址</a></li>
+            <li><a href="{{url('user/share')}}">分享应用</a></li>
+            <li><a href="{{url('user/suggest')}}">意见反馈</a></li>
+            <li><a href="#">关于</a></li>
+            <li><a href="{{url('login_out')}}">退出</a></li>
+          </ul>
         </div>
-        @else
-        <div class="unlogin">
-          <a href="{{url('login')}}">登录</a>|<a href="{{url('register')}}">注册</a>
-        </div>
-        @endif
-        <div class="s-a s-buy">
-          <span>&nbsp;</span>
-          <a href="{{url('cart')}}">购物车<lable>{{$userInfo['cartCount']}}</label></a>
-        </div>
+      </div>
+      @else
+      <div class="unlogin">
+        <a href="{{url('login')}}">登录</a>|<a href="{{url('register')}}">注册</a>
+      </div>
+      @endif
+      <div class="s-a s-buy">
+        <span>&nbsp;</span>
+        <a href="{{url('cart')}}">购物车<lable class="cartNum">{{$userInfo['cartCount']}}</label></a>
       </div>
     </div>
   </div>
-  <!--   top结束   -->
-  <div class="Full-screen">
-    <div class="clear" style="height:80px;"></div>
-    <!--   main开始   -->
-    <div class="main">
-      @yield('content')
-    </div>
-    <div class="clear"></div>
+</div>
+<!--   top结束   -->
+<div class="Full-screen">
+  <div class="clear" style="height:80px;"></div>
+  <!--   main开始   -->
+  <div class="main">
+    @yield('content')
   </div>
   <div class="clear"></div>
-  <div class="foot Full-screen">
-    <div class="foot-list">
-      <div class="foot-ul">
-        <a href="#">关于我们</a><span>|</span>
-        <a href="#">联系我们</a><span>|</span>
-        <a href="#">商务合作</a><span>|</span>
-        <a href="#">我的智慧书店</a>
-      </div>
-      <div class="foot-ul">
-        <span>客服电话：{{$settings['contact_us']}}</span>
-        <span>客服邮箱：{{$settings['contact_email']}}</span>
-      </div>
-      <div class="foot-ul">
-        <span>{{$settings['copyright']}}</span>
-      </div>
+</div>
+<div class="clear"></div>
+<div class="foot Full-screen">
+  <div class="foot-list">
+    <div class="foot-ul">
+      <a href="#">关于我们</a><span>|</span>
+      <a href="#">联系我们</a><span>|</span>
+      <a href="#">商务合作</a><span>|</span>
+      <a href="#">我的智慧书店</a>
+    </div>
+    <div class="foot-ul">
+      <span>客服电话：{{$settings['contact_us']}}</span>
+      <span>客服邮箱：{{$settings['contact_email']}}</span>
+    </div>
+    <div class="foot-ul">
+      <span>{{$settings['copyright']}}</span>
     </div>
   </div>
-  <!--   main结束   -->
-  <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-  <script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
-  <script type="text/javascript">
-    @php
-    $cate = app('request')->segment(1);
-    @endphp
-    $(document).ready(function(){
-      var urlstr =  "{{$cate}}";
-      var urlstatus = false;
-      $(".nav a").each(function () {
-        if ($(this).attr('href').indexOf(urlstr) > -1 && urlstr !='' ) {
-          $(this).parent().addClass('hover'); urlstatus = true;
-        }
-      })
-      if (!urlstatus) {$(".nav a").eq(0).parent().addClass('hover'); }
+</div>
+<!--   main结束   -->
+<script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
+<script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
+<script type="text/javascript">
+  @php
+  $cate = app('request')->segment(1);
+  @endphp
+  $(document).ready(function(){
+    var urlstr =  "{{$cate}}";
+    var urlstatus = false;
+    $(".nav a").each(function () {
+      if ($(this).attr('href').indexOf(urlstr) > -1 && urlstr !='' ) {
+        $(this).parent().addClass('hover'); urlstatus = true;
+      }
+    })
+    if (!urlstatus) {$(".nav a").eq(0).parent().addClass('hover'); }
 
-      $(".inlogin").mouseover(function () {
-        $(".cnt").show("fast");
-      });
-      $(".inlogin").mouseleave(function () {
-        $(".cnt").hide("fast");
-      });
-      $(".s-dwon").click(function(e){
-       $(".app").show();
-       e.stopPropagation();
-     });
-      $(".app").click(function(e){
-       e.stopPropagation();
-     });
-      $(document.body).click(function(){
-       $(".app").hide();
-     });
+    $(".inlogin").mouseover(function () {
+      $(".cnt").show("fast");
     });
-  </script>
-  @yield('js')
+    $(".inlogin").mouseleave(function () {
+      $(".cnt").hide("fast");
+    });
+    $(".s-dwon").click(function(e){
+     $(".app").show();
+     e.stopPropagation();
+   });
+    $(".app").click(function(e){
+     e.stopPropagation();
+   });
+    $(document.body).click(function(){
+     $(".app").hide();
+   });
+  });
+</script>
+@yield('js')
 </body>
 </html>

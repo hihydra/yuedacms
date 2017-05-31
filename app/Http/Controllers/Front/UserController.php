@@ -27,9 +27,10 @@ class UserController extends Controller
 
     public function saveInfo(Request $request){
         $file = $request->file('file');
-        dd($file);
+
         $data = $request->all();
-        if ($data['file']->isValid()) {
+        //dd($data);
+        if (!empty($data['file'])) {
             $file = $data['file'];
             $filedir="upload/images/";
             $imagesName=$file->getClientOriginalName();

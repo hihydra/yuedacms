@@ -43,15 +43,8 @@ class OrderController extends Controller
         $name = trans('front/system.pay');
         $payInfoData = $this->service->getZhiFuBao($snLs);
         parse_str(preg_replace('/\"/', '', $payInfoData['payInfo']));
-        /*
-        $alipay = app('alipay.web');
-        $alipay->setOutTradeNo($out_trade_no);
-        $alipay->setTotalFee($total_fee);
-        $alipay->setSubject($subject);
-        $alipay->setBody($body);
-        $pay['alipay'] = $alipay->getPayLink();
-        */
-        return view('front.order.pay')->with(compact('snLs','name','total_fee'));
+        $paylink = $this->service->getPayLink($snLs);
+        return view('front.order.pay')->with(compact('paylink','name','total_fee'));
     }
 
     public function ajaxCancel($sn){

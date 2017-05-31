@@ -1,0 +1,5 @@
+/*新增收获地址*/
+.M1 h3{height:30px;}
+.M1 .control{min-height:40px;}
+.M1 .control .manageAddr{float: right;color: #c97;cursor: pointer;}
+.M1 .control .addAddr{display: inline-block;vertical-align: middle;padding: 0 10px;overflow: hidden;border: 1px solid #ccc;border-width: 0 1px;border-radius: 2px;cursor: pointer;color: #333;height: 25px;line-height: 25px;font-weight: 700;text-decoration: none;background: url(../img/TB1kidkL.png) 0 -380px repeat-x #f2f2fe;}

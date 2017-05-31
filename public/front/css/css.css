@@ -47,7 +47,6 @@ em{ font-style:normal;}
 .s-dwon span{ background:url(../img/download.png) no-repeat;}
 .s-a a{vertical-align:middle;}
 .s-buy a label{ color:#b81b22;}
-.app{position:absolute;right:312px;top: 79px;display:none;}
 /*main*/
 .Full-screen{ width:100%;}
 .main{ width:1100px; margin:0 auto;}
@@ -236,8 +235,10 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .j-main .ic-info{ margin-top:10px; position:relative; left:-6px; height:32px;}
 .j-main .ic-info li{ float:left; padding:0 10px;}
 .share-1{ padding-bottom:10px;}
-.j-main .ic-02 b{ width:14px; height:14px; display:inline-block; position:relative; left:-5px; top:2px; background:url(../img/share.png) no-repeat;}
-.j-main .ic-03 b{ width:14px; height:14px; display:inline-block; position:relative; left:-5px; top:2px; background:url(../img/sc.png) no-repeat;}
+.j-main .ic-03{font-size: 14px;}
+.j-main .ic-02 b{ width:14px; height:14px;display:inline-block; position:relative; left:-5px; top:2px; background:url(../img/share.png) no-repeat;}
+.j-main .ic-03 .sc{ width:14px; height:14px; display:inline-block; position:relative; left:-5px; top:2px; background:url(../img/sc.png) no-repeat;}
+.j-main .ic-03 .sc-1{ width:14px; height:14px; display:inline-block; position:relative; left:-5px; top:2px; background:url(../img/sc-1.png) no-repeat;}
 .book-select{ margin-top:20px;}
 .bs-ul{ margin-top:40px; border-bottom:2px solid #eee;}
 .bs-ul li{ float:left; text-align:center; line-height:36px; height:36px; width:102px; font-size:16px;}
@@ -404,3 +405,25 @@ span.c-type-r { margin: 0;}
 .c-detail-disable .c-msg .c-time { padding-left: 20px; margin-top: 10px; color: #b0afaf;}
 .c-info { height: 40px; width: 210px; color: #999;}
 .c-info .c-info-qmark { display: inline-block; float: left; height: 13px;  padding: 0 0 0 14px;  margin-top: 3px;  margin-right: 3px; vertical-align: middle; background:url(../img/qmark03.png) no-repeat;}
+
+
+/* 下载 */
+.QR-hd,.QR-mid,.QR-ft,.QR-arrow,.QR-tt p{background-image:url(../img/error_bg1.png); _background-image:url(../img/error_bg_ie6.png);}
+#QR-code{position: absolute; width:340px; top:35px; left:100px; margin-left: -215px; text-align: left; z-index: 1000; display: none; border:1px solide #e3e3e3;}/*2016-1-11*/
+#QR-code.QR_Alert-show{display:none; -webkit-animation: shake 0.6s ease-in-out 0.3s; -moz-animation: shake 0.6s ease-in-out 0.3s; -o-animation: shake 0.6s ease-in-out 0.3s; animation: shake 0.6s ease-in-out 0.3s;}
+#QR-code .QR-hd,#QR-Alert .QR-ft{overflow: hidden; font-size: 0; line-height: 0;}
+#QR-code .QR-hd{height: 8px; background-position: -10px 0; background-repeat: no-repeat;}
+#QR-code .QR-ft{height: 10px; background-position: -10px -8px; background-repeat: no-repeat;}
+#QR-code .QR-mid{padding:10px; background:#fbfbfb;}
+#QR-code .QR-arrow{position: absolute; top:-6px; right:50%; width: 19px; height: 12px; background-position: 0 -16px; background-repeat: no-repeat;}
+#QR-code .QR-tt p{padding: 10px 20px 8px 60px; color: #434343; line-height: 22px; font-weight: bold; font-size: 16px; background:url(../img/OK.png) 20px 9px; background-repeat: no-repeat;}
+
+#QR-Mask{position:absolute; top:0; left: 0;width: 100%; height: 600px; background: #000; opacity: 0.2; filter:alpha(opacity=20); z-index: 1;}
+.QR-tt .fl{ padding-right:10px; float:left;}
+.QR-tt .fl img{ width:130px; height:130px; padding-top:5px;}
+.QR-tt .fr{ width:173px; float:right;}
+.QR-tt .fr ul li{ line-height:20px; margin:5px 0 0;}
+.QR-tt .fr ul li.apple{ width:173px; height:49px; background:url(../img/button-down.png) no-repeat -10px 0;}
+.QR-tt .fr ul li.apple a{ width:173px; height:49px; display:inline-block;}
+.QR-tt .fr ul li.Android{width:173px; height:49px; background:url(../img/button-down.png) no-repeat -10px -51px;}
+.QR-tt .fr ul li.Android a{width:173px; height:49px; display:inline-block;}

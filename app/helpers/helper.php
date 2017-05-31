@@ -64,7 +64,7 @@ if(!function_exists('getStoreName')){
 		if(!empty(Cookie::get('storeName'))){
 			echo Cookie::get('storeName');
 		}else{
-			echo '切换门店';
+			echo config('settings.storeName');
 		}
 	}
 }

@@ -10,8 +10,8 @@
       @php if($key>5){break;}@endphp
       <li>
         <div class="book">
-          <a href="#"><img src="{{{$commend['thumbUrl'] or defaultImg()}}}" /></a>
-          <a href="#" class="tittle">{{str_limit($commend['name'], $limit = 25, $end = '...')}}</a>
+          <a href="{{url('goods/'.$commend['id'])}}"><img src="{{{$commend['thumbUrl'] or defaultImg()}}}" /></a>
+          <a href="{{url('goods/'.$commend['id'])}}" class="tittle">{{str_limit($commend['name'], $limit = 25, $end = '...')}}</a>
         </div>
         <div class="info">
           @if(!empty($commend['author']))

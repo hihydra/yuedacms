@@ -28,10 +28,10 @@
 				</tr>
 				@foreach($orders['datas'] as $order)
 				<tr id="div_order_{{$order['sn']}}" style="height:70px;">
-					<td><a href="#">{{$order['sn']}}</a></td>
+					<td>{{$order['sn']}}</td>
 					<td class="book">
 						@php $item = array_first($order['items']); @endphp
-						<p>{{$item['name']}}<br></p>
+						<p><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></p>
 						@if(count($order['items'])>1)
 						<p style="padding-top: 8px;color: #999;">查看所有>></p>
 						@endif

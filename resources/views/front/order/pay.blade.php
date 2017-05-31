@@ -42,7 +42,7 @@
 			</h4>
 			<ul class="pay-ul">
 				<li>
-					<a href="#"><img src="{{asset('front/img/zfb.jpg')}}" /></a>
+					<a target="_blank" href="{{$paylink['alipay']}}"><img src="{{asset('front/img/zfb.jpg')}}" /></a>
 				</li>
 				<li>
 					<a onclick="weixinpay()"><img src="{{asset('front/img/wx.jpg')}}" /></a>
@@ -61,7 +61,7 @@ function weixinpay(){
 		type: 1,
   		skin: 'layui-layer-rim', //加上边框
   		area: ['420px', '360px'], //宽高
-  		content: '<div class="modal-bd" id="J_showWeixinPayExample"><div class="code" id="J_weixinPayCode"><img src="//i.huodong.mi.com/qrcode/wxget?code=weixin%3A%2F%2Fwxpay%2Fbizpayurl%3Fpr%3DnInIbDQ&amp;key=bd7a08e95394324ba9f0ef7135d3edd8"></div><div class="msg">请使用 <span>微信</span> 扫一扫<br>二维码完成支付</div></div>',
+  		content: '<div class="modal-bd" id="J_showWeixinPayExample"><div class="code" id="J_weixinPayCode"><img src=""></div><div class="msg">请使用 <span>微信</span> 扫一扫<br>二维码完成支付</div></div>',
   		title: '微信支付'
 	});
 }

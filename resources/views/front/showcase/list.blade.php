@@ -33,7 +33,7 @@
           <div class="pc-info-b">
             <p class="pc-like-area"><span>价格：<span class="pc-price">￥{{{$good['price'] or ''}}}</span></span></p>
             <p class="pc-like-area"><i class="ico-like"></i><span>{{$good['likecount']}}</span></p>
-            <p class="pc-like-area no-border"><span>查看详情</span></p>
+            <p class="pc-like-area no-border"><span><a href="{{url('goods/'.$good['id'])}}">查看详情</a></span></p>
           </div>
         </div>
         <div class="left">

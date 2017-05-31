@@ -27,12 +27,12 @@
 				@foreach($datas as $data)
 				<li class="div_{{$data['id']}}" style="width: 47%;">
 					<div class="book">
-						<a href="#"><img src="{{$data['thumbUrl']}}" style="width:440px;height:234px;" /></a>
+						<a href="{{url('goods/'.$data['id'])}}"><img src="{{$data['thumbUrl']}}" style="width:440px;height:234px;" /></a>
 					</div>
 					<div class="info">
-						<a href="#" class="tittle">{{str_limit($data['name'], $limit = 40, $end = '...')}}</a>
+						<a href="{{url('goods/'.$data['id'])}}" class="tittle">{{str_limit($data['name'], $limit = 40, $end = '...')}}</a>
 						<p class="author">{{date('Y-m-d h:i',round($data['likeTime']/1000))}} 喜欢</p>
-						<p class="author"><img src="{{asset('front/img/u78.png')}}" width="14px;"> {{$data['likecount']}}&nbsp;&nbsp;<a href="javascript:unlike({{$data['id']}})">取消收藏</a></p>
+						<p class="author"><img src="{{asset('front/img/u78.png')}}" width="14px;"> {{$data['likecount']}}&nbsp;&nbsp;<a class="btn_red" href="javascript:unlike({{$data['id']}})">取消收藏</a></p>
 					</div>
 				</li>
 				@endforeach

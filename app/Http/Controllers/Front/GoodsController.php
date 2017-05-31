@@ -20,7 +20,13 @@ class GoodsController extends Controller
       $this->coupon = $coupon;
     }
 
-    public function index(Request $request)
+    public function show(Request $request,$productId){
+        $storeId = getStoreId();
+        $name = '小道理：分寸之间';
+        return view('front.goods.show')->with(compact('name'));
+    }
+
+    public function buy(Request $request)
     {
         if($request->has('cartIds')){
             $cartIds = $request->input('cartIds');
@@ -42,7 +48,7 @@ class GoodsController extends Controller
         }
         $goodList = $this->getCouponsByOrder($goodList);
         $addressList = $this->user->getAddressList();
-        return view('front.goods.index')->with(compact('goodList','name','type','addressList'));
+        return view('front.goods.buy')->with(compact('goodList','name','type','addressList'));
     }
 
     public function directBuy(Request $request)

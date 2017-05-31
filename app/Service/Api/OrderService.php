@@ -48,7 +48,7 @@ class OrderService extends BaseService
     public function getOrderCreate($cartIds,$form){
         $path  = '/api/shop/order!create.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = $form;
-        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
+        $data = $this->http_curl($path,$query,'post',false,false,'form_params');
         return $data;
     }
 
@@ -81,6 +81,12 @@ class OrderService extends BaseService
         $path  = '/api/shop/payment!weiXin.do?sn='.implode('&sn=',$snLs);
         $query = array();
         $data = $this->http_curl($path,$query,'post',false,false,'form_params');
+        return $data;
+    }
+
+    //支付链接
+    public function getPayLink($snLs){
+        $data['alipay']  =  $this->url.'/api/shop/payment!zhiFuBaoWeb.do?sn='.implode('&sn=',$snLs);
         return $data;
     }
 

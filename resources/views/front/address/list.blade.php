@@ -92,7 +92,7 @@
 									@if($address['isDefault'])
 									<span class="note">默认地址</span>
 									@else
-									<a class="note-implicit"href="javascript:defaddrAddress({{$address['id']}});">设为默认</a>
+									<a class="note-implicit" href="javascript:defaddrAddress({{$address['id']}});">设为默认</a>
 									@endif
 									</td>
 								</tr>

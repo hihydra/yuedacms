@@ -99,8 +99,8 @@ html,body { margin:0; padding:0; height:100%}
 						<li>
 							<div class="book">
 								<i><img src="{{asset('front/img/sale.png')}}" /></i>
-								<a href="#"><img src="{{$sale['thumbUrl']}}" /></a>
-								<a href="#" class="tittle">{{$sale['name']}}</a>
+								<a href="{{url('goods/'.$sale['id'])}}"><img src="{{$sale['thumbUrl']}}" /></a>
+								<a href="{{url('goods/'.$sale['id'])}}" class="tittle">{{$sale['name']}}</a>
 							</div>
 							<div class="info">
 								<p class="price">￥{{$sale['price']}}<span>￥{{$sale['marketPrice']}}</span></p>

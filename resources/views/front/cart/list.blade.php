@@ -6,7 +6,7 @@
 	@include('front.share.crumb',['name'=>$name])
 	<h1>我的购物车</h1>
 	@if(!empty($carts))
-	<form method="post" action="{{url('goods')}}" id="buyCart">
+	<form method="post" action="{{url('goods/buy')}}" id="buyCart">
 		<div id="div_display" class="gwc_box gb_tal">
 			<table class="g_table" cellspacing="0" cellpadding="0" border="0" >
 				<tbody><tr class="tbg">
@@ -40,9 +40,9 @@
 				</td>
 				<td>
 					<div class="bif">
-						<a href="#" class="img"><img src="{{$item['image']}}"></a>
+						<a href="{{url('goods/'.$item['id'])}}" class="img"><img src="{{$item['image']}}"></a>
 						<div class="info">
-							<h4><a href="#">{{$item['name']}}</a></h4>
+							<h4><a href="{{url('goods/'.$item['id'])}}">{{$item['name']}}</a></h4>
 						</div>
 					</div>
 				</td>

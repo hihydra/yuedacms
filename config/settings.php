@@ -118,4 +118,6 @@ return [
     'defaultImg' => 'front/img/default/default.jpg',
 
     'storeId' => '47',
+
+    'storeName' => '阅达五一店'
 ];
