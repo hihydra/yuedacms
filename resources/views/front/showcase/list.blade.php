@@ -55,8 +55,6 @@
 
 </div>
 <div class="clear"></div>
-
-
 {!!$ApiPresenter->getShowcaseList()!!}
 @endsection
 @section('js')

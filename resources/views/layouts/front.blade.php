@@ -8,6 +8,7 @@
   <link href="{{asset('front/css/css.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{asset('front/css/style.css') }}" rel="stylesheet" type="text/css"/>
   <script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
+  <script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
   @yield('css')
 </head>
 @php
@@ -100,7 +101,7 @@ $storeId = getStoreId();
       @endif
       <div class="s-a s-buy">
         <span>&nbsp;</span>
-        <a href="{{url('cart')}}">购物车<lable class="cartNum">{{$userInfo['cartCount']}}</label></a>
+        <a href="{{url('cart')}}">购物车<lable class="cartNum">{{{$userInfo['cartCount'] or 0}}}</label></a>
       </div>
     </div>
   </div>
@@ -134,7 +135,6 @@ $storeId = getStoreId();
 </div>
 <!--   main结束   -->
 <script type="text/javascript" src="{{asset('vendors/layer/layer.js')}}"></script>
-<script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
 <script type="text/javascript">
   @php
   $cate = app('request')->segment(1);

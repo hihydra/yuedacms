@@ -10,6 +10,9 @@ class BaseService
     public $url;
     public $client;
     public $api_sessionid;
+    public $CODE_NETWORK_ERROR  = 0;
+    public $CODE_SUCCESS        = 1;
+    public $CODE_NOT_LOGIN      = 2;
 
 	public function __construct(){
         $this->url = env('API_URL');
@@ -17,7 +20,7 @@ class BaseService
         $this->api_sessionid = env('API_SESSIONID');
 	}
 
-	public function http_curl($path,$query,$mothod="GET",$cookie=false,$abort=true,$type='query'){
+	public function http_curl($path,$query,$mothod="GET",$json=false,$cookie=false,$type='query'){
         $querys[$type] = $query;
         if (cookie::get($this->api_sessionid)&&!$cookie) {
             $querys['headers'] = array('cookie'=>cookie::get($this->api_sessionid));
@@ -25,33 +28,32 @@ class BaseService
     	$response = $this->client->request($mothod,$path,$querys);
     	if ($response->getStatusCode() == 200) {
     		$body = json_decode($response->getbody(),true);
-            //dd($body);
-            switch ($body['result']) {
-                case '1':
-                    if($cookie){
-                        $cookie_data = $response->getHeader('Set-Cookie');
-                        $body['API_SESSIONID'] = array_first($cookie_data);
-                    }
-                    if(isset($body['data'])){
-                        return $body['data'];
-                    }else{
-                        return $body;
-                    }
-                    break;
-                case '2':
-                    if($abort){
+
+            if ($json) {
+                if($body['result'] == $this->CODE_NOT_LOGIN){
+                    $body['loginUrl'] = url('/login');
+                }
+                if($cookie&&$body['result']==$this->CODE_SUCCESS){
+                    $cookie_data = $response->getHeader('Set-Cookie');
+                    $body['API_SESSIONID'] = array_first($cookie_data);
+                }
+                return $body;
+            }else{
+                switch ($body['result']) {
+                    case $this->CODE_SUCCESS:
+                        if(isset($body['data'])){
+                            return $body['data'];
+                        }else{
+                            return $body;
+                        }
+                        break;
+                    case $this->CODE_NOT_LOGIN:
                         header('Location: '.url('/login'));exit;
-                    }else{
-                        return false;
-                    }
-                    break;
-                default:
-                    if($abort){
-                        return $body;
-                    }else{
+                        break;
+                    default:
                         abort(404,$body['message']);
-                    }
-                    break;
+                        break;
+                }
             }
 		}else{
 			abort(500);

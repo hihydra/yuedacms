@@ -10,7 +10,7 @@ class UserService extends BaseService
     public function getRegisterValidcode($mobile,$random){
         $path  = '/api/shop/account!getRegisterValidcode.do';
         $query = array('mobile'=>$mobile,'random'=>$random);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -34,7 +34,7 @@ class UserService extends BaseService
     public function getStorefrontList($regionId,$anchor = null){
         $path  = '/api/shop/storefront!openListByCity.do';
         $query = array('regionId'=>$regionId,'anchor'=>$anchor,'limit'=>200);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,"GET",true);
         return $data;
     }
 
@@ -42,7 +42,7 @@ class UserService extends BaseService
     public function getRegister($form){
         $path  = '/api/shop/account!register.do';
         $query = $form;
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -50,7 +50,7 @@ class UserService extends BaseService
     public function getLogin($mobile,$password){
         $path  = '/api/shop/account!login.do';
         $query = array('mobile'=>$mobile,'password'=>$password);
-        $data = $this->http_curl($path,$query,'POST',true);
+        $data = $this->http_curl($path,$query,'POST',true,true);
         return $data;
     }
 
@@ -58,7 +58,7 @@ class UserService extends BaseService
     public function getChangePassword($oldpassword,$newpassword){
         $path  = '/api/shop/account!changePassword.do';
         $query = array('oldpassword'=>$oldpassword,'newpassword'=>$newpassword);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -66,7 +66,7 @@ class UserService extends BaseService
     public function getValidcodeByMobile($mobile){
         $path  = '/api/shop/account!getValidcodeByMobile.do';
         $query = array('mobile'=>$mobile);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -74,7 +74,7 @@ class UserService extends BaseService
     public function getResetPassword($mobile,$password,$validcode){
         $path  = '/api/shop/account!resetPassword.do';
         $query = array('mobile'=>$mobile,'password'=>$password,'validcode'=>$validcode);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -90,15 +90,15 @@ class UserService extends BaseService
     public function getChangeMobile($mobile,$validcode){
         $path  = '/api/shop/account!changeMobile.do';
         $query = array('mobile'=>$mobile,'validcode'=>$validcode);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
     //获取用户信息
-    public function getInfo($isJump=true){
+    public function getInfo($json = false){
         $path  = '/api/shop/personInfo!getInfo.do';
         $query = array();
-        $data = $this->http_curl($path,$query,"GET",false,$isJump);
+        $data = $this->http_curl($path,$query,"GET",$json);
         return $data;
     }
 
@@ -138,7 +138,10 @@ class UserService extends BaseService
     public function getAddressStore($from){
         $path  = '/api/shop/address!add.do';
         $query = $from;
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
+        if($data['result'] == $this->CODE_SUCCESS){
+            $data['message'] = '添加成功';
+        }
         return $data;
     }
 
@@ -146,7 +149,7 @@ class UserService extends BaseService
     public function getAddressEdit($from){
         $path  = '/api/shop/address!edit.do';
         $query = $from;
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -154,7 +157,7 @@ class UserService extends BaseService
     public function getAddressDelete($id){
         $path  = '/api/shop/address!delete.do';
         $query = array('id'=>$id);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -162,7 +165,7 @@ class UserService extends BaseService
     public function getAddressDefaddr($id){
         $path  = '/api/shop/address!defaddr.do';
         $query = array('id'=>$id);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -178,7 +181,7 @@ class UserService extends BaseService
     public function getSuggestSave($mobile,$content){
         $path  = '/api/shop/suggest!save.do';
         $query = array('mobile'=>$mobile,'content'=>$content);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 }

@@ -2,45 +2,6 @@
 @section('title'){{$name}}-@endsection
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/slide.css')}}">
-<style type="text/css">
-/* 选项卡 */
-body {
-	font: 12px/20px Open Sans,微软雅黑, Helvetica, Arial, sans-serif;
-	background:#F9F9F9;
-	margin:0;
-	padding:0;
-	color:#555555;
-	min-width:1000px
-}
-a {
-	color:#111111;
-	text-decoration:none;
-	-webkit-transition:color 0.2s linear;
-	-moz-transition:color 0.2s linear;
-	-o-transition:color 0.2s linear;
-	transition:color 0.2s linear
-}
-a:focus , a:link, a:active { outline:none}
-a:hover { color:#F30}
-ol, ul, li{	list-style: none}
-*{margin:0;padding:0}
-html,body { margin:0; padding:0; height:100%}
-.table_card { width:100%; margin:0 auto;margin-top: 20px}
-.table_card .tab { height:37px; font-size:14px; border-bottom:1px #e1e1e1 solid}
-.table_card .tab li { float:left; height:36px; line-height:36px; padding:0 13px; margin-right:6px; background:#f0f0f0; border-top:1px #e1e1e1 solid; border-left:1px #e1e1e1 solid; border-right:1px #e1e1e1 solid;}
-.table_card .tab li:last-child{margin-left: 5px;}
-.table_card .tab li:hover { height:37px; background:#fff; color:#333; cursor:pointer}
-.table_card .activ { height:37px !important; background:#fff !important; color:#333}
-.table_card .tabCon { background:#fff; padding:15px; border-bottom:1px #e1e1e1 solid; border-left:1px #e1e1e1 solid; border-right:1px #e1e1e1 solid;}
-.table_card .tabCon div { display:none}
-.table_card .tabCon .on { display:block}
-
-.newslist { font-size:14px; }
-.newslist li { line-height:36px;}
-.newslist .hover a{color:#F30;}
-.newslist li .ding { color:#F30; margin-left:5px}
-.newslist li .time { float:right; font-size:12px; color:#888}
-</style>
 @endsection
 @section('content')
 <div class="Modular">
@@ -56,13 +17,13 @@ html,body { margin:0; padding:0; height:100%}
 				</ul>
 				<div class="tabCon">
 					@foreach($storeList as $key =>$stores)
-						<div>
-							<ul class="newslist" data-id="{{$key}}">
-								@foreach($stores as $store)
-								<li><a href="{{url('store/'.$store['id'].'/'.$store['name'])}}" class="store_{{$store['id']}}"><span>【{{$store['name']}}】</span>{{$store['address']}}</a></li>
-								@endforeach
-							</ul>
-						</div>
+					<div>
+						<ul class="newslist" data-id="{{$key}}">
+							@foreach($stores as $store)
+							<li><a href="{{url('store/'.$store['id'].'/'.$store['name'])}}" class="store_{{$store['id']}}"><span>【{{$store['name']}}】</span>{{$store['address']}}</a></li>
+							@endforeach
+						</ul>
+					</div>
 					@endforeach
 				</div>
 			</div>
@@ -134,10 +95,10 @@ html,body { margin:0; padding:0; height:100%}
 		$('.store_{{$storeId}}').parent().addClass('hover');
 		var area = $('.store_{{$storeId}}').parent().parent().attr('data-id');
 		$(".tab li").each(function () {
-	        if ($(this).text().indexOf(area) > -1) {
-	          $(this).addClass('activ');
-	        }
-      	})
+			if ($(this).text().indexOf(area) > -1) {
+				$(this).addClass('activ');
+			}
+		})
 	});
 </script>
 @endsection

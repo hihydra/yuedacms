@@ -1,16 +1,5 @@
 @extends('layouts.front')
 @section('title'){{$name}}-@endsection
-@section('css')
-<style type="text/css">
-	.person-code-btn{
-        margin: 0 0 0 15px;
-        padding: 7px 10px;
-        background: #fff;
-        border: 1px solid #ff6280;
-        color: #ff6280;
-    }
-</style>
-@endsection
 @section('content')
 @include('front.share.leftSidebar')
 <div class="M2" style="margin-top:10px; width:928px;">
@@ -121,12 +110,15 @@
 		if(mobile.length ==0 || validcode.length ==0){
 			layer.msg("{{trans('front/system.mobile_validcode_error')}}");return;
 		}
-		$.post("{{url('user/changeMobile_check')}}",{'mobile':mobile,'validcode':validcode},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				window.location.reload();
-			}
-		});
+		var params = {};
+	    params.url = "{{url('user/changeMobile_check')}}";
+	    params.postData = {'mobile':mobile,'validcode':validcode};
+	    params.postType = 'post';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+	      window.location.reload();
+	    };
+	    ajaxJSON(params);
 	}
 	function changePassword(){
 		var oldpassword = $("input[name='oldpassword']").val();
@@ -138,12 +130,16 @@
 		if(newpassword != reNewpassword){
 				layer.msg("{{trans('front/system.repassword_error')}}");return;
 		}
-		$.post("{{url('user/ajaxChangePassword')}}",{'oldpassword':oldpassword,'newpassword':newpassword},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				window.location.reload();
-			}
-		});
+
+		var params = {};
+	    params.url = "{{url('user/ajaxChangePassword')}}";
+	    params.postData = {'oldpassword':oldpassword,'newpassword':newpassword};
+	    params.postType = 'post';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+	      window.location.reload();
+	    };
+	    ajaxJSON(params);
 	}
 </script>
 @endsection

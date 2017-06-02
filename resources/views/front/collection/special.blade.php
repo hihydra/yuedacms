@@ -54,12 +54,14 @@
 @section('js')
 <script type="text/javascript">
 	function unlike(id){
-		$.post("{{url('user/ajaxSpecialUnlike')}}/"+id,function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				$('.div_'+id).remove();
-			}
-		});
+		var params = {};
+		params.url = "{{url('user/ajaxSpecialUnlike')}}/"+id;
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			$('.div_'+id).remove();
+		};
+		ajaxJSON(params);
 	}
 </script>
 @endsection

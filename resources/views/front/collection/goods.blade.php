@@ -60,20 +60,25 @@
 @section('js')
 <script type="text/javascript">
 	function unlike(id){
-		$.post("{{url('user/ajaxGoodsUnlike')}}/"+id,function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				$('.div_'+id).remove();
-			}
-		});
+		var params = {};
+		params.url = "{{url('user/ajaxGoodsUnlike')}}/"+id;
+		params.postType = 'post';
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			$('.div_'+id).remove();
+		};
+		ajaxJSON(params);
 	}
 	function addCart(productId,num,storeId){
-		$.post("{{url('cart/ajaxAdd')}}",{'productId':productId,'num':num,'storeId':storeId},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-
-			}
-		});
+		var params = {};
+		params.url = "{{url('cart/ajaxAdd')}}";
+		params.postData = {'productId':productId,'num':num,'storeId':storeId};
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			window.location.reload();
+		};
+		ajaxJSON(params);
 	}
 </script>
 @endsection

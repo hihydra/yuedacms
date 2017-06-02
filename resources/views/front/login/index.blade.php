@@ -40,12 +40,16 @@
 		if(mobile.length ==0 || password.length ==0){
 			layer.msg("{{trans('front/system.login_error')}}");return;
 		}
-		$.post("{{url('login/login_check')}}",{'mobile':mobile,'password':password},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				location.href = "{{url('/')}}";
-			}
-		});
+
+		var params = {};
+		params.url = "{{url('login/login_check')}}";
+		params.postData = {'mobile':mobile,'password':password};
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			location.href = "{{url('/')}}";
+		};
+		ajaxJSON(params);
 	}
 </script>
 @endsection

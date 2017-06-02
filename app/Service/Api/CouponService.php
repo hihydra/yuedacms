@@ -18,7 +18,7 @@ class CouponService extends BaseService
     public function getCouponObtain($id){
         $path  = '/api/shop/coupon!obtain.do';
         $query = array('id'=>$id);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 

@@ -99,57 +99,20 @@
 		width:156
 	});
 	function getStore(regionId){
-		$.get("{{url('store/ajaxStorefront')}}/"+regionId,function(result){
-			if(result.datas){
-				$('div[name="store"] .selected').html('请选择门店');
-				$('input[name="store"]').val('');
-				var html ="<a class='selected'>请选择门店</a>";
-				$.each(result.datas,function(i,data){
-					html+="<a val="+data.id+">"+ data.name +"</a>";
-				});
-				$('div[name="store"] .opts').html(html);
-			}else{
-				layer.msg('{{trans("front/system.getStore_error")}}');
-			}
-		});
-	}
-	function tel(){
-		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-		if(!myreg.test($('#tel').val()))
-		{
-			layer.msg("{{trans('front/system.phone_error')}}");
-			$('#tel').focus();
-			return false;
-		}else{
-			return true;
-		}
-	}
-	function getCode(url,mobile,obj){
-		if(tel()){
-			$.post(url,{'mobile':mobile},function(result){
-				layer.msg(result.message);
-				if(result.result == 1){
-					settime(obj);
-				}
+		var params = {};
+	    params.url = "{{url('store/ajaxStorefront')}}/"+regionId;
+	    params.postType = 'get';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+      		$('div[name="store"] .selected').html('请选择门店');
+			$('input[name="store"]').val('');
+			var html ="<a class='selected'>请选择门店</a>";
+			$.each(json.data.datas,function(i,data){
+				html+="<a val="+data.id+">"+ data.name +"</a>";
 			});
-		}
-	}
-	var countdown=60;
-	function settime(obj) {
-		tel();
-		if (countdown == 0) {
-			obj.removeAttribute("disabled");
-			obj.value="获取验证码";
-			countdown = 60;
-			return;
-		} else {
-			obj.setAttribute("disabled", true);
-			obj.value="重新发送(" + countdown + ")";
-			countdown--;
-		}
-		setTimeout(function() {
-			settime(obj) }
-			,1000)
+			$('div[name="store"] .opts').html(html);
+	    };
+	    ajaxJSON(params);
 	}
 	function register() {
 		var nickname = $("input[name='nickname']").val();
@@ -169,12 +132,16 @@
 		if(password != rePassword){
 			layer.msg("{{trans('front/system.repassword_error')}}");return;
 		}
-		$.post("{{url('register/register_check')}}",{'nickname':nickname,'mobile':mobile,'password':password,'validcode':validcode,'storeId':$('input[name="store"]').val()},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				location.href = "{{url('login')}}";
-			}
-		});
+
+		var params = {};
+	    params.url = "{{url('register/register_check')}}";
+	    params.postData = {'nickname':nickname,'mobile':mobile,'password':password,'validcode':validcode,'storeId':$('input[name="store"]').val()};
+	    params.postType = 'post';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+	      location.href = "{{url('login')}}";
+	    };
+	    ajaxJSON(params);
 	}
 </script>
 @endsection

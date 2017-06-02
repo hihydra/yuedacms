@@ -57,32 +57,32 @@
 						@endif
 					</div>
 				</div>
-				@endforeach
-			</div>
-			<!--分页-->
-			<div class="pages">
-				<a class="prev  icon-disable1" href="#"><b></b>上一页</a><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a>
-				<i>...</i><a class="last" href="#">212</a><a class="next" href="#">下一页<b></b></a>
-				<span class="go_page">去第<input id="go_page_input" class="input_02 g_ipt" name="" type="text">页 <input name="" class="p_go" value="GO" id="go_page_btn" type="button"></span>
-			</div>
-
+			@endforeach
 		</div>
-		<div class="clear"></div>
+		<!--分页-->
+		<div class="pages">
+			<a class="prev  icon-disable1" href="#"><b></b>上一页</a><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a>
+			<i>...</i><a class="last" href="#">212</a><a class="next" href="#">下一页<b></b></a>
+			<span class="go_page">去第<input id="go_page_input" class="input_02 g_ipt" name="" type="text">页 <input name="" class="p_go" value="GO" id="go_page_btn" type="button"></span>
+		</div>
+	</div>
+<div class="clear"></div>
 
-
-		{!!$ApiPresenter->getShowcaseList()!!}
-		@endsection
-		@section('js')
-		<script type="text/javascript">
-			function obtain(id){
-				$.post("{{url('coupon/ajaxObtain')}}/"+id,function(result){
-					layer.msg(result.message);
-					if(result.result == 1){
-						$('.coupon_'+id+' span').text('已领取');
-						$('.coupon_'+id).attr('href','javascript:void(0);');
-						$('.coupon_'+id).append('<div class="q-state"><div class="btn-state btn-finish">已领取</div></div>');
-					}
-				});
-			}
-		</script>
-		@endsection
+{!!$ApiPresenter->getShowcaseList()!!}
+@endsection
+@section('js')
+<script type="text/javascript">
+	function obtain(id){
+		var params = {};
+		params.url = "{{url('coupon/ajaxObtain')}}/"+id;
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			$('.coupon_'+id+' span').text('已领取');
+			$('.coupon_'+id).attr('href','javascript:void(0);');
+			$('.coupon_'+id).append('<div class="q-state"><div class="btn-state btn-finish">已领取</div></div>');
+		};
+		ajaxJSON(params);
+	}
+</script>
+@endsection

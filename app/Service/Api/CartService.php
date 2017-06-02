@@ -32,8 +32,7 @@ class CartService extends BaseService
     public function getCartAdd($id,$num,$storeId){
         $path  = '/api/shop/cart!add.do';
         $query = array('id'=>$id,'num'=>$num,'storeId'=>$storeId);
-        $data = $this->http_curl($path,$query);
-        //dd($data);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -41,7 +40,7 @@ class CartService extends BaseService
     public function getCartUpdateNum($id,$num){
         $path  = '/api/shop/cart!updateNum.do';
         $query = array('id'=>$id,'num'=>$num);
-        $data = $this->http_curl($path,$query,'post');
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -49,7 +48,7 @@ class CartService extends BaseService
     public function getCartDelete($cartIds){
         $path  = '/api/shop/cart!delete.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
+        $data = $this->http_curl($path,$query,'post',true,null,'form_params');
         return $data;
     }
 

@@ -68,11 +68,18 @@
 								@endforeach
 							</div>
 						</div>
-						<div name="store" type="selectbox">
+						<div name="storeId" type="selectbox">
 							<div class="opts">
 								<a class="selected">请选择门店</a>
 							</div>
 						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="item">
+					<span class="label"></span>
+					<div class="fl">
+						<span style="color:red;">{{{$storeName or ''}}}</span>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -130,24 +137,25 @@
 		height:30,
 		width:156
 	});
-	$('div[name="store"]').inputbox({
+	$('div[name="storeId"]').inputbox({
 		height:30,
 		width:156
 	});
 	function getStore(regionId){
-		$.get("{{url('store/ajaxStorefront')}}/"+regionId,function(result){
-			if(result.datas){
-				$('div[name="store"] .selected').html('请选择门店');
-				$('input[name="store"]').val('');
-				var html ="<a class='selected'>请选择门店</a>";
-				$.each(result.datas,function(i,data){
-					html+="<a val="+data.id+">"+ data.name +"</a>";
-				});
-				$('div[name="store"] .opts').html(html);
-			}else{
-				layer.msg('{{trans("front/system.getStore_error")}}');
-			}
-		});
+		var params = {};
+	    params.url = "{{url('store/ajaxStorefront')}}/"+regionId;
+	    params.postType = 'get';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+      		$('div[name="storeId"] .selected').html('请选择门店');
+			$('input[name="storeId"]').val('');
+			var html ="<a class='selected'>请选择门店</a>";
+			$.each(json.data.datas,function(i,data){
+				html+="<a val="+data.id+">"+ data.name +"</a>";
+			});
+			$('div[name="storeId"] .opts').html(html);
+	    };
+	    ajaxJSON(params);
 	}
 	//上传头像预览
 	$('.choosePic').on('change', '.UploadImg', function(){

@@ -6,11 +6,12 @@
 	@include('front.share.crumb',['name'=>$name])
 	<div class="second-menu">
 		<ul>
-			<li><a href="{{url('order')}}">所有订单</a></li>
-			<li><a href="{{URL::route('order',['status'=>'STATUS_NOT_PAY'])}}">待付款</a></li>
-			<li><a href="{{URL::route('order',['status'=>'STATUS_WAIT_SHIP'])}}">待发货</a></li>
-			<li><a href="{{URL::route('order',['status'=>'STATUS_SHIPPING'])}}">待收货</a></li>
-			<li><a href="{{URL::route('order',['status'=>'STATUS_COMPLETE'])}}">待评价</a></li>
+			<li><a href="{{url('order')}}">所有订单@if($counts['total']>0) ({{$counts['total']}})@endif</a></li>
+			<li><a href="{{URL::route('order',['status'=>'STATUS_NOT_PAY'])}}">待付款@if($counts['STATUS_NOT_PAY']>0) ({{$counts['STATUS_NOT_PAY']}})@endif</a></li>
+			<li><a href="{{URL::route('order',['status'=>'STATUS_WAIT_SHIP'])}}">待发货@if($counts['STATUS_WAIT_SHIP']>0) ({{$counts['STATUS_WAIT_SHIP']}})@endif</a></li>
+			<li><a href="{{URL::route('order',['status'=>'STATUS_SHIPPING'])}}">待收货@if($counts['STATUS_SHIPPING']>0) ({{$counts['STATUS_SHIPPING']}})@endif</a></li>
+			<li><a href="{{URL::route('order',['status'=>'STATUS_COMPLETE'])}}">待评价@if($counts['STATUS_COMPLETE']>0) ({{$counts['STATUS_COMPLETE']}})@endif</a></li>
+			<li><a href="{{URL::route('order',['status'=>'STATUS_AFTERSALES'])}}">退款/售后</a></li>
 		</ul>
 		<div class="clear"></div>
 	</div>
@@ -44,8 +45,10 @@
 						@if($order['status'] == 'STATUS_NOT_PAY')
 						<a class=" btn_red_01" target="_blank" href="{{URL::route('order.pay',['snLs[]'=>$order['sn']])}}">付款</a>
 						<a class="btn_cancel slink" href="javascript:orderCancel('{{$order['sn']}}');">取消订单</a>
+						@elseif($order['status'] == 'STATUS_SHIPPING')
+						<a class=" btn_red_01" href="javascript:rogConfirm('{{$order['sn']}}');">确认收货</a>
 						@elseif($order['status'] == 'STATUS_COMPLETE' || $order['status'] == 'STATUS_CANCEL')
-						@if($order['commented'] == 0)
+						@if($order['commented'] == 0 )
 						<a class=" btn_red_01" target="_blank" href="#">评价</a>
 						@endif
 						<a class="btn_cancel slink" href="javascript:orderDelete('{{$order['sn']}}');">删除订单</a>
@@ -84,26 +87,43 @@
       if (!urlstatus) {$(".second-menu ul li a").eq(0).addClass('hover'); }
     });
 	function orderCancel(sn){
-		if (confirm("确认取消订单!"))
+		layer.confirm("确认取消订单?", function()
 		{
-			$.post("{{url('order/ajaxCancel')}}/"+sn,function(result){
-				layer.msg(result.message);
-				if(result.result == 1){
-					window.location.reload();
-				}
-			});
-		}
+			var params = {};
+			params.url = "{{url('order/ajaxCancel')}}/"+sn;
+			params.postType = "post";
+			params.mustCallBack = true;// 是否必须回调
+			params.callBack = function(json) {
+				window.location.reload();
+			};
+			ajaxJSON(params);
+		});
 	}
 	function orderDelete(sn){
-		if (confirm("确认删除订单!"))
+		layer.confirm("确认删除订单?", function()
 		{
-			$.post("{{url('order/ajaxDelete')}}/"+sn,function(result){
-				layer.msg(result.message);
-				if(result.result == 1){
-					$("#div_order_"+sn).remove();
-				}
-			});
-		}
+			var params = {};
+			params.url = "{{url('order/ajaxDelete')}}/"+sn;
+			params.postType = "post";
+			params.mustCallBack = true;// 是否必须回调
+			params.callBack = function(json) {
+				$("#div_order_"+sn).remove();
+			};
+			ajaxJSON(params);
+		});
+	}
+	function rogConfirm(sn){
+		layer.confirm("请在收到商品后,确认收货！", function()
+		{
+			var params = {};
+			params.url = "{{url('order/rogConfirm')}}/"+sn;
+			params.postType = "post";
+			params.mustCallBack = true;// 是否必须回调
+			params.callBack = function(json) {
+				window.location.reload();
+			};
+			ajaxJSON(params);
+		});
 	}
 </script>
 @endsection

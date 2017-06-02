@@ -75,7 +75,7 @@
 			<!--<a href="#">删除选中图书</a> --></div>
 			<div class="right total">
 				共<label id="total_num">0</label>本，总计
-				<i class="price"><label id="total_price">￥0.00</label></i>
+				<i class="price"><label id="total_price">￥0</label></i>
 				&nbsp;&nbsp;&nbsp;不含运费
 			</div>
 		</div>
@@ -133,40 +133,45 @@
 			$("#total_pay").attr("class","right btn_red_n");
 		}
 	}
-	function updateCartNum(cartId,num,price){
-		num = $("#ipt_num_"+cartId).val()-1+1+num;
-		if(num<=0){
-			return ;
-		}
-		$.post("{{url('cart/ajaxCartUpdateNum')}}/"+cartId,{'num':num},function(result){
-			if(result.result == 1){
-				$("#ipt_num_"+cartId).val(num);
-				$('#itemTotal_price_'+cartId).html("￥"+convertMoney(price*num));
-				refreshTotalPrice();
-			}else{
-				layer.msg(result.message);
-			}
-		});
-	}
-	function delCart(storeId,cartId){
-		$.post("{{url('cart/ajaxCartDelete')}}",{'cartIds[]':cartId},function(result){
-			if(result.result == 1){
-				$("#div_store_"+storeId+"_"+cartId).remove();
-				if($("#div_store_"+storeId).find("[data_type='cartDel']").length<1){
-					$("#div_store_"+storeId).remove();
-				}
-				refreshGlobalChecked();
-			}else{
-				layer.msg(result.message);
-			}
-		});
-	}
 	function buyCart_submit(){
 		var cartIds = $("#div_display").find("input[name='cartIds[]']:checked");
 		if(cartIds.length==0){
 			layer.msg("{{trans('front/system.buyCart_error')}}");return;
 		}
 		$('#buyCart').submit();
+	}
+	function updateCartNum(cartId,num,price){
+		num = $("#ipt_num_"+cartId).val()-1+1+num;
+		if(num<=0){
+			return ;
+		}
+
+		var params = {};
+		params.url = "{{url('cart/ajaxCartUpdateNum')}}/"+cartId;
+		params.postData = {'num':num};
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			$("#ipt_num_"+cartId).val(num);
+			$('#itemTotal_price_'+cartId).html("￥"+convertMoney(price*num));
+			refreshTotalPrice();
+		};
+		ajaxJSON(params);
+	}
+	function delCart(storeId,cartId){
+		var params = {};
+		params.url = "{{url('cart/ajaxCartDelete')}}";
+		params.postData = {'cartIds[]':cartId};
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			$("#div_store_"+storeId+"_"+cartId).remove();
+			if($("#div_store_"+storeId).find("[data_type='cartDel']").length<1){
+				$("#div_store_"+storeId).remove();
+			}
+			refreshGlobalChecked();
+		};
+		ajaxJSON(params);
 	}
 </script>
 @endsection

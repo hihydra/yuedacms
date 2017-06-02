@@ -70,27 +70,27 @@
 @section('js')
 <script type="text/javascript">
   $(document).ready(function(){
-        @php
-          $catId = app('request')->input('catId');
-        @endphp
-        var catId = '{{$catId}}';
-        if(catId){
-           $('.cat_'+catId).addClass('hover');
-        }else{
-            $('.category-list li').first().addClass('hover');
-        }
+    @php
+    $catId = app('request')->input('catId');
+    @endphp
+    var catId = '{{$catId}}';
+    if(catId){
+     $('.cat_'+catId).addClass('hover');
+   }else{
+    $('.category-list li').first().addClass('hover');
+  }
 
-        var sort = "{{{$urlPath['sort'] or 0}}}";
-        if(sort != 0){
-          var isAsc = {{{$urlPath['isAsc'] or 0}}};
-          if(isAsc){
-              $('.'+sort+' em').attr('class','curr2');
-              $('.'+sort).attr("href",$('.'+sort).attr("href")+"&isAsc=false");
-          }else{
-              $('.'+sort+' em').attr('class','curr1');
-              $('.'+sort).attr("href",$('.'+sort).attr("href")+"&isAsc=true");
-          }
-        }
-  });
+  var sort = "{{{$urlPath['sort'] or 0}}}";
+  if(sort != 0){
+    var isAsc = {{{$urlPath['isAsc'] or 0}}};
+    if(isAsc){
+      $('.'+sort+' em').attr('class','curr2');
+      $('.'+sort).attr("href",$('.'+sort).attr("href")+"&isAsc=false");
+    }else{
+      $('.'+sort+' em').attr('class','curr1');
+      $('.'+sort).attr("href",$('.'+sort).attr("href")+"&isAsc=true");
+    }
+  }
+});
 </script>
 @endsection

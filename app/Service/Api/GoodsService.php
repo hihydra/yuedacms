@@ -18,7 +18,7 @@ class GoodsService extends BaseService
     public function checkServiceRadius($storeId,$lng,$lat){
         $path  = '/api/shop/storefront!checkServiceRadius.do';
         $query = array('lng'=>$lng,'lat'=>$lat,'storeId'=>$storeId);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -26,7 +26,7 @@ class GoodsService extends BaseService
     public function getCartListByIds($cartIds){
         $path  = '/api/shop/cart!listByIds.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',false,true,'form_params');
+        $data = $this->http_curl($path,$query,'post',null,null,'form_params');
         return $data;
     }
 
@@ -34,7 +34,7 @@ class GoodsService extends BaseService
     public function getOrderDirectBuy($form){
         $path  = '/api/shop/order!directBuy.do';
         $query = $form;
-        $data = $this->http_curl($path,$query,'post',false,false);
+        $data = $this->http_curl($path,$query,'post',null,null);
         return $data;
     }
 

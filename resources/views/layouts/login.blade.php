@@ -5,7 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="{{asset('front/css/css.css') }}" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('front/css/login.css') }}" rel="stylesheet" type="text/css"/>
+	<link href="{{asset('front/css/style.css') }}" rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src="{{asset('vendors/jquery/jquery-2.1.1.js')}}"></script>
+	<script type="text/javascript" src="{{asset('front/js/utils.js') }}"></script>
 	@yield('css')
 </head>
 <body>

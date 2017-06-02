@@ -11,6 +11,13 @@ class OrderService extends BaseService
         $data = $this->http_curl($path,$query);
         return $data;
     }
+    //获取“退款/售后”列表
+    public function getAfterSalesList($anchor = null){
+        $path  = '/api/shop/order!afterSalesList.do';
+        $query = array('anchor'=>$anchor);
+        $data = $this->http_curl($path,$query);
+        return $data;
+    }
 
     //获取订单数量
     public function getOrderCounts(){
@@ -48,7 +55,7 @@ class OrderService extends BaseService
     public function getOrderCreate($cartIds,$form){
         $path  = '/api/shop/order!create.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = $form;
-        $data = $this->http_curl($path,$query,'post',false,false,'form_params');
+        $data = $this->http_curl($path,$query,'post',null,null,'form_params');
         return $data;
     }
 
@@ -56,7 +63,7 @@ class OrderService extends BaseService
     public function getOrderCancel($sn,$reason=null){
         $path  = '/api/shop/order!cancel.do';
         $query = array('sn'=>$sn,'reason'=>$reason);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -64,7 +71,7 @@ class OrderService extends BaseService
     public function getOrderDelete($sn){
         $path  = '/api/shop/order!delete.do';
         $query = array('sn'=>$sn);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -72,7 +79,7 @@ class OrderService extends BaseService
     public function getZhiFuBao($snLs){
         $path  = '/api/shop/payment!zhiFuBao.do?sn='.implode('&sn=',$snLs);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',false,false,'form_params');
+        $data = $this->http_curl($path,$query,'post',null,true,'form_params');
         return $data;
     }
 
@@ -80,7 +87,7 @@ class OrderService extends BaseService
     public function getWeiXin($snLs){
         $path  = '/api/shop/payment!weiXin.do?sn='.implode('&sn=',$snLs);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',false,false,'form_params');
+        $data = $this->http_curl($path,$query,'post',null,true,'form_params');
         return $data;
     }
 
@@ -110,7 +117,7 @@ class OrderService extends BaseService
     public function getRogConfirm($sn){
         $path  = '/api/shop/order!rogConfirm.do';
         $query = array('sn'=>$sn);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 

@@ -70,35 +70,35 @@
 			<div class="item">
 				<span class="label">&nbsp;</span>
 				<div class="TabContent">
-						<table class="perTable" cellspacing="0" cellpadding="0">
-							<tbody>
-								<tr>
-									<th>收货人</th>
-									<th>小区/大厦</th>
-									<th>详细地址</th>
-									<th>联系方式</th>
-									<th>操作</th>
-									<th></th>
-								</tr>
-								@foreach($addresslist as $address)
-								<tr class="tr_{{$address['id']}}">
-									<td class="name">{{$address['name']}}</td>
-									<td class="village">{{{$address['village'] or ''}}}</td>
-									<td class="address">{{$address['address']}}</td>
-									<td class="mobile">{{$address['mobile']}}</td>
-									<td><a href="javascript:editAddress({{$address['id']}});">修改 </a>|<a href="javascript:delAddress({{$address['id']}});"> 删除</a></td>
-									<input type="hidden" class="isDefault" value="{{$address['isDefault']}}">
-									<td class="thead-tbl-status">
+					<table class="perTable" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<th>收货人</th>
+								<th>小区/大厦</th>
+								<th>详细地址</th>
+								<th>联系方式</th>
+								<th>操作</th>
+								<th></th>
+							</tr>
+							@foreach($addresslist as $address)
+							<tr class="tr_{{$address['id']}}">
+								<td class="name">{{$address['name']}}</td>
+								<td class="village">{{{$address['village'] or ''}}}</td>
+								<td class="address">{{$address['address']}}</td>
+								<td class="mobile">{{$address['mobile']}}</td>
+								<td><a href="javascript:editAddress({{$address['id']}});">修改 </a>|<a href="javascript:delAddress({{$address['id']}});"> 删除</a></td>
+								<input type="hidden" class="isDefault" value="{{$address['isDefault']}}">
+								<td class="thead-tbl-status">
 									@if($address['isDefault'])
 									<span class="note">默认地址</span>
 									@else
 									<a class="note-implicit" href="javascript:defaddrAddress({{$address['id']}});">设为默认</a>
 									@endif
-									</td>
-								</tr>
-								@endforeach
-							</tbody>
-						</table>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
 				</div>
 			</div>
 
@@ -117,51 +117,6 @@
 		var params = {'name':name,'mobile':mobile,'village':village,'address':address,'isDefault':isDefault};
 		return params;
 	}
-	function saveAddress(){
-		$.post("{{url('user/address')}}",dataAddress(),function(result){
-			if(result.result == CODE_NETWORK_ERROR){
-				layer.msg(result.message);
-			}else{
-				layer.msg('添加成功');
-				window.location.reload();
-			}
-		});
-	}
-	function updateAddress(id){
-		$.ajax({
-		    url: "{{url('user/address')}}/"+id,
-		    type: 'PUT',
-		    data: dataAddress(),
-		    success: function(result)
-		    {
-		    	layer.msg(result.message);
-                if(result.result == CODE_SUCCESS){
-                	window.location.reload();
-				}
-            }
-		});
-	}
-	function delAddress(id){
-		$.ajax({
-		    url: "{{url('user/address')}}/"+id,
-		    type: 'DELETE',
-		    success: function(result)
-		    {
-		    	layer.msg(result.message);
-                if(result.result == CODE_SUCCESS){
-                	window.location.reload();
-				}
-            }
-		});
-	}
-	function defaddrAddress(id){
-		$.post("{{url('user/address/defaddr')}}/"+id,function(result){
-			layer.msg(result.message);
-            if(result.result == CODE_SUCCESS){
-            	window.location.reload();
-			}
-		});
-	}
 	function editAddress(id){
 		$("input[name='name']").val($.trim($('.tr_'+id+' .name').text()));
 		$("input[name='mobile']").val($.trim($('.tr_'+id+' .mobile').text()));
@@ -170,6 +125,49 @@
 		$("input[name='isDefault']").prop("checked",$('.tr_'+id+' .isDefault').val());
 		$("input[name='id']").val(id);
 		$('.subAddress').attr('href',"javascript:updateAddress("+id+");");
+	}
+	function saveAddress(){
+		var params = {};
+		params.url = "{{url('user/address')}}";
+		params.postData = dataAddress();
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			window.location.reload();
+		};
+		ajaxJSON(params);
+	}
+	function updateAddress(id){
+		var params = {};
+		params.url = "{{url('user/address')}}/"+id;
+		params.postData = dataAddress();
+		params.postType = 'PUT';
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			window.location.reload();
+		};
+		ajaxJSON(params);
+	}
+	function delAddress(id){
+		var params = {};
+		params.url = "{{url('user/address')}}/"+id;
+		params.postType = 'DELETE';
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			window.location.reload();
+		};
+		ajaxJSON(params);
+	}
+
+	function defaddrAddress(id){
+		var params = {};
+		params.url = "{{url('user/address/defaddr')}}/"+id;
+		params.postType = "post";
+		params.mustCallBack = true;// 是否必须回调
+		params.callBack = function(json) {
+			window.location.reload();
+		};
+		ajaxJSON(params);
 	}
 </script>
 @endsection

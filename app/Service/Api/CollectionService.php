@@ -33,7 +33,7 @@ class CollectionService extends BaseService
     public function getSpecialLike($specialId){
         $path  = '/api/shop/special!like.do';
         $query = array('specialId'=>$specialId);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -41,7 +41,7 @@ class CollectionService extends BaseService
     public function getSpecialUnlike($specialId){
         $path  = '/api/shop/special!unlike.do';
         $query = array('specialId'=>$specialId);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -73,7 +73,7 @@ class CollectionService extends BaseService
     public function getGoodsLike($goodsId){
         $path  = '/api/shop/goods!like.do';
         $query = array('goodsId'=>$goodsId);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 
@@ -81,7 +81,7 @@ class CollectionService extends BaseService
     public function getGoodsUnlike($goodsId){
         $path  = '/api/shop/goods!unlike.do';
         $query = array('goodsId'=>$goodsId);
-        $data = $this->http_curl($path,$query);
+        $data = $this->http_curl($path,$query,'post',true);
         return $data;
     }
 

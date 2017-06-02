@@ -17,10 +17,13 @@ class UserInfoComposer
 
     public function compose(View $view)
     {
-    	$userInfo = $this->user->getInfo(false);
-        if($userInfo){
+    	$data = $this->user->getInfo(true);
+        if($data['result'] == $this->user->CODE_SUCCESS){
+            $userInfo = $data['data'];
             $cartCount = $this->cart->getCartCount();
             $userInfo['cartCount'] = $cartCount['count'];
+        }else{
+            $userInfo = false;
         }
 		$view->with('userInfo',$userInfo);
     }

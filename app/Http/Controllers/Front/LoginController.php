@@ -26,7 +26,8 @@ class LoginController extends Controller
         $mobile = $request->input('mobile');
         $password = $request->input('password');
         $resultData = $this->service->getLogin($mobile,$password);
-        if($resultData['result'] == 1){
+
+        if($resultData['result'] == $this->service->CODE_SUCCESS){
           $this->setStoreId();
           return response()->json($resultData)->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
         }else{
@@ -36,7 +37,7 @@ class LoginController extends Controller
     }
 
     public function setStoreId(){
-        $userInfo = $this->service->getInfo(false);
+        $userInfo = $this->service->getInfo(true);
         if(empty($userInfo['storeId'])){
             $userInfo['storeId'] = config('settings.storeId');
         }

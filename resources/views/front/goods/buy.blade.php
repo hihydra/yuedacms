@@ -213,7 +213,7 @@
 </div>
 </div>
 <div class="clear"></div>
-<div style="display: none;" id="editAddress">
+<div style="display:none;" id="editAddress">
   <div class="editAddress" style="padding-top: 20px;">
     <input type="hidden" name="id">
     <div class="item">
@@ -253,7 +253,7 @@
     <div class="item">
       <span class="label">&nbsp;</span>
       <div class="info-c">
-        <a class="btn_red subAddress" href="javascript:saveAddress();">保存</a>
+        <a class="btn_red subAddress" href="javascript:void(0);">保存</a>
       </div>
     </div>
   </div>
@@ -356,40 +356,6 @@
     $('#orderCreate').submit();
   }
 
-  function dataAddress(){
-    var name = $(".editAddress input[name='name']").val();
-    var mobile = $(".editAddress input[name='mobile']").val();
-    var village = $(".editAddress input[name='village']").val();
-    var address = $(".editAddress textarea[name='address']").val();
-    var params = {'name':name,'mobile':mobile,'village':village,'address':address};
-    return params;
-  }
-
-  function saveAddress(){
-    $.post("{{url('user/address')}}",dataAddress(),function(result){
-      if(result.result == CODE_NETWORK_ERROR){
-        layer.msg(result.message);
-      }else{
-        layer.msg('添加成功');
-        window.location.reload();
-      }
-    });
-  }
-
-  function updateAddress(id){
-    $.ajax({
-      url: "{{url('user/address')}}/"+id,
-      type: 'PUT',
-      data: dataAddress(),
-      success: function(result)
-      {
-        layer.msg(result.message);
-        if(result.result == CODE_SUCCESS){
-            //window.location.reload();
-          }
-        }
-      });
-  }
   function address_model(addressId = null){
     if (addressId) {
       var title="修改收货地址";
@@ -409,8 +375,44 @@
       $(".editAddress textarea[name='address']").val($.trim($('.address_'+addressId).find('.receiverAddress').attr('data-address')));
       $(".editAddress input[name='village']").val($.trim($('.address_'+addressId).find('.receiver').attr('data-village')));
       $(".editAddress input[name='id']").val($.trim($('.address_'+addressId).find('.receiver').attr('data-id')));
-      $('.editAddress .subAddress').attr('href',"javascript:updateAddress("+addressId+");");
+      $('.editAddress .subAddress').attr('href',"javascript:window.parent.updateAddress("+addressId+");");
+    }else{
+      $('.editAddress .subAddress').attr('href',"javascript:window.parent.saveAddress();");
     }
+  }
+
+  function dataAddress(){
+    var name = $(".layui-layer-content input[name='name']").val();
+    var mobile = $(".layui-layer-content input[name='mobile']").val();
+    var village = $(".layui-layer-content input[name='village']").val();
+    var address = $(".layui-layer-content textarea[name='address']").val();
+    var params = {'name':name,'mobile':mobile,'village':village,'address':address};
+    console.log(params);
+    return params;
+  }
+
+  function saveAddress(){
+    var params = {};
+    params.url = "{{url('user/address')}}";
+    params.postData = dataAddress();
+    params.postType = "post";
+    params.mustCallBack = true;// 是否必须回调
+    params.callBack = function(json) {
+      window.location.reload();
+    };
+    ajaxJSON(params);
+  }
+
+  function updateAddress(id){
+    var params = {};
+    params.url = "{{url('user/address')}}/"+id;
+    params.postData = dataAddress();
+    params.postType = 'PUT';
+    params.mustCallBack = true;// 是否必须回调
+    params.callBack = function(json) {
+      window.location.reload();
+    };
+    ajaxJSON(params);
   }
 </script>
 @endsection

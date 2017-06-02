@@ -67,6 +67,16 @@ trait UploadTrait
         return $path;
     }
 
+    public function uploadApiImage($file)
+    {
+        $this->file = $file;
+        $this->checkAllowedExtensionsOrFail();
+
+        $path = $this->saveImageToLocal('apiImg', 1440);
+
+        return $path;
+    }
+
     protected function checkAllowedExtensionsOrFail()
     {
         $extension = strtolower($this->file->getClientOriginalExtension());
@@ -79,6 +89,8 @@ trait UploadTrait
     {
         if ($type == 'avatar') {
             $folderName =  Auth::user()->id;
+        }else if($type == 'apiImg'){
+            $folderName =  date("Ym", time()) .'/'.date("d", time());
         }else{
             $folderName =  date("Ym", time()) .'/'.date("d", time()) .'/'. Auth::user()->id;
         }
@@ -98,13 +110,14 @@ trait UploadTrait
             });
             $img->save();
         }
-*/
+
         $attributes = array('file_name'=>$clientName,
                             'file_location'=>$safeName,
                             'type'=>$type,
                             'user_id'=>Auth::user()->id);
 
-        //$this->attach->storeAttach($attributes);
+        $this->attach->storeAttach($attributes);
+*/
         return $folderName .'/'. $safeName;
     }
 }

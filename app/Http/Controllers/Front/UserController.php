@@ -6,10 +6,12 @@ use App\Service\Api\CouponService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Common\ArrayToolkit;
+use App\Traits\UploadTrait;
 use url;
 
 class UserController extends Controller
 {
+    use UploadTrait;
     protected $service;
     protected $coupon;
 
@@ -26,17 +28,10 @@ class UserController extends Controller
     }
 
     public function saveInfo(Request $request){
-        $file = $request->file('file');
-
         $data = $request->all();
         //dd($data);
         if (!empty($data['file'])) {
-            $file = $data['file'];
-            $filedir="upload/images/";
-            $imagesName=$file->getClientOriginalName();
-            $fileMove = $file->move($filedir,$imagesName);
-            $filePath = base_path().'\public\\'.str_replace('/','\\',$filedir.$imagesName);
-            //dd($filePath);
+            $filePath = $this->uploadApiImage($data['file']);
             $responseData = $this->service->getSetPic($filePath);
             //dd($responseData);
             return response()->json($responseData);

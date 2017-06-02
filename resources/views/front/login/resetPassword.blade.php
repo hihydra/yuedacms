@@ -1,16 +1,5 @@
 @extends('layouts.login')
 @section('title')找回密码-@endsection
-@section('css')
-<style type="text/css">
-	.person-code-btn{
-        margin: 0 0 0 15px;
-        padding: 7px 10px;
-        background: #fff;
-        border: 1px solid #b81b22;
-        color: #b81b22;
-    }
-</style>
-@endsection
 @section('content')
 <div class="login">
 	<div class="login1 tab-1" id="loginBlock">
@@ -49,44 +38,6 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-	function tel(){
-		var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
-		if(!myreg.test($('#tel').val()))
-		{
-			layer.msg("{{trans('front/system.phone_error')}}");
-			$('#tel').focus();
-			return false;
-		}else{
-			return true;
-		}
-	}
-	function getCode(url,mobile,obj){
-		if(tel()){
-			$.post(url,{'mobile':mobile},function(result){
-				layer.msg(result.message);
-				if(result.result == 1){
-					settime(obj);
-				}
-			});
-		}
-	}
-	var countdown=60;
-	function settime(obj) {
-		tel();
-		if (countdown == 0) {
-			obj.removeAttribute("disabled");
-			obj.value="获取验证码";
-			countdown = 60;
-			return;
-		} else {
-			obj.setAttribute("disabled", true);
-			obj.value="重新发送(" + countdown + ")";
-			countdown--;
-		}
-		setTimeout(function() {
-			settime(obj) }
-			,1000)
-	}
 	function resetPassword() {
 		var mobile = $("input[name='mobile']").val();
 		var password = $("input[name='password']").val();
@@ -97,12 +48,16 @@
 		if(validcode.length ==0){
 			layer.msg("{{trans('front/system.validcode_error')}}");return;
 		}
-		$.post("{{url('login/resetPassword_check')}}",{'mobile':mobile,'password':password,'validcode':validcode},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				location.href = "{{url('login')}}";
-			}
-		});
+
+	    var params = {};
+	    params.url = "{{url('login/resetPassword_check')}}";
+	    params.postData = {'mobile':mobile,'password':password,'validcode':validcode};
+	    params.postType = 'post';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+	       location.href = "{{url('login')}}";
+	    };
+	    ajaxJSON(params);
 	}
 </script>
 @endsection

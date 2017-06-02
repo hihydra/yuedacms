@@ -18,15 +18,21 @@ class OrderController extends Controller
     public function index(Request $request){
         $anchor = $request->input('anchor','');
         $status = $request->input('status','');
-        $orders = $this->service->getOrderList($anchor,$status);
+        if($status == 'STATUS_AFTERSALES'){
+           $orders = $this->service->getAfterSalesList($anchor);
+        }else{
+           $orders = $this->service->getOrderList($anchor,$status);
+        }
+        $counts = $this->service->getOrderCounts();
         $name = trans('front/system.order');
-        return view('front.order.list')->with(compact('orders','name'));
+        return view('front.order.list')->with(compact('orders','name','counts'));
     }
 
     public function show($sn){
         $result = $this->service->getOrderDetail($sn);
         $result['expressInfo'] = $this->service->getOrderExpressInfo($sn);
         $result['name'] = trans('front/system.orderDetail');
+        //dd($result);
         return view('front.order.show')->with($result);
     }
 
@@ -58,8 +64,8 @@ class OrderController extends Controller
     }
 
     public function rogConfirm($sn){
-        $this->service->getRogConfirm($sn);
-        return redirect('front.address.index');
+        $responseData = $this->service->getRogConfirm($sn);
+        return response()->json($responseData);
     }
 
 }

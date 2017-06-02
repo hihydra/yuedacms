@@ -61,8 +61,8 @@ em{ font-style:normal;}
 .hot-list{ margin-top:20px;}
 .hot-list ul li{ width:380px; float:left; margin:0 16px 30px 0;}
 .hot-list ul li .book{ float:left;}
-.hot-list ul li .book a img{box-shadow: 0 1px 10px #b0b0b0; width:86px; height:122px;}
-.hot-list ul li .info{ margin:0 0 0 110px;}
+.hot-list ul li .book a img{box-shadow: 0 1px 10px #b0b0b0; width:120px; height:120px;}
+.hot-list ul li .info{ margin:0 0 0 135px;}
 .hot-list ul li .info .tittle{ font-size:16px; height:22px; overflow:hidden; display:block;}
 .hot-list ul li .info .author{ color:#999; font-size:12px; height:24px; overflow:hidden;}
 .hot-list ul li .info .desc{ line-height:18px; padding:2px 0; height:36px; overflow:hidden;}
@@ -227,10 +227,10 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .b-org .b-org-li a i{ font-size:28px; font-style:normal;}
 .choose-btns{ margin-top:10px;}
 .wrap-input{ position:relative; border:1px solid #ccc; width:60px; height:34px; float:left;}
-.wrap-input .btn-add{ top:-1px; right:-1px;}
-.wrap-input .btn-reduce{ bottom:-1px; right:-1px;}
-.wrap-input a{ position:absolute; background:#f1f1f1; border:1px solid #ccc; height:17px; line-height:15px; width:15px; text-align:center; color:#666;}
-.wrap-input .buy-num{ height:32px; line-height:32px; width:40px; border:0; text-align:center;}
+.wrap-input .decrease{ top:-1px; right:-1px;}
+.wrap-input .increase{ bottom:-1px; right:-1px;}
+.wrap-input span{ position:absolute; background:#f1f1f1; border:1px solid #ccc; height:17px; line-height:15px; width:15px; text-align:center; color:#666;}
+.wrap-input input{ height:32px; line-height:32px; width:40px; border:0; text-align:center;}
 .btn-append{ float:left; margin-left:20px; height:35px; line-height:32px; background:#e2393c; color:#fff; padding:0 20px; border-radius:3px; font-weight:bold;}
 .j-main .ic-info{ margin-top:10px; position:relative; left:-6px; height:32px;}
 .j-main .ic-info li{ float:left; padding:0 10px;}

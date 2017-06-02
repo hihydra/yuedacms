@@ -33,12 +33,15 @@
 		if($("textarea[name='content']").val().length==0 || $("input[name='mobile']").val().length==0){
 			layer.msg("{{trans('front/system.suggest_error')}}");return;
 		}
-		$.post("{{url('user/ajaxSuggestSave')}}",{'content':$("textarea[name='content']").val(),'mobile':$("input[name='mobile']").val()},function(result){
-			layer.msg(result.message);
-			if(result.result == 1){
-				 window.location.reload();
-			}
-		});
+		var params = {};
+	    params.url = "{{url('user/ajaxSuggestSave')}}";
+	    params.postData = {'content':$("textarea[name='content']").val(),'mobile':$("input[name='mobile']").val()};
+	    params.postType = 'post';
+	    params.mustCallBack = true;// 是否必须回调
+	    params.callBack = function(json) {
+	      window.location.reload();
+	    };
+	    ajaxJSON(params);
 	}
 </script>
 @endsection
