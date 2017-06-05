@@ -1,4 +1,4 @@
-(function($){
+﻿(function($){
 $.extend({
 ms_DatePicker: function (options) {
             var defaults = {
@@ -34,6 +34,7 @@ ms_DatePicker: function (options) {
 			var monthSel = $MonthSelector.attr("rel");
             for (var i = 1; i <= 12; i++) {
 				var sed = monthSel==i?"selected":"";
+				if(i.toString().length ==1 ){ i = '0'+i;}
                 var monthStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
                 $MonthSelector.append(monthStr);
             }
@@ -77,6 +78,7 @@ ms_DatePicker: function (options) {
 					var daySel = $DaySelector.attr("rel");
                     for (var i = 1; i <= dayCount; i++) {
 						var sed = daySel==i?"selected":"";
+						if(i.toString().length ==1 ){ i = '0'+i;}
 						var dayStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
                         $DaySelector.append(dayStr);
                     }

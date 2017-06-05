@@ -29,22 +29,23 @@ class UserController extends Controller
 
     public function saveInfo(Request $request){
         $data = $request->all();
-        //dd($data);
         if (!empty($data['file'])) {
-            $filePath = $this->uploadApiImage($data['file']);
-            $responseData = $this->service->getSetPic($filePath);
-            //dd($responseData);
-            return response()->json($responseData);
+            if($data['w']){
+                $crop = array_only($data,['w','h','x','y']);
+            }else{
+                $crop = '';
+            }
+
+            $filePath = $this->uploadApiImage($data['file'],$crop);
+            $filePath = base_path().'\public'.str_replace('/','\\',$filePath);
+            $this->service->getSetPic($filePath);
         }
         $superiorCode = $request->input('superiorCode');
         if(!empty($superiorCode)){
             $responseData = $this->service->bindSuperior($superiorCode);
-            if($responseData['result'] != 1){
-                return response()->json($responseData);
-            }
         }
         $responseData = $this->service->getSaveInfo($request->all());
-        return response()->json($responseData);
+        return redirect('user');
     }
 
     public function safe(){

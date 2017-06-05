@@ -67,12 +67,12 @@ trait UploadTrait
         return $path;
     }
 
-    public function uploadApiImage($file)
+    public function uploadApiImage($file,$crop='')
     {
         $this->file = $file;
         $this->checkAllowedExtensionsOrFail();
 
-        $path = $this->saveImageToLocal('apiImg', 1440);
+        $path = $this->saveImageToLocal('apiImg', 1440,'',$crop);
 
         return $path;
     }
@@ -85,12 +85,12 @@ trait UploadTrait
         }
     }
 
-    protected function saveImageToLocal($type, $resize, $filename = '')
+    protected function saveImageToLocal($type, $resize, $filename = '',$crop = '')
     {
         if ($type == 'avatar') {
             $folderName =  Auth::user()->id;
         }else if($type == 'apiImg'){
-            $folderName =  date("Ym", time()) .'/'.date("d", time());
+            $folderName = '';
         }else{
             $folderName =  date("Ym", time()) .'/'.date("d", time()) .'/'. Auth::user()->id;
         }
@@ -99,8 +99,15 @@ trait UploadTrait
         $destinationPath = public_path().$folderName;
 
         $clientName = $this->file->getClientOriginalName();
+
         $safeName  = $filename ? :md5($clientName.time().rand()).'.'.$this->file->getClientOriginalExtension();
-        $this->file->move($destinationPath, $safeName);
+
+        if ($crop) {
+             Image::make($this->file)->crop($crop['w'],$crop['h'],$crop['x'],$crop['y'])->save($destinationPath.$safeName);
+        }else{
+            $this->file->move($destinationPath, $safeName);
+        }
+
 /*
         if ($this->file->getClientOriginalExtension() != 'gif') {
             $img = Image::make($destinationPath . '/' . $safeName);

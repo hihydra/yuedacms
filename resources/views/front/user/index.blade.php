@@ -53,6 +53,7 @@
 						<label class="ml">月</label>
 						<select class="selt sel_day"  name="day" rel="{{date('d',$birthday)}}"> </select>
 						<label class="ml">日</label>
+						<input type="hidden" name="birthday">
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -102,9 +103,9 @@
 						<input type="hidden" id="y" name="y">
 						<input type="hidden" id="w" name="w">
 						<input type="hidden" id="h" name="h">
-						<input type="file" class="photo-input UploadImg" name="file" accept="image/*" style="left:0; top:0; width:175px; height:45px;">
+						<input type="file" class="photo-input UploadImg" name="file" style="left:0; top:0; width:175px; height:45px;">
 						<a class="Btn btn_blue">&nbsp;</a>
-						<div style="padding:5px; border:1px solid #f1f1f1; width:200px;" class="item left previewPic"><img src="{{asset('front/img/face.jpg')}}" style="width:100%;" id="cropbox"></div>
+						<div style="padding:5px; border:1px solid #f1f1f1;" class="item left previewPic"><img src="{{{$face or asset('front/img/face.png')}}}" style="width:100%;" id="cropbox"></div>
 					</div>
 					<div class="clear"></div>
 					<div class="item">
@@ -123,7 +124,6 @@
 <script type="text/javascript" src="{{asset('vendors/jquery.inputbox/jquery.inputbox.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/birthday/birthday.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/Jcrop/js/jquery.Jcrop.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('vendors/jquery.ajaxupload/jquery.ajaxupload.js')}}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".jdradio[value='{{$sex}}']").attr("checked",'checked');
@@ -201,16 +201,19 @@
 	function saveInfo(){
 		var nickname = $("input[name='nickname']").val();
 		var sex = $("input[name='sex']:checked").val();
+		var superiorCode = $("input[name='superiorCode']").val();
+
 		var year = $("select[name='year'] option:selected").val();
 		var month = $("select[name='month'] option:selected").val();
 		var day = $("select[name='day'] option:selected").val();
-		var superiorCode = $("input[name='superiorCode']").val();
+
 		if(nickname.length==0){
 			layer.msg("{{trans('front/system.nickname_error')}}");return;
 		}
 		if(year.length!=0 && month.length!=0 && day.length!=0){
 			var date = new Date(year+'/'+month+'/'+day);
 			var birthday = date.getTime()/1000;
+			$("input[name='birthday']").val(birthday);
 		}
 		$('#saveInfo').submit();
 		/*

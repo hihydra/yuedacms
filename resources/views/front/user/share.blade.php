@@ -9,36 +9,21 @@
 		<div style="width:930px; margin:10px 0 10px 0;">
 			<ul class="pay-ul-1">
 				<li>
-					<a class="left" href="#"><img src="{{asset('front/img/icon_Qzone.png')}}" /></a>
+					<a class="left"><img src="{{asset('front/img/icon_Qzone.png')}}" /></a>
 					<div class="left">
 						<span>QQ空间</span>
-						<div class="info-c"><a class="btn_red" href="#">立刻分享</a></div>
+						<div class="info-c"><a class="btn_red" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{url('/')}}&title={{$settings['title']}}">立刻分享</a></div>
 					</div>
 				</li>
 				<li>
-					<a class="left" href="#"><img src="{{asset('front/img/social-wechat.png')}}" /></a>
-					<span>微信好友</span>
-					<div class="info-c"><a class="btn_red" href="#">立刻分享</a></div>
-				</li>
-				<li>
-					<a class="left" href="#"><img src="{{asset('front/img/social-pengyou.png')}}" /></a>
-					<span>微信朋友圈</span>
-					<div class="info-c"><a class="btn_red" href="#">立刻分享</a></div>
-				</li>
-				<li>
-					<a class="left" href="#"><img src="{{asset('front/img/social-qq.png')}}" /></a>
+					<a class="left"><img src="{{asset('front/img/social-qq.png')}}" /></a>
 					<span>QQ好友</span>
-					<div class="info-c"><a class="btn_red" href="#">立刻分享</a></div>
+					<div class="info-c"><a class="btn_red" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url={{url('/')}}&title={{$settings['title']}}">立刻分享</a></div>
 				</li>
 				<li>
-					<a class="left" href="#"><img src="{{asset('front/img/social-weibo.png')}}" /></a>
+					<a class="left"><img src="{{asset('front/img/social-weibo.png')}}" /></a>
 					<span>新浪微博</span>
-					<div class="info-c"><a class="btn_red" href="#">立刻分享</a></div>
-				</li>
-				<li>
-					<a class="left" href="#"><img src="{{asset('front/img/more.png')}}" /></a>
-					<span>更多</span>
-					<div class="info-c"><a class="btn_red" href="#">立刻分享</a></div>
+					<div class="info-c"><a class="btn_red" target="_blank" href="http://service.weibo.com/share/share.php?url={{url('/')}}&title={{$settings['title']}}">立刻分享</a></div>
 				</li>
 			</ul>
 			<div class="clear"></div>

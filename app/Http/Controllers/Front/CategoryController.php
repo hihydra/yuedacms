@@ -29,6 +29,7 @@ class CategoryController extends Controller
         $goodsList = $this->service->getGoodsList($storeId,$catId,$anchor,$keyword,$sort,$isAsc);
 
         $urlPath = compact('storeId','catId','keyword','anchor','sort','isAsc');
+
         if ($keyword) {
             $name = trans('front/system.search');
             return view('front.search.index')->with(compact('catList','goodsList','urlPath','name'));

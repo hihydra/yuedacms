@@ -115,6 +115,8 @@ return [
 
     ],
 
+    'pagenum' => 10,
+
     'defaultImg' => 'front/img/default/default.jpg',
 
     'storeId' => '47',

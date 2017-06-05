@@ -121,8 +121,9 @@ class UserService extends BaseService
     //设置用户头像
     public function getSetPic($filePath){
         $path  = '/api/shop/personInfo!setPic.do';
-        $query = array('file'=>curl_file_create($filePath,'image/jpeg'));
-        $data = $this->http_curl($path,$query,"post");
+        $query[] = array('name'=>'file','contents'=>fopen($filePath, "r"));
+        $data = $this->http_curl($path,$query,"post",null,null,'multipart');
+        unlink($filePath);
         return $data;
     }
 

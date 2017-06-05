@@ -176,6 +176,7 @@ return [
         Vinkla\Hashids\HashidsServiceProvider::class,//加密
         Krucas\Settings\Providers\SettingsServiceProvider::class,//setting
         Baum\Providers\BaumServiceProvider::class,//无限分类扩展
+        Intervention\Image\ImageServiceProvider::class,//图片处理
 
 
         /*
@@ -236,6 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Settings' => Krucas\Settings\Facades\Settings::class,//setting
+        'Image' => Intervention\Image\Facades\Image::class//图片处理
     ],
 
 ];
