@@ -18,14 +18,15 @@ class OrderController extends Controller
     public function index(Request $request){
         $anchor = $request->input('anchor','');
         $status = $request->input('status','');
-        if($status == 'STATUS_AFTERSALES'){
-           $orders = $this->service->getAfterSalesList($anchor);
-        }else{
-           $orders = $this->service->getOrderList($anchor,$status);
-        }
         $counts = $this->service->getOrderCounts();
         $name = trans('front/system.order');
-        return view('front.order.list')->with(compact('orders','name','counts'));
+        if($status == 'STATUS_AFTERSALES'){
+           $orders = $this->service->getAfterSalesList($anchor);
+           return view('front.order.afterSales')->with(compact('orders','name','counts'));
+        }else{
+           $orders = $this->service->getOrderList($anchor,$status);
+           return view('front.order.list')->with(compact('orders','name','counts'));
+        }
     }
 
     public function show($sn){
@@ -51,6 +52,12 @@ class OrderController extends Controller
         parse_str(preg_replace('/\"/', '', $payInfoData['payInfo']));
         $paylink = $this->service->getPayLink($snLs);
         return view('front.order.pay')->with(compact('paylink','name','total_fee'));
+    }
+
+    public function afterSalesDetail($id){
+        $data = $this->service->getAfterSalesDetail($id);
+        $data['name'] = trans('front/system.afterSalesDetail');
+        return view('front.order.afterSalesDetail')->with($data);
     }
 
     public function ajaxCancel($sn){

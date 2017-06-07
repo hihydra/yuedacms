@@ -68,6 +68,7 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+	 @include('layouts.partials.pagination')
 	<div class="clear"></div>
 </div>
 <div class="clear"></div>

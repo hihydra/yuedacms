@@ -108,10 +108,44 @@ if(!function_exists('orderStatus')){
 			case 'STATUS_CANCEL':
 				return '已取消';
 				break;
+			case 'STATUS_WAITING':
+				return '待退款';
+				break;
+			case 'STATUS_SUCCESS':
+				return '已退款';
+				break;
+			case 'STATUS_FAIL':
+				return '退款失败';
+				break;
 		}
 	}
 }
-
+if(!function_exists('reason')){
+	function reason($type)
+	{
+		switch ($type) {
+			case 'REASON_CANCEL':
+				return '订单取消';
+				break;
+			case 'REASON_MODIFY':
+				return '订单修改';
+				break;
+		}
+	}
+}
+if(!function_exists('refundType')){
+	function refundType($type)
+	{
+		switch ($type) {
+			case 'TYPE_WX':
+				return '微信';
+				break;
+			case 'TYPE_ZFB':
+				return '支付宝';
+				break;
+		}
+	}
+}
 
 if(!function_exists('paymentType')){
 	function paymentType($type)

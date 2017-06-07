@@ -35,6 +35,14 @@ class OrderService extends BaseService
         return $data;
     }
 
+    //获取“退款详情”、“钱款去向”
+    public function getAfterSalesDetail($id){
+        $path  = '/api/shop/order!afterSalesDetail.do';
+        $query = array('id'=>$id);
+        $data = $this->http_curl($path,$query);
+        return $data;
+    }
+
     //获取物流信息
     public function getOrderExpressInfo($sn){
         $path  = '/api/shop/order!expressInfo.do';

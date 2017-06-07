@@ -8,7 +8,6 @@
       <li><a href="{{url('user/address')}}">收货地址</a></li>
 			<li><a href="{{url('user/share')}}">分享应用</a></li>
 			<li><a href="{{url('user/suggest')}}">意见反馈</a></li>
-			<li><a href="#">关于</a></li>
 		</ul>
 	</div>
 </div>

@@ -40,12 +40,7 @@
   </div>
 </div>
 
-<!--分页-->
-<div class="pages">
-  <a class="prev  icon-disable1" href="#"><b></b>上一页</a><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a>
-  <i>...</i><a class="last" href="#">212</a><a class="next" href="#">下一页<b></b></a>
-  <span class="go_page">去第<input id="go_page_input" class="input_02 g_ipt" name="" type="text">页 <input name="" class="p_go" value="GO" id="go_page_btn" type="button"></span>
-</div>
+ @include('layouts.partials.pagination')
 <div class="clear"></div>
 </div>
 <div class="clear"></div>

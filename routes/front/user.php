@@ -21,7 +21,7 @@ $router->group(['prefix' => 'user','middleware' => ['isLogin']],function ($route
 	$router->get('goods','CollectionController@goods');
 	$router->post('ajaxGoodsLike/{goodsId}','CollectionController@ajaxGoodsLike')->name('collection.ajaxGoodsLike');
 	$router->post('ajaxGoodsUnlike/{goodsId}','CollectionController@ajaxGoodsUnlike')->name('collection.ajaxGoodsUnlike');
-	$router->get('special','CollectionController@special');
+	$router->get('goods/special','CollectionController@special');
 	$router->post('ajaxSpecialLike/{specialId}','CollectionController@ajaxSpecialLike')->name('collection.ajaxSpecialLike');
 	$router->post('ajaxSpecialUnlike/{specialId}','CollectionController@ajaxSpecialUnlike')->name('collection.ajaxSpecialUnlike');
 });

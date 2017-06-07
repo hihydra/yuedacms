@@ -30,6 +30,7 @@ return [
 	'expireCoupons'  => '过期礼券',
 	'address'   =>  '收货地址',
 	'pay'       => '付款',
+	'afterSalesDetail'=> '退款详情',
 
 
 

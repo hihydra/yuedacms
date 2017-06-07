@@ -31,10 +31,11 @@
 				<tr id="div_order_{{$order['sn']}}" style="height:70px;">
 					<td>{{$order['sn']}}</td>
 					<td class="book">
-						@php $item = array_first($order['items']); @endphp
-						<p><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></p>
+						@foreach($order['items'] as $key=>$item)
+						<p @if($key>0)style="display:none;"@endif><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></p>
+						@endforeach
 						@if(count($order['items'])>1)
-						<p style="padding-top: 8px;color: #999;">查看所有>></p>
+						<p style="padding-top: 8px;color: #999;" class="seeAll">查看所有>></p>
 						@endif
 					</td>
 					<td>￥{{$order['needPayMoney']}}</td>
@@ -60,12 +61,7 @@
 			</tbody></table>
 		</div>
 	</div>
-	<!--分页-->
-	<div class="pages">
-		<a class="prev  icon-disable1" href="#"><b></b>上一页</a><strong>1</strong><a href="#">2</a><a href="#">3</a><a href="#">4</a>
-		<i>...</i><a class="last" href="#">212</a><a class="next" href="#">下一页<b></b></a>
-		<span class="go_page">去第<input id="go_page_input" class="input_02 g_ipt" name="" type="text">页 <input name="" class="p_go" value="GO" id="go_page_btn" type="button"></span>
-	</div>
+ @include('layouts.partials.pagination')
 
 </div>
 <div class="clear"></div>
@@ -85,45 +81,10 @@
         }
       })
       if (!urlstatus) {$(".second-menu ul li a").eq(0).addClass('hover'); }
+      $(".seeAll").click(function(){
+      	$(this).parent().find('p').show();
+      	$(this).hide();
+      })
     });
-	function orderCancel(sn){
-		layer.confirm("确认取消订单?", function()
-		{
-			var params = {};
-			params.url = "{{url('order/ajaxCancel')}}/"+sn;
-			params.postType = "post";
-			params.mustCallBack = true;// 是否必须回调
-			params.callBack = function(json) {
-				window.location.reload();
-			};
-			ajaxJSON(params);
-		});
-	}
-	function orderDelete(sn){
-		layer.confirm("确认删除订单?", function()
-		{
-			var params = {};
-			params.url = "{{url('order/ajaxDelete')}}/"+sn;
-			params.postType = "post";
-			params.mustCallBack = true;// 是否必须回调
-			params.callBack = function(json) {
-				$("#div_order_"+sn).remove();
-			};
-			ajaxJSON(params);
-		});
-	}
-	function rogConfirm(sn){
-		layer.confirm("请在收到商品后,确认收货！", function()
-		{
-			var params = {};
-			params.url = "{{url('order/rogConfirm')}}/"+sn;
-			params.postType = "post";
-			params.mustCallBack = true;// 是否必须回调
-			params.callBack = function(json) {
-				window.location.reload();
-			};
-			ajaxJSON(params);
-		});
-	}
 </script>
 @endsection
