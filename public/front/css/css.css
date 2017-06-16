@@ -11,7 +11,7 @@ em{ font-style:normal;}
 .right{ float:right;}
 .clear{ padding:0; margin:0; clear:both; height:0;}
 /*top*/
-.top{ border-bottom:2px solid #eee; position:fixed; left:0; top:0; background:#fff; width:100%; z-index:99;}
+.top{ border-bottom:2px solid #eee; position:fixed; left:0; top:0; background:#fff; width:100%; z-index:9999;}
 .top-center{ height:78px; width:1200px; margin:0 auto;}
 .top-center .logo{ margin:10px 0 0 0; float:left;}
 .top-center .nav{ float:left; position:relative; z-index:1000; margin-left:15px;}
@@ -124,6 +124,7 @@ em{ font-style:normal;}
 .Recommend-list{ margin-top:20px; position:relative;}
 .Recommend-list ul li{ width:155px; float:left; margin:0 10px 20px;}
 .Recommend-list ul li .book{padding-bottom:8px; text-align:center; position:relative;}
+.Recommend-list ul li .book i img{ position:absolute; /*left:24px; */top:0; width:40px;}
 .Recommend-list ul li .book a img{box-shadow: 0 1px 10px #b0b0b0; width:146px; height:146px;}
 .Recommend-list ul li .book a.tittle{ width:110px; font-size:14px; line-height:20px; display:inline-block; margin-top:10px; word-break:break-all; word-wrap:break-word; height:40px; text-align:left;}
 .Recommend-list ul li .info{ position:relative;}

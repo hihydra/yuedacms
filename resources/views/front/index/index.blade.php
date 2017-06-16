@@ -73,7 +73,7 @@
 					@php if($key>3){break;} @endphp
 					<li>
 						<div class="book">
-							<a href="#"><img src="{{$recommend['thumbUrl']}}" /></a>
+							<a href="{{url('goods/'.$recommend['id'])}}"><img src="{{$recommend['thumbUrl']}}" /></a>
 						</div>
 						<div class="info">
 							<div class="wrap">

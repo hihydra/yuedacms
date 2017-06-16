@@ -42,6 +42,9 @@
        @foreach($goodsList['datas'] as $good)
        <li>
         <div class="book">
+          @if($good['isNew'])
+          <i><img src="{{asset('front/img/new.png')}}"></i>
+          @endif
           <a href="{{url('goods/'.$good['id'])}}"><img src="{{{$good['thumbUrl'] or defaultImg()}}}" /></a>
           <a href="{{url('goods/'.$good['id'])}}" class="tittle">{{str_limit($good['name'], $limit = 25, $end = '...')}}</a>
         </div>
