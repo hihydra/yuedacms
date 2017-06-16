@@ -105,7 +105,7 @@
     <tbody>
       <tr class="tbg">
         <td class="cl06"></td>
-        <td><i><img src="{{asset('front/img/dianpu.png')}}" width="15px;"></i> {{$storeName}}</td>
+        <td><i><img src="{{asset('front/img/dianpu.png')}}" width="15px;"></i> {{$storeName}} <span style="padding-left:30px;">订单号：{{$sn}}</span></td>
         <td class="cl04">数量</td>
         <td class="cl03">小计</td>
       </tr>

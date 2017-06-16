@@ -30,6 +30,7 @@ class ShowcaseController extends Controller
                 $name = trans('front/system.special');
                 break;
         }
+       //dd(compact('goods','name','type'));
     	return view('front.showcase.list')->with(compact('goods','name','type'));
     }
 }

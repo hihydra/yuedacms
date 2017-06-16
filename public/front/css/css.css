@@ -322,7 +322,7 @@ input[type="radio"]{ margin-right:3px; vertical-align:-2px;}
 .info-c .qx{ color:#999; font-size:12px; line-height:28px; margin-left:15px;}
 .photo-input{ position:absolute; cursor:pointer; opacity:0;}
 .btn_blue{ width:175px;  height:45px;  display:block; margin-bottom:10px; background:url(../img/sc-btn.jpg) no-repeat;}
-.item{ margin-bottom:10px;}
+.item{ margin-bottom:10px;padding-top: 10px;}
 .item span.label{ float:left; height:18px; line-height:18px; padding:6px 0; width:120px; text-align:right;}
 .item em{ color:#e4593c;}
 .itxt{ height:18px; width:127px; padding:5px 23px 5px 5px;}
@@ -427,3 +427,22 @@ span.c-type-r { margin: 0;}
 .QR-tt .fr ul li.apple a{ width:173px; height:49px; display:inline-block;}
 .QR-tt .fr ul li.Android{width:173px; height:49px; background:url(../img/button-down.png) no-repeat -10px -51px;}
 .QR-tt .fr ul li.Android a{width:173px; height:49px; display:inline-block;}
+
+/*买家评论*/
+.img-list-ul{ display:block;}
+.img-lists li{ position:relative; float:left; width:60px; height:60px; border:1px solid #f0f0f0; margin-right:10px; overflow:hidden; background:#f0f0f0;}
+.img-list-ul .add-img-btn{ float:left; height:58px; width:58px; line-height:58px; margin-right:10px; text-align:center; border:1px solid #ccc; background-color:#fff;}
+.img-list-ul .add-img-btn b{ display:inline-block; position:absolute; width:20px; height:20px; overflow:hidden; vertical-align:middle; background:url(../img/arbn-icons.png) no-repeat; top:18px; left:18px;}
+.btn_red_01{ width:78px; height:28px; line-height:28px; color:#fff; background:#ef6668; display:block; border-radius: 5px; margin:0 auto 0; float:left; text-align:center;}
+.g-star{ width:85px; height:22px; background:url(../img/commentsListIcons1.png) no-repeat;}
+.left .g-star{ margin-top:8px;}
+.score{ padding:5px;}
+.score li{ float:left; padding-right:5px;}
+.score li a img{ width:20px;}
+.g-star1{ background-position:-17px 0;}
+.g-star2{ background-position:-34px 0;}
+.g-star3{ background-position:-51px 0;}
+.g-star4{ background-position:-68px 0;}
+.Figure li{ float:left; padding:10px 0; padding-right:15px; position:relative;}
+.Figure li a.close{ position:absolute; top:0; right:3px;}
+.Figure .item .left{ width:900px;}

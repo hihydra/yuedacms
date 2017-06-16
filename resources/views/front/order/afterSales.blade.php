@@ -73,44 +73,5 @@
       	$(this).hide();
       })
     });
-	function orderCancel(sn){
-		layer.confirm("确认取消订单?", function()
-		{
-			var params = {};
-			params.url = "{{url('order/ajaxCancel')}}/"+sn;
-			params.postType = "post";
-			params.mustCallBack = true;// 是否必须回调
-			params.callBack = function(json) {
-				window.location.reload();
-			};
-			ajaxJSON(params);
-		});
-	}
-	function orderDelete(sn){
-		layer.confirm("确认删除订单?", function()
-		{
-			var params = {};
-			params.url = "{{url('order/ajaxDelete')}}/"+sn;
-			params.postType = "post";
-			params.mustCallBack = true;// 是否必须回调
-			params.callBack = function(json) {
-				$("#div_order_"+sn).remove();
-			};
-			ajaxJSON(params);
-		});
-	}
-	function rogConfirm(sn){
-		layer.confirm("请在收到商品后,确认收货！", function()
-		{
-			var params = {};
-			params.url = "{{url('order/rogConfirm')}}/"+sn;
-			params.postType = "post";
-			params.mustCallBack = true;// 是否必须回调
-			params.callBack = function(json) {
-				window.location.reload();
-			};
-			ajaxJSON(params);
-		});
-	}
 </script>
 @endsection

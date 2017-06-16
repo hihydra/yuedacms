@@ -36,7 +36,7 @@ class BaseService
                 }
                 if($cookie&&$body['result']==$this->CODE_SUCCESS){
                     $cookie_data = $response->getHeader('Set-Cookie');
-                    $body['API_SESSIONID'] = array_first($cookie_data);
+                    $body[$this->api_sessionid] = array_first($cookie_data);
                 }
                 return $body;
             }else{

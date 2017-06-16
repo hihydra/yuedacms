@@ -33,7 +33,6 @@ class OrderController extends Controller
         $result = $this->service->getOrderDetail($sn);
         $result['expressInfo'] = $this->service->getOrderExpressInfo($sn);
         $result['name'] = trans('front/system.orderDetail');
-        //dd($result);
         return view('front.order.show')->with($result);
     }
 
@@ -60,6 +59,12 @@ class OrderController extends Controller
         return view('front.order.afterSalesDetail')->with($data);
     }
 
+    public function comment($orderId){
+        $items = $this->service->getWaitCommentGoods($orderId);
+        $name = trans('front/system.comment');
+        return view('front.order.comment')->with(compact('items','name','orderId'));
+    }
+
     public function ajaxCancel($sn){
         $responseData = $this->service->getOrderCancel($sn);
         return response()->json($responseData);
@@ -72,6 +77,11 @@ class OrderController extends Controller
 
     public function rogConfirm($sn){
         $responseData = $this->service->getRogConfirm($sn);
+        return response()->json($responseData);
+    }
+
+    public function commentAdd(Request $request){
+        $responseData = $this->service->getCommentAdd($request->all());
         return response()->json($responseData);
     }
 

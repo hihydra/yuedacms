@@ -13,6 +13,7 @@ return [
 	'order'     => '我的书店',
 	'store'     => '切换门店',
 	'orderDetail'  =>  '订单详情',
+	'comment'  =>  '商品评价',
 	'goods'     => '确认订单',
 	'freeShipping' => '本店购物满59元包邮，不满59元收取运费10元',
 	'personal' => '个人中心',
@@ -46,5 +47,6 @@ return [
 	'mobile_validcode_error' => '手机号和验证码不能为空',
 	'buyCart_error' => '您还没选择商品!',
 	'receipt_error'=>'发票抬头不能为空',
+	'comment_content_error' => '评论内容不能为空',
 
 ];

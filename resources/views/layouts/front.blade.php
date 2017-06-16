@@ -36,7 +36,7 @@ $storeId = getStoreId();
         <form action="{{url('category')}}" method="get">
           <div class="s-bg">
             <div class="s-btn right">
-              <input class="s-seek"  type="button" />
+              <input class="s-seek"  type="submit" value=""/>
             </div>
             <div class="s-input left">
               <input type="text" placeholder="请输入搜索内容" name="keyword" value=""/>
@@ -89,7 +89,6 @@ $storeId = getStoreId();
             <li><a href="{{url('user/address')}}">收货地址</a></li>
             <li><a href="{{url('user/share')}}">分享应用</a></li>
             <li><a href="{{url('user/suggest')}}">意见反馈</a></li>
-            <li><a href="#">关于</a></li>
             <li><a href="{{url('login_out')}}">退出</a></li>
           </ul>
         </div>
@@ -122,7 +121,7 @@ $storeId = getStoreId();
       <a href="#">关于我们</a><span>|</span>
       <a href="#">联系我们</a><span>|</span>
       <a href="#">商务合作</a><span>|</span>
-      <a href="#">我的智慧书店</a>
+      <a href="{{url('order')}}">我的智慧书店</a>
     </div>
     <div class="foot-ul">
       <span>客服电话：{{$settings['contact_us']}}</span>

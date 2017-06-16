@@ -12,7 +12,7 @@
 			<div class="table_card">
 				<ul class="tab">
 					@foreach($storeList as $key=>$value)
-					<li>{{$key}}</li>
+					<li title="{{$key}}">{{str_limit($key, $limit = 15, $end = '...')}}</li>
 					@endforeach
 				</ul>
 				<div class="tabCon">

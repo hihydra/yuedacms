@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         if($resultData['result'] == $this->service->CODE_SUCCESS){
           $this->setStoreId();
-          return response()->json($resultData)->withCookie('API_SESSIONID',$resultData['API_SESSIONID']);
+          return response()->json($resultData)->withCookie($this->service->api_sessionid,$resultData[$this->service->api_sessionid]);
         }else{
           return response()->json($resultData);
         }
@@ -67,6 +67,6 @@ class LoginController extends Controller
 
     //退出登陆
     public function login_out(){
-       return redirect('login')->withCookie(cookie()->forget('API_SESSIONID'));
+       return redirect('login')->withCookie(cookie()->forget($this->service->api_sessionid));
     }
 }

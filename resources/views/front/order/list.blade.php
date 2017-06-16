@@ -1,6 +1,14 @@
 @extends('layouts.front')
 @section('title'){{$name}}-@endsection
 @inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
+@section('css')
+<style type="text/css">
+	.perTable{border-bottom:1px solid #eee;}
+	.perTable tr td{border-bottom:none;}
+	.perTable .parameter{border-left:1px solid #eee;}
+	.perTable .goods{border-bottom:1px solid #eee;}
+</style>
+@endsection
 @section('content')
 <div class="M1" style="margin-top:10px;">
 	@include('front.share.crumb',['name'=>$name])
@@ -17,51 +25,53 @@
 	</div>
 	<div class="TabContent">
 		<div id="myTab0_Content0">
+			@foreach($orders['datas'] as $order)
 			<table class="perTable" cellspacing="0" cellpadding="0">
 				<tbody><tr>
-					<th width="130">订单号</th>
-					<th>商品</th>
+					<th width="600"><i><img src="{{asset('front/img/dianpu.png')}}" width="15px;"></i>  {{$order['storeName']}} <span style="padding-left:30px;">订单号：{{$order['sn']}}</span></th>
 					<th>金额</th>
-					<th>门店</th>
+					<th width="80">合计</th>
 					<th width="80">付款类型</th>
 					<th width="80">订单状态</th>
 					<th width="80">操作</th>
 				</tr>
-				@foreach($orders['datas'] as $order)
+				@foreach($order['items'] as $key=>$item)
 				<tr id="div_order_{{$order['sn']}}" style="height:70px;">
-					<td>{{$order['sn']}}</td>
-					<td class="book">
-						@foreach($order['items'] as $key=>$item)
-						<p @if($key>0)style="display:none;"@endif><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></p>
-						@endforeach
-						@if(count($order['items'])>1)
-						<p style="padding-top: 8px;color: #999;" class="seeAll">查看所有>></p>
-						@endif
+					<td class="goods bif">
+						<a href="{{url('goods/'.$item['goodsId'])}}" class="img"><img src="{{$item['image']}}"></a>
+						<div class="info"><h4><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></h4></div>
 					</td>
-					<td>￥{{$order['needPayMoney']}}</td>
-					<td class="date">{{$order['storeName']}}</td>
-					<td>{{paymentType($order['paymentType'])}}</td>
-					<td>{{orderStatus($order['status'])}}</td>
-					<td class="operation">
+					<td class="goods price">￥{{$item['price']}}</td>
+					@if($key == 0)
+					@php $num =  count($order['items']); @endphp
+					<td class="parameter" rowspan="{{$num}}">￥{{$order['needPayMoney']}}<br>共{{$num}}件商品</td>
+					<td class="parameter" rowspan="{{$num}}">{{paymentType($order['paymentType'])}}</td>
+					<td class="parameter" rowspan="{{$num}}">{{orderStatus($order['status'])}}</td>
+					<td class="parameter" rowspan="{{$num}}" class="operation">
 						@if($order['status'] == 'STATUS_NOT_PAY')
-						<a class=" btn_red_01" target="_blank" href="{{URL::route('order.pay',['snLs[]'=>$order['sn']])}}">付款</a>
-						<a class="btn_cancel slink" href="javascript:orderCancel('{{$order['sn']}}');">取消订单</a>
+						<a class="btn_red_01" target="_blank" href="{{URL::route('order.pay',['snLs[]'=>$order['sn']])}}">付款</a></br>
+						<a class="btn_cancel slink" href="javascript:orderCancel('{{$order['sn']}}');">取消订单</a></br>
 						@elseif($order['status'] == 'STATUS_SHIPPING')
-						<a class=" btn_red_01" href="javascript:rogConfirm('{{$order['sn']}}');">确认收货</a>
-						@elseif($order['status'] == 'STATUS_COMPLETE' || $order['status'] == 'STATUS_CANCEL')
+						<a class="btn_red_01" href="javascript:rogConfirm('{{$order['sn']}}');">确认收货</a></br>
+						@elseif($order['status'] == 'STATUS_COMPLETE')
 						@if($order['commented'] == 0 )
-						<a class=" btn_red_01" target="_blank" href="#">评价</a>
+						<a class="btn_red_01" href="{{url('order/comment/'.$order['id'])}}">评价</a></br>
 						@endif
-						<a class="btn_cancel slink" href="javascript:orderDelete('{{$order['sn']}}');">删除订单</a>
+						<a class="btn_cancel slink" href="javascript:orderDelete('{{$order['sn']}}');">删除订单</a></br>
+						@elseif($order['status'] == 'STATUS_CANCEL')
+						<a class="btn_cancel slink" href="javascript:orderDelete('{{$order['sn']}}');">删除订单</a></br>
 						@endif
 						<a href="{{url('order/'.$order['sn'])}}">查看</a>
 					</td>
+					@endif
 				</tr>
 				@endforeach
-			</tbody></table>
-		</div>
+			</tbody>
+		</table>
+		@endforeach
 	</div>
- @include('layouts.partials.pagination')
+</div>
+@include('layouts.partials.pagination')
 
 </div>
 <div class="clear"></div>
@@ -69,22 +79,61 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    $(document).ready(function(){
-      @php
-         $status = app('request')->input('status');
-      @endphp
-      var status = '{{$status}}';
-	  var urlstatus = false;
-      $(".second-menu ul li a").each(function () {
-        if ($(this).attr('href').indexOf(status) > -1 && status !='' ) {
-          $(this).addClass('hover'); urlstatus = true;
-        }
-      })
-      if (!urlstatus) {$(".second-menu ul li a").eq(0).addClass('hover'); }
-      $(".seeAll").click(function(){
-      	$(this).parent().find('p').show();
-      	$(this).hide();
-      })
-    });
+	$(document).ready(function(){
+		@php
+		$status = app('request')->input('status');
+		@endphp
+		var status = '{{$status}}';
+		var urlstatus = false;
+		$(".second-menu ul li a").each(function () {
+			if ($(this).attr('href').indexOf(status) > -1 && status !='' ) {
+				$(this).addClass('hover'); urlstatus = true;
+			}
+		})
+		if (!urlstatus) {$(".second-menu ul li a").eq(0).addClass('hover'); }
+		$(".seeAll").click(function(){
+			$(this).parent().find('p').show();
+			$(this).hide();
+		})
+	});
+	function orderCancel(sn){
+		layer.confirm("确认取消订单?", function()
+		{
+			var params = {};
+			params.url = "{{url('order/ajaxCancel')}}/"+sn;
+			params.postType = "post";
+			params.mustCallBack = true;// 是否必须回调
+			params.callBack = function(json) {
+				window.location.reload();
+			};
+			ajaxJSON(params);
+		});
+	}
+	function orderDelete(sn){
+		layer.confirm("确认删除订单?", function()
+		{
+			var params = {};
+			params.url = "{{url('order/ajaxDelete')}}/"+sn;
+			params.postType = "post";
+			params.mustCallBack = true;// 是否必须回调
+			params.callBack = function(json) {
+				$("#div_order_"+sn).remove();
+			};
+			ajaxJSON(params);
+		});
+	}
+	function rogConfirm(sn){
+		layer.confirm("请在收到商品后,确认收货！", function()
+		{
+			var params = {};
+			params.url = "{{url('order/rogConfirm')}}/"+sn;
+			params.postType = "post";
+			params.mustCallBack = true;// 是否必须回调
+			params.callBack = function(json) {
+				window.location.reload();
+			};
+			ajaxJSON(params);
+		});
+	}
 </script>
 @endsection
