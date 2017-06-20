@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
 	'search'  => '搜索',
 	'recommend' => '店长推荐',
