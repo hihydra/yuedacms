@@ -1,6 +1,14 @@
 @extends('layouts.front')
 @section('title'){{$name}}-@endsection
 @inject('ApiPresenter','App\Presenters\Front\ApiPresenter')
+@section('css')
+<style type="text/css">
+	.perTable{border-bottom:1px solid #eee;}
+	.perTable tr td{border-bottom:none;}
+	.perTable .parameter{border-left:1px solid #eee;}
+	.perTable .goods{border-bottom:1px solid #eee;}
+</style>
+@endsection
 @section('content')
 <div class="M1" style="margin-top:10px;">
 	@include('front.share.crumb',['name'=>$name])
@@ -17,38 +25,44 @@
 	</div>
 	<div class="TabContent">
 		<div id="myTab0_Content0">
+			@foreach($orders['datas'] as $order)
 			<table class="perTable" cellspacing="0" cellpadding="0">
 				<tbody><tr>
-					<th width="180">门店</th>
+					<th width="600"><i><img src="{{asset('front/img/dianpu.png')}}" width="15px;"></i>  {{$order['storeName']}}</th>
 					<th>商品</th>
 					<th width="80">交易金额</th>
 					<th width="80">退款金额</th>
 					<th width="80">订单状态</th>
 					<th width="80">操作</th>
 				</tr>
-				@foreach($orders['datas'] as $order)
+				@foreach($order['items'] as $key=>$item)
 				<tr style="height:70px;">
-					<td>{{$order['storeName']}}</td>
-					<td class="book">
-						@foreach($order['items'] as $key=>$item)
-						<p @if($key>0)style="display:none;"@endif><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></p>
-						@endforeach
-						@if(count($order['items'])>1)
-						<p style="padding-top: 8px;color: #999;" class="seeAll">查看所有>></p>
-						@endif
+					<td class="goods bif">
+						<a href="{{url('goods/'.$item['goodsId'])}}" class="img"><img src="{{$item['image']}}"></a>
+						<div class="info">
+							<h4><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></h4>
+							<p class="left">x{{$item['num']}}</p>
+						</div>
 					</td>
-					<td>￥{{$order['payMoney']}}</td>
-					<td>￥{{$order['refundMoney']}}</td>
-					<td>{{orderStatus($order['status'])}}</td>
-					<td class="operation">
-						<a class=" btn_red_01" target="_blank" href="{{url('order/afterSalesDetail/'.$order['id'])}}">钱款去向</a>
+					<td class="goods price">￥{{$item['price']}}</td>
+					@if($key == 0)
+					@php $num =  count($order['items']); @endphp
+					@php $goodnum=0; foreach($order['items'] as $v){$goodnum += $v['num'];}@endphp
+					<td class="parameter" rowspan="{{$num}}">￥{{$order['payMoney']}}<br>共{{$goodnum}}件商品</td>
+					<td class="parameter" rowspan="{{$num}}">{{$order['refundMoney']}}</td>
+					<td class="parameter" rowspan="{{$num}}">{{orderStatus($order['status'])}}</td>
+					<td class="parameter" rowspan="{{$num}}" class="operation">
+						<a class="btn_red_01" target="_blank" href="{{url('order/afterSalesDetail/'.$order['id'])}}">钱款去向</a>
 					</td>
+					@endif
 				</tr>
 				@endforeach
-			</tbody></table>
-		</div>
+			</tbody>
+		</table>
+		@endforeach
 	</div>
- @include('layouts.partials.pagination')
+</div>
+@include('layouts.partials.pagination')
 
 </div>
 <div class="clear"></div>
@@ -56,22 +70,22 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    $(document).ready(function(){
-      @php
-         $status = app('request')->input('status');
-      @endphp
-      var status = '{{$status}}';
-	  var urlstatus = false;
-      $(".second-menu ul li a").each(function () {
-        if ($(this).attr('href').indexOf(status) > -1 && status !='' ) {
-          $(this).addClass('hover'); urlstatus = true;
-        }
-      })
-      if (!urlstatus) {$(".second-menu ul li a").eq(0).addClass('hover'); }
-      $(".seeAll").click(function(){
-      	$(this).parent().find('p').show();
-      	$(this).hide();
-      })
-    });
+	$(document).ready(function(){
+		@php
+		$status = app('request')->input('status');
+		@endphp
+		var status = '{{$status}}';
+		var urlstatus = false;
+		$(".second-menu ul li a").each(function () {
+			if ($(this).attr('href').indexOf(status) > -1 && status !='' ) {
+				$(this).addClass('hover'); urlstatus = true;
+			}
+		})
+		if (!urlstatus) {$(".second-menu ul li a").eq(0).addClass('hover'); }
+		$(".seeAll").click(function(){
+			$(this).parent().find('p').show();
+			$(this).hide();
+		})
+	});
 </script>
 @endsection

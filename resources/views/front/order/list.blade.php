@@ -39,12 +39,16 @@
 				<tr id="div_order_{{$order['sn']}}" style="height:70px;">
 					<td class="goods bif">
 						<a href="{{url('goods/'.$item['goodsId'])}}" class="img"><img src="{{$item['image']}}"></a>
-						<div class="info"><h4><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></h4></div>
+						<div class="info">
+							<h4><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></h4>
+							<p class="left">x{{$item['num']}}</p>
+						</div>
 					</td>
 					<td class="goods price">￥{{$item['price']}}</td>
 					@if($key == 0)
 					@php $num =  count($order['items']); @endphp
-					<td class="parameter" rowspan="{{$num}}">￥{{$order['needPayMoney']}}<br>共{{$num}}件商品</td>
+					@php $goodnum=0; foreach($order['items'] as $v){$goodnum += $v['num'];}@endphp
+					<td class="parameter" rowspan="{{$num}}">￥{{$order['needPayMoney']}}<br>共{{$goodnum}}件商品</td>
 					<td class="parameter" rowspan="{{$num}}">{{paymentType($order['paymentType'])}}</td>
 					<td class="parameter" rowspan="{{$num}}">{{orderStatus($order['status'])}}</td>
 					<td class="parameter" rowspan="{{$num}}" class="operation">

@@ -1,6 +1,8 @@
 <?php
 namespace App\Presenters\Admin;
 
+use App\Common\ArrayToolkit;
+
 class ArticlePresenter
 {
 	/**
@@ -14,9 +16,10 @@ class ArticlePresenter
 	{
 		$html = '<option value="0">请选择分类</option>';
 		if ($categories) {
+			$categories = ArrayToolkit::unlimitedForLevel($categories);
 			foreach ($categories as $v) {
 				$html .= <<<Eof
-				<option value="{$v['id']}" {$this->checkSelected($v['id'],$articleCagegory,'category')}>{$v['name']}</option>
+				<option value="{$v['id']}" {$this->checkSelected($v['id'],$articleCagegory,'category')}>{$v['html']}{$v['name']}</option>
 Eof;
 			}
 		}

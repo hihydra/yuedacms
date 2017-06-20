@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('vendors/summernote/dist/summernote.css')}}"/>
 <link rel="stylesheet" type="text/css" href="{{asset('vendors/nestable/nestable.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('vendors/ladda/ladda-themeless.min.css')}}">
 @endsection
@@ -42,6 +43,8 @@
 </div>
 @endsection
 @section('js')
+<script src="{{asset('vendors/summernote/dist/summernote.min.js')}}"></script>
+<script src="{{asset('vendors/summernote/lang/summernote-zh-CN.js')}}"></script>
 <script src="{{asset('vendors/nestable/jquery.nestable.js')}}"></script>
 <script src="{{asset('vendors/ladda/spin.min.js')}}"></script>
 <script src="{{asset('vendors/ladda/ladda.min.js')}}"></script>

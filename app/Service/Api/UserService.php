@@ -122,7 +122,7 @@ class UserService extends BaseService
     public function getSetPic($filePath){
         $path  = '/api/shop/personInfo!setPic.do';
         $query[] = array('name'=>'file','contents'=>fopen($filePath, "r"));
-        $data = $this->http_curl($path,$query,"post",null,null,'multipart');
+        $data = $this->http_curl($path,$query,"post",false,false,'multipart');
         unlink($filePath);
         return $data;
     }

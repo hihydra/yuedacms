@@ -38,15 +38,17 @@
 		</div>
 		<div class="pt1">
 			<h4>
-				请选择以下支付方式<i>（目前只支持支付宝和微信支付）</i>
+				请选择以下支付方式<i>（目前只支持支付宝<!--和微信支付-->）</i>
 			</h4>
 			<ul class="pay-ul">
 				<li>
 					<a target="_blank" href="{{$paylink['alipay']}}"><img src="{{asset('front/img/zfb.jpg')}}" /></a>
 				</li>
+				<!--
 				<li>
 					<a onclick="weixinpay()"><img src="{{asset('front/img/wx.jpg')}}" /></a>
 				</li>
+				-->
 			</ul>
 		</div>
 	</div>

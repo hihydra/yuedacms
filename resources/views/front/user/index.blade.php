@@ -105,7 +105,7 @@
 						<input type="hidden" id="h" name="h">
 						<input type="file" class="photo-input UploadImg" name="file" style="left:0; top:0; width:175px; height:45px;">
 						<a class="Btn btn_blue">&nbsp;</a>
-						<div style="padding:5px; border:1px solid #f1f1f1;" class="item left previewPic"><img src="{{{$face or asset('front/img/face.png')}}}" style="width:100%;" id="cropbox"></div>
+						<div style="padding:5px; border:1px solid #f1f1f1;" class="item left previewPic"><img src="{{{$face or asset('front/img/face.png')}}}" style="max-width:200px;" id="cropbox"></div>
 					</div>
 					<div class="clear"></div>
 					<div class="item">

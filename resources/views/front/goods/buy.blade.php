@@ -20,7 +20,7 @@
           <div class="inner">
             <div class="addr-hd">
               <span>（</span>
-              <span class="receiver" data-id='{{$address["id"]}}' data-lng='{{{$address["lng"] or ""}}}' data-lat='{{{$address["lat"] or ""}}}' data-village='{{$address["village"]}}'>{{$address['name']}}</span>
+              <span class="receiver" data-id='{{$address["id"]}}' data-lng='{{{$address["lng"] or ""}}}' data-lat='{{{$address["lat"] or ""}}}' data-village='{{{$address["village"] or ''}}}'>{{$address['name']}}</span>
               <span> 收）</span>
               <span class="receiverMobile" style="display:inline;">{{$address['mobile']}}</span>
             </div>

@@ -70,6 +70,14 @@ class IndexService extends BaseService
         return $data;
     }
 
+    //获取专题详情
+    public function getSpecialDetail($specialId){
+        $path  = '/api/shop/special!detail.do';
+        $query = array('specialId'=>$specialId);
+        $data = $this->http_curl($path,$query);
+        return $data;
+    }
+
     //主题列表
     public function getTopicalList($storeId){
         $path  = '/api/shop/topical!list.do';

@@ -6,4 +6,5 @@ $router->group(['prefix' => 'goods','middleware' => ['isLogin']],function ($rout
 	$router->post('directBuy','GoodsController@directBuy')->name('goods.directBuy');
 	$router->get('checkServiceRadius','GoodsController@checkServiceRadius')->name('goods.checkServiceRadius');
 });
-$router->get('goods/{productId}','GoodsController@show')->name('goods');
+$router->get('goods/ajaxComment/{goodsId}','GoodsController@ajaxComment')->name('goods.ajaxComment');
+$router->get('goods/{goodsId}','GoodsController@show')->name('goods');

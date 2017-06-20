@@ -33,7 +33,7 @@
 					@php if($key>2){break;} @endphp
 					<li>
 						<div class="book">
-							<a href="{{URL::route('showcase',['type'=>'special','specialId'=>$spe['id']])}}"><img src="{{$spe['thumbUrl']}}" /></a>
+							<a href="{{URL::route('showcase',['type'=>'specialDetail','specialId'=>$spe['id']])}}"><img src="{{$spe['thumbUrl']}}" /></a>
 						</div>
 						<div class="info">
 							<div class="wrap">

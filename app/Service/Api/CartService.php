@@ -48,7 +48,7 @@ class CartService extends BaseService
     public function getCartDelete($cartIds){
         $path  = '/api/shop/cart!delete.do?cartIds='.implode('&cartIds=',$cartIds);
         $query = array();
-        $data = $this->http_curl($path,$query,'post',true,null,'form_params');
+        $data = $this->http_curl($path,$query,'post',true,false,'form_params');
         return $data;
     }
 

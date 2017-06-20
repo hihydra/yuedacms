@@ -10,7 +10,7 @@ class Category extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['pid', 'name', 'url', 'icon', 'sort'];
+    protected $fillable = ['pid', 'name', 'url', 'icon','content_html','content_mark','sort'];
 
     public function setSortAttribute($value)
     {

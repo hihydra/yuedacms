@@ -184,4 +184,19 @@ class ArrayToolkit
         }
         return false;
     }
+
+
+    public static function unlimitedForLevel($array, $html = '|——', $pid = 0, $level = 0)
+    {
+        $arr = array();
+        foreach ($array as $k => $v) {
+            if ($v['pid'] == $pid) {
+                $v['level'] = $level + 1;
+                $v['html']  = str_repeat($html, $level);
+                $arr[] = $v;
+                $arr = array_merge($arr, self::unlimitedForLevel($array, $html, $v['id'], $level + 1));
+            }
+        }
+        return $arr;
+    }
 }

@@ -12,7 +12,7 @@ class ShowcaseController extends Controller
 		$this->service = $service;
 	}
 
-    public function index(Request $request,$type)
+    public function index(Request $request,$type,$id = null)
     {
         $storeId = getStoreId();
         $anchor = $request->input('anchor');
@@ -29,8 +29,11 @@ class ShowcaseController extends Controller
                 $goods = $this->service->getListByStore($storeId,$anchor);
                 $name = trans('front/system.special');
                 break;
+            case 'specialDetail':
+                $goods = $this->service->getSpecialDetail($id);
+                $name = trans('front/system.specialDetail');
+                break;
         }
-       //dd(compact('goods','name','type'));
     	return view('front.showcase.list')->with(compact('goods','name','type'));
     }
 }

@@ -61,7 +61,8 @@
 </div>
 
 <!--分页-->
-    @include('layouts.partials.pagination')
+@include('layouts.partials.pagination')
+   {{-- @include('layouts.partials.pagination',['totalPages'=>$goodsList['totalPages']])--}}
 <div class="clear"></div>
 </div>
 <div class="clear"></div>

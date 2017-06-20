@@ -19,6 +19,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->default('')->comment('分类名称');
             $table->string('url')->default('')->comment('分类外部url，默认为空');
             $table->string('icon',30)->default('')->comment('分类图标');
+            $table->text('content_html')->comment('文章内容-html格式');
+            $table->text('content_mark')->comment('文章内容-markdown格式');
             $table->tinyInteger('sort')->default(0)->comment('排序');
             $table->timestamps();
 		});

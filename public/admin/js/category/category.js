@@ -31,7 +31,7 @@ var CategoryList = function() {
 
      * @date   2016-11-04T10:07:56+0800               [description]
      */
-    $(menu.box).on('click',menu.createMenu,function () {
+     $(menu.box).on('click',menu.createMenu,function () {
       $.ajax({
         url:'/admin/category/create',
         dataType:'html',
@@ -42,18 +42,18 @@ var CategoryList = function() {
       });
     });
 
-    $(menu.box).on('click',menu.close,function () {
+     $(menu.box).on('click',menu.close,function () {
       $('.formBox').removeClass('bounceIn').addClass('bounceOut').remove();
       $(menu.middleBox).removeClass('bounceOut').addClass('bounceIn').show();
     });
 
-    $('.tooltips').tooltip();
+     $('.tooltips').tooltip();
     /**
      * 添加分类
 
      * @date   2016-11-04T16:12:58+0800
      */
-    $(menu.box).on('click','.createButton',function () {
+     $(menu.box).on('click','.createButton',function () {
       var l = $(this).ladda();
       var _item = $(this);
       var _form = $('#createForm');
@@ -94,7 +94,7 @@ var CategoryList = function() {
 
      * @date   2016-11-04T16:13:20+0800
      */
-    $('#nestable').on('click','.editMenu',function () {
+     $('#nestable').on('click','.editMenu',function () {
       var _item = $(this);
       $.ajax({
         url:_item.attr('data-href'),
@@ -119,7 +119,7 @@ var CategoryList = function() {
 
      * @date   2016-11-04T16:51:00+0800
      */
-    $(menu.box).on('click','.editButton',function () {
+     $(menu.box).on('click','.editButton',function () {
       var l = $(this).ladda();
       var _item = $(this);
       var _form = $('#editForm');
@@ -161,7 +161,7 @@ var CategoryList = function() {
 
      * @date   2016-11-04
      */
-    $('#nestable').on('click','.showInfo',function () {
+     $('#nestable').on('click','.showInfo',function () {
       var _item = $(this);
       $.ajax({
         url:_item.attr('data-href'),
@@ -181,9 +181,9 @@ var CategoryList = function() {
         }
       });
     });
-  };
+   };
 
-  return {
+   return {
     init : categoryInit
   }
 }();

@@ -9,8 +9,13 @@ class FrontIslogin
     public function handle($request, Closure $next)
     {
        if(!$request->cookie('API_SESSIONID')){
-            return redirect('login');
+       		if($request->ajax()){
+       			return response()->json(array('loginUrl' => url('/login'),'result' => 2));
+       		}else{
+       			return redirect('login');
+            }
         }
+
         return $next($request);
     }
 }

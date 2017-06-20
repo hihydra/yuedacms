@@ -73,7 +73,7 @@ if(!function_exists('getStoreName')){
 if(!function_exists('getStoreId')){
 	function getStoreId()
 	{
-		if (app('request')->input('storeId')) {
+		if (app('request')->has('storeId')) {
 			return app('request')->input('storeId');
 		}else if(!empty(Cookie::get('storeId'))){
 			return Cookie::get('storeId');

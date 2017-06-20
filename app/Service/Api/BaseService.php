@@ -29,7 +29,6 @@ class BaseService
 
     	if ($response->getStatusCode() == 200) {
     		$body = json_decode($response->getbody(),true);
-
             if ($json) {
                 if($body['result'] == $this->CODE_NOT_LOGIN){
                     $body['loginUrl'] = url('/login');
