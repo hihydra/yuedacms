@@ -387,7 +387,6 @@
     var village = $(".layui-layer-content input[name='village']").val();
     var address = $(".layui-layer-content textarea[name='address']").val();
     var params = {'name':name,'mobile':mobile,'village':village,'address':address};
-    console.log(params);
     return params;
   }
 

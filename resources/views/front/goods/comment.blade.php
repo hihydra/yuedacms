@@ -20,7 +20,7 @@
 						@if(!empty($data['img']))
 						<div class="p-show-img">
 							<ul>
-								<li><div class="show-more-pic"><img src="{{$data['img']}}" /></div></li>
+								<li><div class="show-more-pic"><img src="{{$data['img']}}"/></div></li>
 							</ul>
 						</div>
 						@endif

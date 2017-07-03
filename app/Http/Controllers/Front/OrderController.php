@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Front;
 use App\Service\Api\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Traits\UploadTrait;
 use URL;
 
 class OrderController extends Controller
 {
+    use UploadTrait;
     protected $service;
 
     public function __construct(OrderService $service)
@@ -81,7 +83,13 @@ class OrderController extends Controller
     }
 
     public function commentAdd(Request $request){
-        $responseData = $this->service->getCommentAdd($request->all());
+        $data = $request->all();
+        if (!empty($data['file'])) {
+            $filePath = $this->uploadApiImage($data['file']);
+            $filePath = base_path().'\public'.str_replace('/','\\',$filePath);
+            $data['file'] = $filePath;
+        }
+        $responseData = $this->service->getCommentAdd($data);
         return response()->json($responseData);
     }
 

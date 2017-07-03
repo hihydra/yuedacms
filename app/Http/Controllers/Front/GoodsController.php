@@ -20,10 +20,18 @@ class GoodsController extends Controller
       $this->coupon = $coupon;
     }
 
-    public function show(Request $request,$productId){
+    public function show(Request $request,$goodsId){
         $storeId = getStoreId();
-        $name = '小道理：分寸之间';
-        return view('front.goods.show')->with(compact('name'));
+        $goodList = $this->service->getGoods($storeId,$goodsId);
+        return view('front.goods.show',$goodList);
+    }
+
+    public function ajaxComment(Request $request,$goodsId){
+        $storeId = getStoreId();
+        $anchor = $request->input('anchor');
+        $commentList = $this->service->getCommentList($storeId,$goodsId,$anchor);
+        $responseData = (string)(view('front.goods.comment',$commentList));
+        return response()->json(array('result' =>$this->service->CODE_SUCCESS,'data'=>$responseData));
     }
 
     public function buy(Request $request)
@@ -33,8 +41,8 @@ class GoodsController extends Controller
             $goodList = $this->service->getCartListByIds($cartIds);
             $name = trans('front/system.goods');
             $type = 'cart';
-        }else if($request->has('storId') && $request->has('productId')){
-            $storeId = $request->input('storId');
+        }else if($request->has('productId')){
+            $storeId = getStoreId();
             $productId = $request->input('productId');
             $good = $this->service->getGoodsDetail($productId,$storeId);
             $good['num'] = $request->input('num',1);

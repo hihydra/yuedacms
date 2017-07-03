@@ -26,6 +26,7 @@
         </tr>
       </tbody>
     </table>
+    <form action="{{url('order/commentAdd')}}" method="post" id="sub_{{$item['id']}}"  enctype="multipart/form-data">
     <div class="g_tbox">
       <div class="left" style="width:100%;">
         <div class="item">
@@ -35,6 +36,8 @@
           </div>
           <div class="clear"></div>
         </div>
+        <input type="hidden" name="goodsId" value="{{$item['id']}}">
+        <input type="hidden" name="orderId" value="{{$orderId}}">
         <div class="item">
           <span class="label"><em>*</em> 买家评分：</span>
           <input id="ipt_grade_{{$item['id']}}" name="grade" value="5" type="hidden" />
@@ -50,26 +53,19 @@
           <div class="clear"></div>
         </div>
         <div class="item">
-          <!--
-            <span class="label"><em>*</em> 晒单：</span>
-            <div class="left">
-              <ul class="img-list-ul">
-                <li class="upload-btn">
-                  <div>
-                    <a href="#none" class="add-img-btn" style="position: relative; z-index: 0;"><b></b></a>
-                    <ul class="Figure">
-                      <li><a href="#"><img src="img/201612070922290897.jpg" width="50px"></a><a class="close" href="#"><img src="img/close.png" width="20px"></a></li>
-                      <li><a href="#"><img src="img/自控力.jpg" width="50px"></a><a class="close" href="#"><img src="img/close.png" width="20px"></a></li>
-                      <li><a href="#"><img src="img/201612070922290897.jpg" width="50px"></a><a class="close" href="#"><img src="img/close.png" width="20px"></a></li>
-                      <li><a href="#"><img src="img/自控力.jpg" width="50px"></a><a class="close" href="#"><img src="img/close.png" width="20px"></a></li>
-                      <li><a href="#"><img src="img/201612070922290897.jpg" width="50px"></a><a class="close" href="#"><img src="img/close.png" width="20px"></a></li>
-                      <li><a href="#"><img src="img/自控力.jpg" width="50px"></a><a class="close" href="#"><img src="img/close.png" width="20px"></a></li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          -->
+          <span class="label"><em>*</em> 晒单：</span>
+          <div class="left">
+            <ul class="img-list-ul">
+              <li class="upload-btn">
+                <div style="height:80px;">
+                  <input type="file" class="photo-input UploadImg" name="file" style="z-index:1; width:60px; height:60px;">
+                  <a class="add-img-btn" style="position: relative;"><b></b></a>
+                  <ul class="Figure">
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
           <div class="clear"></div>
           <div class="item">
             <span class="label">&nbsp;</span>
@@ -80,6 +76,7 @@
         </div>
       </div>
     </div>
+    </form>
     @endforeach
   </br>
 </div>
@@ -90,6 +87,34 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+  //上传头像预览
+  $('.upload-btn').on('change', '.UploadImg', function(){
+    var file = this.files[0];
+    if(file == ''){
+      return false;
+    }
+      //判断类型是不是图片
+      if(!/image\/\w+/.test(file.type)){
+        layer.msg('文件只能为图片类型');
+        return false;
+      }
+
+      //判断照片是否小于2M
+      if(file.size > 2*1024*1024){
+        layer.msg('图片大小不能超过2M');
+        return false;
+      }
+
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function(e){
+          str = '<li><img src="'+this.result+'" height="60px"><a class="close" href="javascript:close(this);"><img src="{{asset('/front/img/close.png')}}" width="20px"></a></li>';
+          $('.Figure').append(str);
+          $(".Figure .close").click(function(){
+            $(this).parent().remove();
+          });
+      }
+  });
   function setCommentGrade(grade){
     $("#ipt_grade").val(grade);
     for(var i=2;i<=grade;i++){
@@ -102,11 +127,13 @@
     }
   }
   function commentAdd(goodsId){
+
     var content = $('#ipt_content_'+goodsId).val();
-    var grade = $('#ipt_grade_'+goodsId).val();
     if(content==""){
       layer.msg("{{trans('front/system.comment_content_error')}}");return;
     }
+    /*
+    var grade = $('#ipt_grade_'+goodsId).val();
     var params = {};
     params.url = "{{url('order/commentAdd')}}";
     params.postData = {'goodsId':goodsId,'orderId':{{$orderId}},'content':content,'grade':grade};
@@ -116,6 +143,8 @@
        location.href = "{{url('order')}}";
     };
     ajaxJSON(params);
+    */
+    $('#sub_'+goodsId).submit();
   }
 </script>
 @endsection

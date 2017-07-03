@@ -5,30 +5,52 @@
 <div class="M1" style="margin-top:10px;">
   @include('front.share.crumb',['name'=>$name])
   <div class="wrapper">
-    @if(true)
-    <img src="{{asset('front/img/bannar2.jpg')}}" />
-    <div class="topic-info j-main">
-      <h1 class="topic-title">适合女性的书单推荐
+    @if($type == 'specialDetail')
+    <img src="{{$goods['image']}}" width="1070px"/>
+    <div class="topic-info j-main" style="padding-top:10px;">
+      <h1 class="topic-title">{{$goods['name']}}
         <span class="ic-03" style="padding-left:20px;font-weight:normal;">
-          <a href="javascript:unlike(29537);" class="favorite"><b class="sc-1"></b>喜欢</a>
+          @if($goods['hasLike'])
+          <a href="javascript:unlike({{$goods['id']}});" class="favorite"><b class="sc"></b>喜欢</a>
+          @else
+          <a href="javascript:like({{$goods['id']}});" class="favorite"><b class="sc-1"></b>喜欢</a>
+          @endif
         </span>
       </h1>
-      <p class="topic-desc">3月，是早春的季节，也是女性的节日。“腹有诗书气自华”这话说的一点都没错，从书中得到的知识是任何人都抢不走的，在这个春暖花开的季节，小糖君给各位糖果们推荐一份适合女性的书单，希望你们会喜欢。</p>
+      <p class="topic-desc">{{$goods['intro']}}</p>
     </div>
     @endif
     <div class="product-list">
       @if($type == 'special')
       @foreach($goods['datas'] as $good)
-      <div class="product-item j-main">
-        <span class="ic-03" style="float: right;line-height: 35px;"><b class="sc-1"></b>{{$good['likecount']}}</span>
+      <div class="product-item">
+        <span class="favorite"><img src="{{asset('front/img/u78.png')}}" />{{$good['likecount']}}</span>
         <p class="p-title">{{$good['name']}}</p>
         <div class="left">
-          <a href=""><img src="{{{$good['thumbUrl'] or defaultImg()}}}" width="1070px;" height="532px;" /></a>
+          <a href="{{url('showcase/specialDetail/'.$good['id'])}}"><img src="{{{$good['thumbUrl'] or defaultImg()}}}" width="1070px;" height="532px;" /></a>
         </div>
         <div class="clear"></div>
       </div>
       @endforeach
-      @else
+      @elseif($type == 'specialDetail')
+      @foreach($goods['items'] as $good)
+      <div class="product-item">
+        <p class="p-title">@if($good['sloganTitle']){{$good['sloganTitle']}}@else{{$good['name']}}@endif</p>
+        <div class="right">
+          <p class="desc">{{{$good['slogan'] or ''}}}</p>
+          <div class="pc-info-b">
+            <p class="pc-like-area"><i class="ico-like"></i><span>{{$good['likecount']}}</span></p>
+            <p class="pc-like-area no-border"><span><a href="{{url('goods/'.$good['id'])}}">查看详情</a></span></p>
+          </div>
+        </div>
+        <div class="left">
+          <img src="{{{$good['image'] or defaultImg()}}}" width="156px;" height="156px;" />
+        </div>
+        <div class="clear"></div>
+      </div>
+      @endforeach
+      @include('layouts.partials.pagination')
+      @else($type == 'recommend' || $type == 'sales')
       @foreach($goods['datas'] as $good)
       <div class="product-item">
         <p class="p-title">{{$good['name']}}</p>
@@ -46,11 +68,10 @@
         <div class="clear"></div>
       </div>
       @endforeach
+      @include('layouts.partials.pagination',['totalPages'=>$goods['totalPages']])
       @endif
     </div>
   </div>
-
-  @include('layouts.partials.pagination')
 
 </div>
 <div class="clear"></div>

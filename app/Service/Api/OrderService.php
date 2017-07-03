@@ -116,7 +116,16 @@ class OrderService extends BaseService
     //已购商品评价
     public function getCommentAdd($form){
         $path  = '/api/shop/comment!add.do';
-        $query = $form;
+        foreach ($form as $key => $value) {
+            $arr['name'] = $key;
+            if ($key == 'file') {
+                $arr['contents'] = fopen($value, "r");
+            }else{
+                $arr['contents'] = $value;
+            }
+            $query[] =  $arr;
+        }
+        //$query[] = array('name'=>'file','contents'=>fopen($filePath, "r"));
         $data = $this->http_curl($path,$query);
         return $data;
     }

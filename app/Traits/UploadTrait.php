@@ -125,6 +125,6 @@ trait UploadTrait
 
         $this->attach->storeAttach($attributes);
 */
-        return $folderName .'/'. $safeName;
+        return $folderName. $safeName;
     }
 }

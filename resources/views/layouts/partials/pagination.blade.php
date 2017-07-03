@@ -1,4 +1,3 @@
-<?php if(empty($totalPages)){$totalPages = 100;} ?>
 @if(!empty($totalPages))
 @if ($pagenum = round(config('settings.pagenum')/2)) @endif
 <div class="pages">

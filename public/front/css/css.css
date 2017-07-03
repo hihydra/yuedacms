@@ -438,7 +438,7 @@ span.c-type-r { margin: 0;}
 .img-lists li{ position:relative; float:left; width:60px; height:60px; border:1px solid #f0f0f0; margin-right:10px; overflow:hidden; background:#f0f0f0;}
 .img-list-ul .add-img-btn{ float:left; height:58px; width:58px; line-height:58px; margin-right:10px; text-align:center; border:1px solid #ccc; background-color:#fff;}
 .img-list-ul .add-img-btn b{ display:inline-block; position:absolute; width:20px; height:20px; overflow:hidden; vertical-align:middle; background:url(../img/arbn-icons.png) no-repeat; top:18px; left:18px;}
-.btn_red_01{ width:78px; height:28px; line-height:28px; color:#fff; background:#ef6668; display:block; border-radius: 5px; margin:0 auto 0; float:left; text-align:center;}
+.btn_red_01{ width:62px; height:28px; line-height:28px; color:#fff; background:#ef6668; display:block; border-radius: 5px; margin:0 auto 0; float:left; text-align:center;}
 .g-star{ width:85px; height:22px; background:url(../img/commentsListIcons1.png) no-repeat;}
 .left .g-star{ margin-top:8px;}
 .score{ padding:5px;}
@@ -448,6 +448,6 @@ span.c-type-r { margin: 0;}
 .g-star2{ background-position:-34px 0;}
 .g-star3{ background-position:-51px 0;}
 .g-star4{ background-position:-68px 0;}
-.Figure li{ float:left; padding:10px 0; padding-right:15px; position:relative;}
+.Figure li{ float:left; padding:10px 0; padding-right:15px; position:relative;/*add*/margin-top:-70px;padding-left: 92px;}
 .Figure li a.close{ position:absolute; top:0; right:3px;}
 .Figure .item .left{ width:900px;}

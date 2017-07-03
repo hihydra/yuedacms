@@ -26,6 +26,7 @@ class TopicalController extends Controller
     	$topicalGoods = $this->service->getTopicalGoods($storeId,$topicalId,$anchor);
         $urlPath = compact('storeId','topicalId','anchor');
     	$name = trans('front/system.topical');
+
     	return view('front.topical.list')->with(compact('topicalList','topicalGoods','name','urlPath','storeId'));
     }
 }

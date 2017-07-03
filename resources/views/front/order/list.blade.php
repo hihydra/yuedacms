@@ -75,7 +75,7 @@
 		@endforeach
 	</div>
 </div>
-@include('layouts.partials.pagination')
+ @include('layouts.partials.pagination',['totalPages'=>$orders['totalPages']])
 
 </div>
 <div class="clear"></div>
