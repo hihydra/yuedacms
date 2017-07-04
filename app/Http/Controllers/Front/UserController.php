@@ -83,7 +83,7 @@ class UserController extends Controller
     public function myCoupons(Request $request){
         $status = $request->input('status','STATUS_UNUSED');
         $anchor = $request->input('anchor','');
-        $coupons = $this->coupon->getMyCoupons($status,$anchor);
+        $coupons = $this->coupon->getMyCoupons($status,$anchor,12);
         $name = trans('front/system.myCoupons');
         return view('front.user.myCoupons')->with(compact('name','coupons','status'));
     }

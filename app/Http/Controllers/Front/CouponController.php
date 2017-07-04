@@ -17,7 +17,7 @@ class CouponController extends Controller
     {
         $storeId = getStoreId();
         $anchor = $request->input('anchor');
-        $coupons = $this->service->getCouponList($storeId,$anchor);
+        $coupons = $this->service->getCouponList($storeId,$anchor,12);
         $name = trans('front/system.coupon');
 
     	return view('front.coupon.list')->with(compact('coupons','name'));

@@ -13,10 +13,10 @@ class CategoryService extends BaseService
         return $data;
     }
 
-    //专题搜索
-    public function getGoodsList($storeId=NULL,$catId=NULL,$anchor=NULL,$keyword=NULL,$sort='SORT_TIME',$isAsc=false){
+    //分类商品搜索
+    public function getGoodsList($storeId=NULL,$catId=NULL,$anchor=NULL,$keyword=NULL,$sort='SORT_TIME',$isAsc=false,$pageSize=null){
         $path  = '/api/shop/goods!search.do';
-        $query = array('storeId'=>$storeId,'catId'=>$catId,'anchor'=>$anchor,'keyword'=>$keyword,'sort'=>$sort,'isAsc'=>$isAsc);
+        $query = array('storeId'=>$storeId,'catId'=>$catId,'anchor'=>$anchor,'keyword'=>$keyword,'sort'=>$sort,'isAsc'=>$isAsc,'pageSize'=>$pageSize);
         $data = $this->http_curl($path,$query);
         return $data;
     }

@@ -25,8 +25,8 @@
        @foreach($goodsList['datas'] as $good)
        <li>
         <div class="book">
-          <a href="#"><img src="{{{$good['thumbUrl'] or defaultImg()}}}" /></a>
-          <a href="#" class="tittle">{{str_limit($good['name'], $limit = 25, $end = '...')}}</a>
+          <a href="{{url('goods/'.$good['id'])}}"><img src="{{{$good['thumbUrl'] or defaultImg()}}}" /></a>
+          <a href="{{url('goods/'.$good['id'])}}" class="tittle">{{str_limit($good['name'], $limit = 25, $end = '...')}}</a>
         </div>
         <div class="info">
           <p class="author"></p>
@@ -40,7 +40,7 @@
   </div>
 </div>
 
- @include('layouts.partials.pagination')
+ @include('layouts.partials.pagination',['totalPages'=>$goodsList['totalPages']])
 <div class="clear"></div>
 </div>
 <div class="clear"></div>

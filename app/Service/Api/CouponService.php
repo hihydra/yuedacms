@@ -7,9 +7,9 @@ class CouponService extends BaseService
 {
 
     //领券中心
-    public function getCouponList($storeId,$anchor=null){
+    public function getCouponList($storeId,$anchor=null,$pageSize=null){
         $path  = '/api/shop/coupon!list.do';
-        $query = array('storeId'=>$storeId,'anchor'=>$anchor);
+        $query = array('storeId'=>$storeId,'anchor'=>$anchor,'pageSize'=>$pageSize);
         $data = $this->http_curl($path,$query);
         return $data;
     }
@@ -33,9 +33,9 @@ class CouponService extends BaseService
     int anchor:由上一次请求返回
     */
     //我的优惠券
-    public function getMyCoupons($status,$anchor=null){
+    public function getMyCoupons($status,$anchor=null,$pageSize=null){
         $path  = '/api/shop/coupon!myCoupons.do';
-        $query = array('status'=>$status,'anchor'=>$anchor);
+        $query = array('status'=>$status,'anchor'=>$anchor,'pageSize'=>$pageSize);
         $data = $this->http_curl($path,$query);
         return $data;
     }

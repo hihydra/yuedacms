@@ -26,7 +26,12 @@ class CategoryController extends Controller
         $sort = $request->input('sort');
         $isAsc = $request->input('isAsc');
         $catList = $this->service->getCatList();
-        $goodsList = $this->service->getGoodsList($storeId,$catId,$anchor,$keyword,$sort,$isAsc);
+        if($request->has('keyword')){
+            $pageSize = 18;
+        }else{
+            $pageSize = 20;
+        }
+        $goodsList = $this->service->getGoodsList($storeId,$catId,$anchor,$keyword,$sort,$isAsc,$pageSize);
 
         $urlPath = compact('storeId','catId','keyword','anchor','sort','isAsc');
 
