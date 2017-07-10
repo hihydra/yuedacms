@@ -37,7 +37,7 @@ class UserController extends Controller
             }
 
             $filePath = $this->uploadApiImage($data['file'],$crop);
-            $filePath = base_path().'\public'.str_replace('/','\\',$filePath);
+            $filePath = str_replace('\\','/',base_path().'\public'.$filePath);
             $this->service->getSetPic($filePath);
         }
         $superiorCode = $request->input('superiorCode');

@@ -26,7 +26,7 @@
 	<div class="TabContent">
 		<div id="myTab0_Content0">
 			@foreach($orders['datas'] as $order)
-			<table class="perTable" cellspacing="0" cellpadding="0">
+			<table id="div_order_{{$order['sn']}}" class="perTable" cellspacing="0" cellpadding="0">
 				<tbody><tr>
 					<th width="600"><i><img src="{{asset('front/img/dianpu.png')}}" width="15px;"></i>  {{$order['storeName']}} <span style="padding-left:30px;">订单号：{{$order['sn']}}</span></th>
 					<th>金额</th>
@@ -36,7 +36,7 @@
 					<th width="80">操作</th>
 				</tr>
 				@foreach($order['items'] as $key=>$item)
-				<tr id="div_order_{{$order['sn']}}" style="height:70px;">
+				<tr style="height:70px;">
 					<td class="goods bif">
 						<a href="{{url('goods/'.$item['goodsId'])}}" class="img"><img src="{{$item['image']}}"></a>
 						<div class="info">

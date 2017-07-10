@@ -68,8 +68,7 @@
 			<div class="clear"></div>
 		</div>
 	</div>
-	 @include('layouts.partials.pagination')
-	{{--@include('layouts.partials.pagination',['totalPages'=>$coupons['totalPages']])--}}
+	@include('layouts.partials.pagination',['totalPages'=>$coupons['totalPages']])
 	<div class="clear"></div>
 </div>
 <div class="clear"></div>

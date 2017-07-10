@@ -59,10 +59,7 @@
 				</div>
 			@endforeach
 		</div>
- @include('layouts.partials.pagination')
-{{--
  @include('layouts.partials.pagination',['totalPages'=>$coupons['totalPages']])
- --}}
 	</div>
 <div class="clear"></div>
 

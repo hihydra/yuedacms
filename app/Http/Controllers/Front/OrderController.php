@@ -86,7 +86,7 @@ class OrderController extends Controller
         $data = $request->all();
         if (!empty($data['file'])) {
             $filePath = $this->uploadApiImage($data['file']);
-            $filePath = base_path().'\public'.str_replace('/','\\',$filePath);
+            $filePath = str_replace('\\','/',base_path().'\public'.$filePath);
             $data['file'] = $filePath;
         }
         $responseData = $this->service->getCommentAdd($data);
