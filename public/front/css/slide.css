@@ -1,6 +1,6 @@
 ﻿.bannar-img{position:relative;overflow:auto}
 .bannar-img li{list-style:none}
-.bannar-img ul li{float:left;width:825pt;height:285px}
+.bannar-img ul li{float:left;width:825pt;height:360px}
 .bannar-img{width:40pc}
 .bannar-img .dots{position:absolute;right:0;bottom:20px;left:0;text-align:center}
 .bannar-img .dots li{z-index:999px;display:inline-block;margin:0 4px;width:10px;height:10px;border:2px solid #b81b22;border-radius:6px;text-indent:-999em;opacity:.4;cursor:pointer;-webkit-transition:background .5s,opacity .5s;transition:background .5s,opacity .5s}
