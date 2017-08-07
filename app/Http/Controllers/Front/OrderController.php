@@ -48,6 +48,11 @@ class OrderController extends Controller
 
     public function pay(Request $request){
         $snLs = $request->input('snLs');
+        $sn = array_first($snLs);
+        $order = $this->service->getOrderDetail($sn);
+        if($order['status'] != 'STATUS_NOT_PAY'){
+            return redirect('order/'.$sn);
+        }
         $name = trans('front/system.pay');
         $payInfoData = $this->service->getZhiFuBao($snLs);
         parse_str(preg_replace('/\"/', '', $payInfoData['payInfo']));

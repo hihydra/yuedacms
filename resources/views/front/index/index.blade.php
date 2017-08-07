@@ -11,7 +11,7 @@
 				@if(!empty($ad['url']))
 				<li><a href="{{{$ad['url'] or ''}}}" target="_blade"><img src="{{$ad['thumbUrl']}}"/></a></li>
 				@else
-				<li><a href="{{url('goods/'.$ad['id'])}}" target="_blade"><img src="{{$ad['thumbUrl']}}"/></a></li>
+				<li><a href="{{url('goods/'.$ad['targetId'])}}" target="_blade"><img src="{{$ad['thumbUrl']}}"/></a></li>
 				@endif
 			@endforeach
 		</ul>

@@ -280,7 +280,7 @@
       $("input[name='receiverAddress']").val($.trim($(this).find('.receiverAddress').attr('data-address')));
       $("input[name='addressId']").val($.trim($(this).find('.receiver').attr('data-id')));
       $("input[name='lng']").val($.trim($(this).find('.receiver').attr('data-lng')));
-      $("input[name='lat']").val($.trim($(this).find('.receiver').attr('data-id')));
+      $("input[name='lat']").val($.trim($(this).find('.receiver').attr('data-lat')));
     });
 
     $('.receiptType').click(function(){

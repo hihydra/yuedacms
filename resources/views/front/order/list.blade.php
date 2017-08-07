@@ -25,6 +25,7 @@
 	</div>
 	<div class="TabContent">
 		<div id="myTab0_Content0">
+			@if($orders['datas'])
 			@foreach($orders['datas'] as $order)
 			<table id="div_order_{{$order['sn']}}" class="perTable" cellspacing="0" cellpadding="0">
 				<tbody><tr>
@@ -73,9 +74,16 @@
 			</tbody>
 		</table>
 		@endforeach
+		@else
+		<div class="g_tbox">
+			<div class="g_chkbx" style="text-align: center;">
+				没有更多订单了
+			</div>
+		</div>
+		@endif
 	</div>
 </div>
- @include('layouts.partials.pagination',['totalPages'=>$orders['totalPages']])
+@include('layouts.partials.pagination',['totalPages'=>$orders['totalPages']])
 
 </div>
 <div class="clear"></div>

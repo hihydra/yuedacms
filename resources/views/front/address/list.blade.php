@@ -73,12 +73,12 @@
 					<table class="perTable" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th>收货人</th>
-								<th>小区/大厦</th>
-								<th>详细地址</th>
-								<th>联系方式</th>
-								<th>操作</th>
-								<th></th>
+								<th width="10%">收货人</th>
+								<th width="25%">小区/大厦</th>
+								<th width="25%">详细地址</th>
+								<th width="20%">联系方式</th>
+								<th width="10%">操作</th>
+								<th width="10%"></th>
 							</tr>
 							@foreach($addresslist as $address)
 							<tr class="tr_{{$address['id']}}">
