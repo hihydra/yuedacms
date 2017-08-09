@@ -151,11 +151,11 @@
             <span class="label"><em>*</em> 配送方式：</span>
             <div class="left" style="height:28px; line-height:28px;padding-top: 6px;">
               <select name="shippingMethod" class="selt selt1 shippingMethod">
-                <option value="METHOD_LOCAL" id="div_METHOD_LOCAL">即时送</option>
+                <option value="METHOD_LOCAL" id="div_METHOD_LOCAL" style="display:none;">即时送</option>
                 <option value="METHOD_DELIVERY" selected="selected">快递配送</option>
               </select>
             </div>
-            <span id="methodLocal" style="padding-left:40px;line-height: 32px;"><a onclick="methodLocal();" style="color:red;">什么是即时送?</a></span>
+            <span id="methodLocal" style="padding-left:40px;line-height: 32px;display:none;"><a onclick="methodLocal();" style="color:red;">什么是即时送?</a></span>
             <div class="clear"></div>
           </div>
           <div class="item">
@@ -163,7 +163,7 @@
             <div class="left" style="height:28px; line-height:28px;padding-top: 6px;">
               <select name="paymentType" class="selt selt1 paymentType">
                 <option value="online">在线支付</option>
-                <option value="cod" id="div_cod">货到付款</option>
+                <option value="cod" id="div_cod"  style="display:none;">货到付款</option>
               </select>
             </div>
             <div class="clear"></div>

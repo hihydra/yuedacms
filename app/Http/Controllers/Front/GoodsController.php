@@ -65,7 +65,7 @@ class GoodsController extends Controller
         $form = array_only($request->all(), ['receiver','receiverMobile','receiverAddress','lng','lat','shippingMethod','storeId','paymentType','addressId','num','productId']);
         $form['otherInfo'] = json_encode($request->input('otherInfo'));
         $snLs = $this->service->getOrderDirectBuy($form);
-        return redirect('order/pay?snLs[]='.implode('snLs[]=',$snLs));
+        return redirect('order/pay?snLs[]='.implode('&snLs[]=',$snLs));
     }
 
     //获取订单可用优惠券列表

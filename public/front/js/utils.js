@@ -20,12 +20,12 @@ function ajaxJSON(params){
 				if(json.message!=null){
 					layer.msg(json.message);
 				}
+				params.callBack(json);
 			}else{
 				if(typeof(params.returnErr)=="undefined"){
 					layer.msg(json.message==null?params.error:json.message);
 				}
 			}
-			params.callBack(json);
 		},
 		error:function(){
 			layer.msg('请求错误');

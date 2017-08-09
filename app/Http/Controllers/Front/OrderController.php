@@ -43,7 +43,7 @@ class OrderController extends Controller
         $form['otherInfo'] = json_encode($request->input('otherInfo'));
         $cartIds = $request->input('cartIds');
         $snLs = $this->service->getOrderCreate($cartIds,$form);
-        return redirect('order/pay?snLs[]='.implode('snLs[]=',$snLs));
+        return redirect('order/pay?snLs[]='.implode('&snLs[]=',$snLs));
     }
 
     public function pay(Request $request){
@@ -54,6 +54,7 @@ class OrderController extends Controller
             return redirect('order/'.$sn);
         }
         $name = trans('front/system.pay');
+
         $payInfoData = $this->service->getZhiFuBao($snLs);
         parse_str(preg_replace('/\"/', '', $payInfoData['payInfo']));
         $paylink = $this->service->getPayLink($snLs);
