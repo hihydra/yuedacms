@@ -11,6 +11,34 @@ $(function () {
         tagClass: 'label label-primary',
         cancelConfirmKeysOnEmpty:true
     });
+
+    $('#editor').summernote({
+      height: 400,
+      lang : 'zh-CN',
+      callbacks:{
+        onImageUpload: function(files) {
+          var data=new FormData();
+          data.append('editormd-image-file',files[0]);
+          $.ajax({
+            url: '/admin/article/upload',
+            method: 'POST',
+            data:data,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+              if (data['success']=='1') {
+                $("#editor").summernote('insertImage',data['url']);
+              }
+              else{
+                layer.msg(data['message']);
+              }
+            }
+          });
+        }
+      }
+    });
+
+    /*
     layui.use('layedit', function(){
 		var layedit = layui.layedit,$ = layui.jquery;
 
@@ -33,7 +61,7 @@ $(function () {
 				,'face' //表情
 			]
 		});
-	  
+
   	});
 
   	var editor = editormd('editor',{
@@ -49,8 +77,9 @@ $(function () {
 		imageUpload : true,
 		imageUploadURL : '/admin/article/upload'
     });
-
+  	*/
     $('.col-sm-offset-2').on('click','.submit-article',function () {
+    	$("input[name='content_html']").val($('#editor').summernote('code'));
     	$('form').submit();
     });
 });

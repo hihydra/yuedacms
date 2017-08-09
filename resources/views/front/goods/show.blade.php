@@ -87,8 +87,13 @@
 					<div id="div_num" class="Numinput" style="margin-left: 7px;"></div>
 				</div>
 				<i id="icon-cart"></i>
+				@if(isset($isPresale)&&$isPresale)
+				<a href="{{URL::route('goods.buy',['productId'=>$productId,'isPresale'=>true])}}" class="btn-appendCart addtocart-btn"><b></b>预约购买</a>
+				@else
 				<a href="javascript:void(0);" onclick="addCart({{$productId}})" class="btn-appendCart addtocart-btn addcart"><b></b>加入购物车</a>
 				<a href="{{URL::route('goods.buy',['productId'=>$productId])}}" class="btn-append"><b></b>立即购买</a>
+				@endif
+
 			</div><div class="clear"></div>
 		</div>
 		<div class="clear"></div>

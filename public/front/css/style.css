@@ -36,3 +36,7 @@
 .package-detail-list ul{padding: 5px 10px;}
 .package-detail-list li{color:#666;vertical-align:middle;white-space:nowrap}
 .package-address{display:inline-block;zoom:1;white-space:nowrap;margin-left:10px;float:none}
+
+
+.layer_notice {float: left;overflow: hidden;background: #5FB878;padding: 10px;}
+.layer_notice {color: #fff;}

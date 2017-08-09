@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('css')
-<link href="{{asset('vendors/editor/css/editormd.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('vendors/summernote/dist/summernote.css')}}" rel="stylesheet"/>
 <link href="{{asset('vendors/layui/css/layui.css')}}" rel="stylesheet">
 <link href="{{asset('vendors/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet">
 <link href="{{asset('vendors/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet">
@@ -113,7 +113,8 @@
                             <div class="form-group{{ $errors->has('content_mark') ? ' has-error' : '' }}">
                               <label class="col-sm-1 control-label">{{trans('admin/article.model.content_mark')}}</label>
                               <div class="col-sm-10">
-                                <div id="editor"><textarea style="display: none;" name="content_mark">{!!old('content_mark',$article['content_mark'])!!}</textarea></div>
+                                <input type="hidden" name="content_html" value="$('#editor').summernote('code');">
+                                <div id="editor">{!!old('content_html',$article['content_html'])!!}</div>
                                 @if ($errors->has('content_mark'))
                                 <span class="help-block m-b-none text-danger">{{ $errors->first('content_mark') }}</span>
                                 @endif
@@ -191,7 +192,8 @@
 </div>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{asset('vendors/editor/editormd.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/summernote/dist/summernote.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendors/summernote/lang/summernote-zh-CN.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/bootstrap-select/bootstrap-select.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendors/jasny/jasny-bootstrap.min.js')}}"></script>

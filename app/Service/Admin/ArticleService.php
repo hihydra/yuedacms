@@ -90,6 +90,7 @@ class ArticleService{
 	{
 		try {
 			$attributes = $request->all();
+
 			// 文章banner
 			if ($attributes['edit_banner']) {
 				$attributes['banner'] = $attributes['edit_banner'];
@@ -99,7 +100,7 @@ class ArticleService{
 				}
 			}
 
-			$attributes['content_html'] = $attributes['editor-html-code'];
+			$attributes['content_html'] = $attributes['content_html'];
 			$attributes['user_id'] = Auth::id();
 			$article = $this->article->skipPresenter()->create($attributes);
 
@@ -165,7 +166,7 @@ class ArticleService{
 				}
 			}
 
-			$attributes['content_html'] = $attributes['editor-html-code'];
+			$attributes['content_html'] = $attributes['content_html'];
 
 			//$attributes['id'] = $id = $this->article->decodeId($attributes['id']);
 

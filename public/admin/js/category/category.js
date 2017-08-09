@@ -54,6 +54,7 @@ var CategoryList = function() {
      * @date   2016-11-04T16:12:58+0800
      */
      $(menu.box).on('click','.createButton',function () {
+      $("input[name='content_html']").val($('#editor').summernote('code'));
       var l = $(this).ladda();
       var _item = $(this);
       var _form = $('#createForm');
@@ -120,6 +121,7 @@ var CategoryList = function() {
      * @date   2016-11-04T16:51:00+0800
      */
      $(menu.box).on('click','.editButton',function () {
+      $("input[name='content_html']").val($('#editor').summernote('code'));
       var l = $(this).ladda();
       var _item = $(this);
       var _form = $('#editForm');

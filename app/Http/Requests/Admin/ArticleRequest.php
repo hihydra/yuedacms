@@ -27,7 +27,7 @@ class ArticleRequest extends FormRequest
             'title' => 'required',
             'author' => 'required',
             'category_id' => 'required',
-            'content_mark' => 'required',
+            'content_html' => 'required',
           //'tags' => 'required',
         ];
 

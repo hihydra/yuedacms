@@ -67,7 +67,7 @@
               <div class="panel-body">
                 <div class="col-sm-12">
                   <input type="hidden" name="content_html">
-                  <div id="editor">{{$category->content_html}}</div>
+                  <div id="editor">{!!$category->content_html!!}</div>
                 </div>
               </div>
             </div>
@@ -89,8 +89,8 @@
     $('#editor').summernote({
       height: 400,
       lang : 'zh-CN',
+      code : 'markupStr',
       callbacks:{
-        onSubmit:$("input[name='content_html']").val($('#editor').summernote('code')),
         onImageUpload: function(files) {
           var data=new FormData();
           data.append('editormd-image-file',files[0]);
@@ -105,7 +105,7 @@
                 $("#editor").summernote('insertImage',data['url']);
               }
               else{
-                alert(data['message']);
+                layer.msg(data['message']);
               }
             }
           });

@@ -56,7 +56,8 @@ class GoodsController extends Controller
         }
         $goodList = $this->getCouponsByOrder($goodList);
         $addressList = $this->user->getAddressList();
-        return view('front.goods.buy')->with(compact('goodList','name','type','addressList'));
+        $isPresale = $request->input('isPresale','false');
+        return view('front.goods.buy')->with(compact('goodList','name','type','addressList','isPresale'));
     }
 
     public function directBuy(Request $request)
@@ -96,7 +97,7 @@ class GoodsController extends Controller
     }
 
     public function checkServiceRadius(Request $request){
-        $storId = getStoreId();
+        $storeId = getStoreId();
         $lng = $request->input('lng');
         $lat = $request->input('lat');
 

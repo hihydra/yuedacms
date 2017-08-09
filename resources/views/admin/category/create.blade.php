@@ -65,7 +65,7 @@
               <div class="panel-body">
                 <div class="col-sm-12">
                   <input type="hidden" name="content_html" value="$('#editor').summernote('code');">
-                  <div id="editor"><textarea style="display: none;">{!!old('content_html')!!}</textarea></div>
+                  <div id="editor"></div>
                 </div>
               </div>
             </div>
@@ -88,8 +88,6 @@
       height: 400,
       lang : 'zh-CN',
       callbacks:{
-        //onInit:$(".note-codable").attr('name',content_html);
-        //onSubmit:$("input[name='content_html']").val($('.summernote').summernote('code')),
         onImageUpload: function(files) {
           var data=new FormData();
           data.append('editormd-image-file',files[0]);
@@ -104,7 +102,7 @@
                 $("#editor").summernote('insertImage',data['url']);
               }
               else{
-                alert(data['message']);
+                layer.msg(data['message']);
               }
             }
           });

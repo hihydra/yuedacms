@@ -137,6 +137,7 @@
           <input id="ipt_freight_{{$good['id']}}" value="{{$good['freight']}}" type="hidden" />
           <input id="ipt_totalPrice_{{$good['id']}}" value="{{$good['goodsPrice'] + $good['freight']}}" type="hidden" />
           <input type="hidden" name="otherInfo[{{$good['id']}}][couponId]">
+          <input type="hidden" name="isPresale" value="{{$isPresale}}">
         </div>
         <div class="left" style="width:70%;">
           <div class="item">
@@ -149,19 +150,20 @@
           <div class="item">
             <span class="label"><em>*</em> 配送方式：</span>
             <div class="left" style="height:28px; line-height:28px;padding-top: 6px;">
-              <select name="shippingMethod" class="selt selt1">
-                <option value="0">请选择：</option>
-                <option value="METHOD_DELIVERY" selected = "selected">快递配送</option>
+              <select name="shippingMethod" class="selt selt1 shippingMethod">
+                <option value="METHOD_LOCAL" id="div_METHOD_LOCAL">即时送</option>
+                <option value="METHOD_DELIVERY" selected="selected">快递配送</option>
               </select>
             </div>
+            <span id="methodLocal" style="padding-left:40px;line-height: 32px;"><a onclick="methodLocal();" style="color:red;">什么是即时送?</a></span>
             <div class="clear"></div>
           </div>
           <div class="item">
             <span class="label"><em>*</em> 支付方式：</span>
             <div class="left" style="height:28px; line-height:28px;padding-top: 6px;">
-              <select name="paymentType" class="selt selt1">
-                <option value="0">请选择：</option>
-                <option value="online" selected = "selected">在线支付</option>
+              <select name="paymentType" class="selt selt1 paymentType">
+                <option value="online">在线支付</option>
+                <option value="cod" id="div_cod">货到付款</option>
               </select>
             </div>
             <div class="clear"></div>
@@ -258,6 +260,16 @@
     </div>
   </div>
 </div>
+<div class="layer_notice" style="display:none;">
+  <div class="middle jss">
+    <p align="center">选择即时送的您，将在三小时内收到宝贝哦！</p>
+    <p align="center">同城配送+货到付款（不限额免费配送）</p>
+    <p>温馨提示：当天下午四点以前提交的订单，当天为您送达；四点以后提交的订单，将在次日为您送达。</p>
+    <p>请在提交订单前仔细确认您的收货地址，订单发货后暂不支持更改收件人信息。</p>
+    <p>如有疑问请拨打客服热线：<span>400-8696-471</span></p>
+    <p>客服工作时间：周一至周五9:00-17:00</p>
+  </div>
+</div>
 {!!$ApiPresenter->getShowcaseList()!!}
 @endsection
 @section('js')
@@ -269,18 +281,21 @@
     @endif
     @endforeach
     doRefreshBuyConfirmTotalPrice_calculate();
+    refreshBuyConfirmTotalPrice();
 
     $(".suggest-address").click(function(){
       $(".list .addr-cur").removeClass("addr-cur");
       $(".list .curMarker").remove();
       $(this).addClass('addr-cur');
       $(this).append('<div class="curMarker"></div>');
+      var storeIds = $("#div_orderList").find("input[name='storeId']");
       $("input[name='receiver']").val($.trim($(this).find('.receiver').text()));
       $("input[name='receiverMobile']").val($.trim($(this).find('.receiverMobile').text()));
       $("input[name='receiverAddress']").val($.trim($(this).find('.receiverAddress').attr('data-address')));
       $("input[name='addressId']").val($.trim($(this).find('.receiver').attr('data-id')));
       $("input[name='lng']").val($.trim($(this).find('.receiver').attr('data-lng')));
       $("input[name='lat']").val($.trim($(this).find('.receiver').attr('data-lat')));
+      refreshBuyConfirmTotalPrice();
     });
 
     $('.receiptType').click(function(){
@@ -296,6 +311,60 @@
       }
     });
   });
+
+  function refreshBuyConfirmTotalPrice(){
+    $("#div_METHOD_LOCAL").hide();
+    $("#div_cod").hide();
+    $('#methodLocal').hide();
+    $(".shippingMethod").val("METHOD_DELIVERY");
+    $(".paymentType").val("online");
+    var storeIds = $("#div_orderList").find("input[name='storeId']");
+    if(storeIds.length==1){
+      var lng = $.trim($("input[name='lng']").val());
+      var lat = $.trim($("input[name='lat']").val());
+      if(lng!=""&&lat!=""){
+        checkServiceRadius(storeIds[0].value,lng,lat);
+        return ;
+      }
+    }
+  }
+  function checkServiceRadius(storeId,lng,lat){
+    var params = {};
+    params.url = "{{url('goods/checkServiceRadius')}}";
+    params.postData = {storeId:storeId,lng:lng,lat:lat};
+    params.postType = "post";
+    params.error = "校验配送范围失败";
+      params.mustCallBack = true;// 是否必须回调
+      params.returnErr = false;
+      params.callBack = function(json) {
+        if(json.result==CODE_SUCCESS){
+          $("#div_METHOD_LOCAL").show();
+          $('#methodLocal').show();
+          if ($("input[name='isPresale']").val() == true) {
+           $("#div_cod").hide();
+         }else{
+           $('#div_cod').show();
+         }
+         $(".shippingMethod").val("METHOD_LOCAL");
+       }else{
+        $("#div_METHOD_LOCAL").hide();
+        $("#div_cod").hide();
+        $('#methodLocal').hide();
+        $(".shippingMethod").val("METHOD_DELIVERY");
+      }
+    };
+    ajaxJSON(params);
+  }
+
+  function methodLocal(){
+    layer.open({
+      type: 1,
+      shade: false,
+      title: false, //不显示标题
+      content: $('.layer_notice'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+    });
+  }
+
   function buyConfirm_useCoupon(storeId,couponId,discountPrice,type){
     var freight = convertMoney($('#ipt_freight_'+storeId).val());
     if(!$('.coupon_'+storeId+'_'+couponId+' .c-detail').hasClass('item-selected')){
@@ -351,50 +420,50 @@
       }
     }
     if($("input[name='receiver']").val()==''||$("input[name='receiver']").val()==undefined){
-       layer.msg("请选择收货地址");return;
-    }
-    $('#orderCreate').submit();
-  }
+     layer.msg("请选择收货地址");return;
+   }
+   $('#orderCreate').submit();
+ }
 
-  function address_model(addressId = null){
-    if (addressId) {
-      var title="修改收货地址";
-    }else{
-      var title="新增收货地址";
-    }
-    layer.open({
-      type: 1,
+ function address_model(addressId = null){
+  if (addressId) {
+    var title="修改收货地址";
+  }else{
+    var title="新增收货地址";
+  }
+  layer.open({
+    type: 1,
         skin: 'layui-layer-rim', //加上边框
         area: ['620px', '350px'], //宽高
         content: $('#editAddress').html(),
         title:title
-    });
-    if (addressId) {
-      $(".editAddress input[name='name']").val($.trim($('.address_'+addressId).find('.receiver').text()));
-      $(".editAddress input[name='mobile']").val($.trim($('.address_'+addressId).find('.receiverMobile').text()));
-      $(".editAddress textarea[name='address']").val($.trim($('.address_'+addressId).find('.receiverAddress').attr('data-address')));
-      $(".editAddress input[name='village']").val($.trim($('.address_'+addressId).find('.receiver').attr('data-village')));
-      $(".editAddress input[name='id']").val($.trim($('.address_'+addressId).find('.receiver').attr('data-id')));
-      $('.editAddress .subAddress').attr('href',"javascript:window.parent.updateAddress("+addressId+");");
-    }else{
-      $('.editAddress .subAddress').attr('href',"javascript:window.parent.saveAddress();");
-    }
+      });
+  if (addressId) {
+    $(".editAddress input[name='name']").val($.trim($('.address_'+addressId).find('.receiver').text()));
+    $(".editAddress input[name='mobile']").val($.trim($('.address_'+addressId).find('.receiverMobile').text()));
+    $(".editAddress textarea[name='address']").val($.trim($('.address_'+addressId).find('.receiverAddress').attr('data-address')));
+    $(".editAddress input[name='village']").val($.trim($('.address_'+addressId).find('.receiver').attr('data-village')));
+    $(".editAddress input[name='id']").val($.trim($('.address_'+addressId).find('.receiver').attr('data-id')));
+    $('.editAddress .subAddress').attr('href',"javascript:window.parent.updateAddress("+addressId+");");
+  }else{
+    $('.editAddress .subAddress').attr('href',"javascript:window.parent.saveAddress();");
   }
+}
 
-  function dataAddress(){
-    var name = $(".layui-layer-content input[name='name']").val();
-    var mobile = $(".layui-layer-content input[name='mobile']").val();
-    var village = $(".layui-layer-content input[name='village']").val();
-    var address = $(".layui-layer-content textarea[name='address']").val();
-    var params = {'name':name,'mobile':mobile,'village':village,'address':address};
-    return params;
-  }
+function dataAddress(){
+  var name = $(".layui-layer-content input[name='name']").val();
+  var mobile = $(".layui-layer-content input[name='mobile']").val();
+  var village = $(".layui-layer-content input[name='village']").val();
+  var address = $(".layui-layer-content textarea[name='address']").val();
+  var params = {'name':name,'mobile':mobile,'village':village,'address':address};
+  return params;
+}
 
-  function saveAddress(){
-    var params = {};
-    params.url = "{{url('user/address')}}";
-    params.postData = dataAddress();
-    params.postType = "post";
+function saveAddress(){
+  var params = {};
+  params.url = "{{url('user/address')}}";
+  params.postData = dataAddress();
+  params.postType = "post";
     params.mustCallBack = true;// 是否必须回调
     params.callBack = function(json) {
       window.location.reload();
