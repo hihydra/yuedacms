@@ -2,7 +2,7 @@
 namespace App\Service\Front;
 use App\Repositories\Eloquent\ArticleRepositoryEloquent;
 use App\Repositories\Criteria\FilterStatusCriteria;
-use App\Repositories\Criteria\FilterSearchCriteria;
+use App\Repositories\Eloquent\LinkRepositoryEloquent;
 use App\Traits\SendSystemErrorTrait;
 use Exception;
 /**
@@ -12,10 +12,12 @@ class IndexService
 {
 	use SendSystemErrorTrait;
 	protected $article;
+	protected $link;
 
-	function __construct(ArticleRepositoryEloquent $article)
+	function __construct(ArticleRepositoryEloquent $article,LinkRepositoryEloquent $link)
 	{
 		$this->article =  $article;
+		$this->link  = $link;
 	}
 
 	public function getArticleList()
@@ -47,5 +49,16 @@ class IndexService
 			}
 		}
 		return '';
+	}
+
+	public function link(){
+		try {
+			$link = $this->link->skipPresenter()->all();
+			return $link;
+		} catch (Exception $e) {
+			// 错误信息发送邮件
+			$this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
+			return false;
+		}
 	}
 }

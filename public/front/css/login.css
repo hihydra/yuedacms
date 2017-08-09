@@ -1,6 +1,6 @@
 ﻿@charset "utf-8";
 body{ background:#fff;}
-.login{ height:523px; width:100%; background:url(../img/login-bg.jpg) no-repeat center -10px;}
+.login{ height:523px; width:100%; background:url(../img/login-bg.jpg) no-repeat center -10px;background-size: 100%;}
 /* CSS Document */
 .container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container{ width:1002px;}
 .carousel-inner .item{ margin-top:2px; padding:0; width:100%;}

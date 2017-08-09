@@ -37,7 +37,6 @@ class ArticleService
 			$visits = $this->hgetVisits($articleId,'visits');
 			return compact('article','visits');
 		} catch (Exception $e) {
-			dd($e);
 			// 错误信息发送邮件
 			$this->sendSystemErrorMail(env('MAIL_SYSTEMERROR',''),$e);
 			return false;

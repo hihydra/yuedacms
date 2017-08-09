@@ -60,8 +60,8 @@ $storeId = getStoreId();
                 <div class="fr">
                  <ul>
                    <li>扫描下载官方App</li>
-                   <li class="apple"><a target="_blank" href="{{$settings['download_android']}}">&nbsp;</a></li>
-                   <li class="Android"><a target="_blank" href="{{$settings['download_ios']}}">&nbsp;</a></li>
+                   <li class="apple"><a target="_blank" href="{{$settings['download_ios']}}">&nbsp;</a></li>
+                   <li class="Android"><a target="_blank" href="{{$settings['download_android']}}">&nbsp;</a></li>
                  </ul>
                </div>
                <div class="clear"></div>

@@ -82,7 +82,7 @@ em{ font-style:normal;}
 .special-book{ width:235px;}
 .special-list ul li{float:left; padding:16px 0; border-bottom:1px dotted #eee;}
 .special-list ul li .book{ float:left;}
-.special-list ul li .book a img{ width:140px; height:76px;}
+.special-list ul li .book a img{ width:140px; height:75px;}
 .special-list ul li .info{ margin:0 0 0 150px;}
 .special-list ul li .info .tittle{ font-size:16px; height:22px; overflow:hidden; display:block;}
 .special-list ul li .info .author{ color:#999; font-size:12px; height:24px; overflow:hidden;}
@@ -94,6 +94,15 @@ em{ font-style:normal;}
 .foot-ul{ color:#fff; height:30px; line-height:30px;}
 .foot-ul span{ display:inline-block; margin:0 10px; font-size:12px;}
 .foot-ul a{ display:inline-block; margin:0 5px; color:#fff; text-align:center; font-size:12px;}
+
+
+.f_link{padding:4px 8px; margin:0 auto;background: #fff;}
+.f_link dl{ height:28px; line-height:28px;}
+.f_link dl dt{ font-size:14px; color:#AC1D1B; float:left; display:inline; font-weight:bold}
+.f_link dl dd{  float:left; display:inline}
+.f_link dl a{font-size:12px; color:#636363; text-decoration:none; display:block; margin:0 10px;}
+.f_link dl a:hover{ text-decoration:underline}
+
 
 /*我的订单*/
 .titleNav{ padding:10px 0 20px; color:#666;}

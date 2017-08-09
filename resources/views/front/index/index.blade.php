@@ -119,10 +119,20 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <div class="clear"></div>
+@if(!$links->isEmpty())
+<div class="f_link">
+    <dl>
+        <dt>友情链接</dt>
+        @foreach($links as $link)
+        <dd><a href="{{$link['url']}}" target="_blank">{{$link['name']}}</a></dd>
+        @endforeach
+    </dl>
+</div>
+<div class="clear"></div>
+@endif
 @endsection
 @section('js')
 <script type="text/javascript" src="{{asset('vendors/unslider/unslider.min.js')}}"></script>

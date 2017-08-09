@@ -92,7 +92,7 @@ trait UploadTrait
         }else if($type == 'apiImg'){
             $folderName = '';
         }else{
-            $folderName =  date("Ym", time()) .'/'.date("d", time()) .'/'. Auth::user()->id;
+            $folderName =  date("Ym", time()) .'/'.date("d", time()) .'/'. Auth::user()->id.'/';
         }
         $folderName = config('admin.global.imagePath').$type.'/'.$folderName;
 
