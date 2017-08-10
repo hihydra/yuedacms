@@ -68,9 +68,8 @@ function weixinpay(){
 	});
 }
 function payAlert() {
-	layer.msg('正在支付...', {
-	  time: 0 //不自动关闭
-	  ,icon: 6,btn: ['支付成功了','重新选择支付方式']
+	layer.confirm('正在支付...', {
+	  icon: 4,btn: ['支付成功了','重新选择支付方式']
 	  ,yes: function(index){
 	    layer.close(index);
 	    window.location.reload();
