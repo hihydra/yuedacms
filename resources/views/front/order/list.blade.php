@@ -39,9 +39,9 @@
 				@foreach($order['items'] as $key=>$item)
 				<tr style="height:70px;">
 					<td class="goods bif">
-						<a href="{{url('goods/'.$item['goodsId'])}}" class="img"><img src="{{$item['image']}}"></a>
+						<a href="{{URL::route('goods',['goodsId'=>$item['goodsId'],'storeId'=>$order['storeId']])}}" class="img"><img src="{{$item['image']}}"></a>
 						<div class="info">
-							<h4><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></h4>
+							<h4><a href="{{URL::route('goods',['goodsId'=>$item['goodsId'],'storeId'=>$order['storeId']])}}">{{$item['name']}}</a><br></h4>
 							<p class="left">x{{$item['num']}}</p>
 						</div>
 					</td>

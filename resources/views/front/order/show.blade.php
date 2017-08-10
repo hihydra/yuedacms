@@ -115,10 +115,10 @@
         </td>
         <td>
           <div class="bif">
-            <a target="_blank" href="#" class="img"><img src="{{$item['image']}}" width="48px" height="68px"></a>
+            <a target="_blank" href="{{URL::route('goods',['goodsId'=>$item['goodsId'],'storeId'=>$storeId])}}" class="img"><img src="{{$item['image']}}" width="48px" height="68px"></a>
             <div class="info">
               <h4>
-                <a target="_blank" href="#">{{$item['name']}}</a>
+                <a target="_blank" href="{{URL::route('goods',['goodsId'=>$item['goodsId'],'storeId'=>$storeId])}}">{{$item['name']}}</a>
               </h4>
             </div>
           </div>

@@ -38,9 +38,9 @@
 				@foreach($order['items'] as $key=>$item)
 				<tr style="height:70px;">
 					<td class="goods bif">
-						<a href="{{url('goods/'.$item['goodsId'])}}" class="img"><img src="{{$item['image']}}"></a>
+						<a class="img"><img src="{{$item['image']}}"></a>
 						<div class="info">
-							<h4><a href="{{url('goods/'.$order['id'])}}">{{$item['name']}}</a><br></h4>
+							<h4><a>{{$item['name']}}</a><br></h4>
 							<p class="left">x{{$item['num']}}</p>
 						</div>
 					</td>
@@ -52,7 +52,7 @@
 					<td class="parameter" rowspan="{{$num}}">{{$order['refundMoney']}}</td>
 					<td class="parameter" rowspan="{{$num}}">{{orderStatus($order['status'])}}</td>
 					<td class="parameter" rowspan="{{$num}}" class="operation">
-						<a class="btn_red_01" target="_blank" href="{{url('order/afterSalesDetail/'.$order['id'])}}">钱款去向</a>
+						<a class="btn_red_01" href="{{url('order/afterSalesDetail/'.$order['id'])}}">钱款去向</a>
 					</td>
 					@endif
 				</tr>
