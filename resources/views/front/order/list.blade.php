@@ -54,7 +54,7 @@
 					<td class="parameter" rowspan="{{$num}}">{{orderStatus($order['status'])}}</td>
 					<td class="parameter" rowspan="{{$num}}" class="operation">
 						@if($order['status'] == 'STATUS_NOT_PAY')
-						<a class="btn_red_01" target="_blank" href="{{URL::route('order.pay',['snLs[]'=>$order['sn']])}}">付款</a></br>
+						<a class="btn_red_01" href="{{URL::route('order.pay',['snLs[]'=>$order['sn']])}}">付款</a></br>
 						<a class="btn_cancel slink" href="javascript:orderCancel('{{$order['sn']}}');">取消订单</a></br>
 						@elseif($order['status'] == 'STATUS_SHIPPING')
 						<a class="btn_red_01" href="javascript:rogConfirm('{{$order['sn']}}');">确认收货</a></br>

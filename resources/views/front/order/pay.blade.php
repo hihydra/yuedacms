@@ -42,7 +42,7 @@
 			</h4>
 			<ul class="pay-ul">
 				<li>
-					<a target="_blank" href="{{$paylink['alipay']}}"><img src="{{asset('front/img/zfb.jpg')}}" /></a>
+					<a target="_blank" href="{{$paylink['alipay']}}" onclick="payAlert();"><img src="{{asset('front/img/zfb.jpg')}}" /></a>
 				</li>
 				<!--
 				<li>
@@ -67,5 +67,16 @@ function weixinpay(){
   		title: '微信支付'
 	});
 }
+function payAlert() {
+	layer.msg('正在支付...', {
+	  time: 0 //不自动关闭
+	  ,icon: 6,btn: ['支付成功了','重新选择支付方式']
+	  ,yes: function(index){
+	    layer.close(index);
+	    window.location.reload();
+	  }
+	});
+}
+
 </script>
 @endsection
